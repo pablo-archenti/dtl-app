@@ -1,0 +1,23 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/resolve.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/view.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/state.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/viewScroll.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/urlMatcherFactory.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/stateDirectives.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/stateFilters.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/release/angular-ui-router.min.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/common.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/templateFactory.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/viewDirective.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/src/urlRouter.js",
+        "/home/bobafett/workspace/dtl-app/www/js/controllers/projects.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/ionic-service-core/ionic-core.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-animate/angular-animate.min.js",
+        "/home/bobafett/workspace/dtl-app/www/js/app.route.js",
+        "/home/bobafett/workspace/dtl-app/www/lib/angular-ui-router/release/angular-ui-router.js",
+        "/home/bobafett/workspace/dtl-app/www/app/app.config.js",
+        "/home/bobafett/workspace/dtl-app/www/app/app.route.js"
+    ]
+}
