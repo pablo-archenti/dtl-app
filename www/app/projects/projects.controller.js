@@ -1,6 +1,12 @@
-angular.module('projects')
-.controller('ProjectsCtrl', ProjectsCtrl);
+(function() {
+    'use strict';
 
-function ProjectsCtrl($scope, $ionicModal, $timeout) {
+    angular
+        .module('projects')
+        .controller('ProjectsCtrl', ProjectsCtrl);
 
-}
+    function ProjectsCtrl($scope, $ionicModal, $timeout) {
+
+    }
+
+})();

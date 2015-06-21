@@ -1,1 +1,8 @@
-angular.module('projects', [])
+(function() {
+    'use strict';
+
+    angular
+        .module('projects', []);
+
+})();
+

@@ -1,60 +1,66 @@
-angular.module('app')
-.config(routes);
+(function() {
+    'use strict';
 
-function routes($stateProvider, $urlRouterProvider) {
-    $stateProvider
+    angular
+        .module('app')
+        .config(routes);
 
-    .state('app', {
-        url: '/app',
-        abstract: true,
-        templateUrl: 'app/layout/menu.html'
-    })
+    function routes($stateProvider, $urlRouterProvider) {
+        $stateProvider
 
-    .state('app.projects', {
-        url: '/projects',
-        views: {
-            menuContent: {
-                templateUrl: 'app/projects/projects.html',
-                controller: 'ProjectsCtrl'
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'app/layout/menu.html'
+        })
+
+        .state('app.projects', {
+            url: '/projects',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/projects/projects.html',
+                    controller: 'ProjectsCtrl'
+                }
             }
-        }
-    })
+        })
 
-    .state('app.join', {
-        url: '/join',
-        views: {
-            menuContent: {
-                templateUrl: 'app/join/join.html'
+        .state('app.join', {
+            url: '/join',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/join/join.html'
+                }
             }
-        }
-    })
+        })
 
-    .state('app.howItWorks', {
-        url: '/howItWorks',
-        views: {
-            menuContent: {
-                templateUrl: 'app/howItWorks/howItWorks.html'
+        .state('app.howItWorks', {
+            url: '/howItWorks',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/howItWorks/howItWorks.html'
+                }
             }
-        }
-    })
+        })
 
-    .state('app.whoAreWe', {
-        url: '/whoAreWe',
-        views: {
-            menuContent: {
-                templateUrl: 'app/whoAreWe/whoAreWe.html'
+        .state('app.whoAreWe', {
+            url: '/whoAreWe',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/whoAreWe/whoAreWe.html'
+                }
             }
-        }
-    })
+        })
 
-    .state('app.configure', {
-        url: '/configure',
-        views: {
-            menuContent: {
-                templateUrl: 'app/configure/configure.html'
+        .state('app.configure', {
+            url: '/configure',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/configure/configure.html'
+                }
             }
-        }
-    });
+        });
 
-    $urlRouterProvider.otherwise('/app/projects');
-}
+        $urlRouterProvider.otherwise('/app/projects');
+    }
+
+})();
