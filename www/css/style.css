@@ -1,1 +1,7 @@
-/* Empty. Add your own CSS if you like */
+
+.projects .item h2 {
+    white-space: normal;
+}
+.button participate {
+    align-right;
+}

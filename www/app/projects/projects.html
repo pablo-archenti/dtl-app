@@ -1,11 +1,10 @@
 <ion-view view-title="Proyectos">
   <ion-content>
-    <div class="list">
+    <div class="list projects">
 
-        <a class="item item-thumbnail-left" href="#">
-          <img src="http://desdetulugar.com.ar/panel/proyectos/principal/13_20_40Generemos%20sonrisas.jpeg">
-          <h2>Kits: un abrigo, un juguete y unas zapatillas junto con "Generemos Sonrisas"</h2>
-          <p>Nine Inch Nails</p>
+        <a class="item item-thumbnail-left" ng-repeat="project in projects" href="#/projects/{{project.id}}">
+          <img src="{{ project.pictures.small }}">
+          <h2 class="title">{{ project.title }}</h2>
         </a>
 
     </div>
