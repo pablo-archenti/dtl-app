@@ -1,0 +1,33 @@
+<ion-view title="{{ project.title }}">
+    <ion-content class="has-header">
+        <div class="list card project">
+
+            <div class="item item-avatar">
+                <img src="{{ project.pictures.small }}">
+                <h2>{{ project.title }}</h2>
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" src="{{ project.pictures.big[0] }}" ng-click="openModal()">
+                <p>
+                    Estamos juntando ropa de abrigo y zapatillas junto con los chicos de "Generemos sonrisas" para ser entregados en el apoyo familiar San Clotilde, a los chicos que asisten a las ludotecas de la Fundación Potencialidades y a los chicos de la escuela Pedro Vega de Santa Fe.
+
+                    Escribimos si tenés alguna de estas cosas para sumar a info@desdetulugar.com.ar!!! Son 1.000 kits los que vamos a estar entregando! y mil sonrisas las que vamos a estar generando!
+                </p>
+                <p><span>Apertura</span>: Nov 05, 2014 - <span>Cierre</span>: Dic 10, 2014</p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#">
+                    <i class="icon ion-heart assertive"></i>
+                    Ayudar
+                </a>
+                <a class="tab-item" href="#">
+                    <i class="icon ion-share positive"></i>
+                    Compartir
+                </a>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

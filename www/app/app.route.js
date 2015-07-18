@@ -14,12 +14,22 @@
             templateUrl: 'app/layout/menu.html'
         })
 
-        .state('app.projects', {
+        .state('app.projectsList', {
             url: '/projects',
             views: {
                 menuContent: {
-                    templateUrl: 'app/projects/projects.html',
-                    controller: 'ProjectsCtrl'
+                    templateUrl: 'app/projects/projectsList.html',
+                    controller: 'ProjectsListCtrl'
+                }
+            }
+        })
+
+        .state('app.projectsShow', {
+            url: '/projects/{id:int}',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/projects/projectsShow.html',
+                    controller: 'ProjectsShowCtrl'
                 }
             }
         })

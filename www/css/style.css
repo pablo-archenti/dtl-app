@@ -1,7 +1,7 @@
 
-.projects .item h2 {
+.projects .item h2, .project .item-avatar h2 {
     white-space: normal;
 }
-.button participate {
-    align-right;
+.modal {
+    background-color: black;
 }

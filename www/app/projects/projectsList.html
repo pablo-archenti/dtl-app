@@ -1,0 +1,15 @@
+<ion-view view-title="Proyectos">
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-android-more-horizontal"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list projects">
+
+            <a class="item item-thumbnail-left" ng-repeat="project in projects" ui-sref="app.projectsShow({ id: project.id})">
+                <img src="{{ project.pictures.small }}">
+                <h2 class="title">{{ project.title }}</h2>
+            </a>
+
+        </div>
+    </ion-content>
+</ion-view>
