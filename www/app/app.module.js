@@ -5,7 +5,8 @@
         .module('app', [
             'ionic',
             'ionic.service.core',
-            'projects'
+            'projects',
+            'join'
         ])
         .run(run);
 

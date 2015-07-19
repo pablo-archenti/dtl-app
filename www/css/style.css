@@ -5,3 +5,9 @@
 .modal {
     background-color: black;
 }
+.item.item-toggle {
+    white-space: normal;
+}
+.asterisk-error, input.ng-invalid {
+    color: red
+}

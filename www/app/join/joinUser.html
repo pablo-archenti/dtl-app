@@ -1,0 +1,61 @@
+<ion-view view-title="Sumate">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    <span ng-class="{'asterisk-error': joinForm.name.$invalid}">*</span>
+                    Nombre y Apellido
+                </span>
+                <input type="text" name="name" ng-model="formData.user.name" placeholder="Pablo Entiarch" required>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    <span ng-class="{'asterisk-error': joinForm.email.$invalid}">*</span>
+                    Email
+                </span>
+                <input type="email" name="email" ng-model="formData.user.email" placeholder="entiarch@email.com" required>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    <span ng-class="{'asterisk-error': joinForm.phone.$invalid}">*</span>
+                    Teléfono
+                </span>
+                <input type="tel" name="phone" ng-model="formData.user.phone" placeholder="01122223333" required>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Fecha de Nacimiento</span>
+                <input class="textbox-n" type="text" onfocus="this.type='date';this.setAttribute('onfocus','');this.blur();this.focus();" ng-model="formData.user.birthdate" placeholder="02/08/1979">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Localidad / Barrio</span>
+                <input type="text" ng-model="formData.user.neighborhood" placeholder="Palermo">
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Profesión / Oficio
+                </div>
+                <select ng-model="formData.user.profession">
+                    <option value=""></option>
+                    <option value="arquitecto">Arquitecto</option>
+                    <option value="diseñador">Diseñador</option>
+                    <option value="medico">Médico</option>
+                    <option value="odontologo">Odontólogo</option>
+                    <option value="carpintero">Carpintero</option>
+                    <option value="electricista">Electricista</option>
+                    <option value="cocinero">Cocinero</option>
+                    <option value="artista">Artista</option>
+                    <option value="otro" ng-click="otro()">Otro</option>
+                </select>
+            </label>
+
+        </div>
+        <button class="button button-block button-positive" type="submit" ng-click="next('app.join.help', joinForm)">
+            Siguiente
+        </button>
+    </ion-content>
+</ion-view>

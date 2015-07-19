@@ -1,0 +1,72 @@
+<ion-view view-title="Con qué podrías colaborar?">
+    <ion-content>
+        <ul class="list">
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.donation">
+             </label>
+             Donación ($)
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.buy">
+             </label>
+             Compra chica
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.time">
+             </label>
+             Tiempo
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.car">
+             </label>
+             Auto
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.van">
+             </label>
+             Camioneta
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.voluntary">
+             </label>
+             Voluntario en eventos
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.truck">
+             </label>
+             Camión
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.boat">
+             </label>
+             Barco/Lancha
+          </li>
+
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="formData.help.other">
+             </label>
+             Otro
+          </li>
+        </ul>
+        <button class="button button-block button-positive" type="submit" ng-click="next('app.join.other', joinForm)">
+            Siguiente
+        </button>
+    </ion-content>
+</ion-view>
