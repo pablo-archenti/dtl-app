@@ -17,3 +17,6 @@ input.ng-invalid {
 .joinForm label {
     padding-right: 16px;
 }
+.gallery img {
+    width:100%;
+}

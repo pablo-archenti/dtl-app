@@ -6,10 +6,10 @@
         .controller('ProjectsListCtrl', ProjectsListCtrl)
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
-    ProjectsListCtrl.$inject = ['$scope', '$state'];
+    ProjectsListCtrl.$inject = ['$scope'];
     ProjectsShowCtrl.$inject = ['$scope', '$ionicLoading', '$stateParams', '$ionicModal'];
 
-    function ProjectsListCtrl($scope, $state) {
+    function ProjectsListCtrl($scope) {
         var projectsService = service;
         $scope.projects = [];
 
@@ -25,10 +25,6 @@
                 $scope.projects = projects;
                 $scope.$broadcast('scroll.refreshComplete');
             });
-        };
-
-        $scope.reload = function() {
-            $state.go($state.current, {}, { reload: true });
         };
 
     }
