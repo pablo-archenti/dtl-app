@@ -5,9 +5,9 @@
         .module('join')
         .controller('JoinCtrl', JoinCtrl);
 
-    JoinCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicViewService'];
+    JoinCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
 
-    function JoinCtrl($scope, $state, $ionicPopup, $timeout, $ionicViewService) {
+    function JoinCtrl($scope, $state, $ionicPopup, $timeout, $ionicHistory) {
 
         $scope.formData = {};
 
@@ -22,7 +22,7 @@
             myPopup.then();
             $timeout(function() {
                 myPopup.close();
-            }, 2000);
+            }, 1500);
         }
 
         $scope.next = function(state, form) {
@@ -43,7 +43,7 @@
 
         $scope.cancel = function() {
             $scope.formData = {};
-            $ionicViewService.nextViewOptions({
+            $ionicHistory.nextViewOptions({
                 disableBack: true
             });
         };
