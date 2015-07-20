@@ -7,7 +7,7 @@
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
     ProjectsListCtrl.$inject = ['$scope'];
-    ProjectsShowCtrl.$inject = ['$scope', '$ionicLoading', '$stateParams', '$ionicModal'];
+    ProjectsShowCtrl.$inject = ['$scope', '$stateParams', '$ionicModal'];
 
     function ProjectsListCtrl($scope) {
         var projectsService = service;
@@ -29,16 +29,12 @@
 
     }
 
-    function ProjectsShowCtrl($scope, $ionicLoading, $stateParams, $ionicModal) {
+    function ProjectsShowCtrl($scope, $stateParams, $ionicModal) {
 
         function init() {
             $scope.projects = [];
-            $ionicLoading.show({
-                templateUrl: 'loading.html'
-            });
             service.getProjectById($stateParams.id, function(project) {
                 $scope.project = project;
-                $ionicLoading.hide();
             });
             $ionicModal.fromTemplateUrl('app/projects/projectsGallery.html', {
                 scope: $scope,
