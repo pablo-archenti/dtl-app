@@ -6,25 +6,31 @@
         .controller('ProjectsListCtrl', ProjectsListCtrl)
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
-    ProjectsListCtrl.$inject = ['$scope', '$ionicLoading'];
+    ProjectsListCtrl.$inject = ['$scope', '$state'];
     ProjectsShowCtrl.$inject = ['$scope', '$ionicLoading', '$stateParams', '$ionicModal'];
 
-    function ProjectsListCtrl($scope, $ionicLoading) {
+    function ProjectsListCtrl($scope, $state) {
         var projectsService = service;
+        $scope.projects = [];
 
-        function init() {
-            $scope.projects = [];
-            $ionicLoading.show({
-                templateUrl: 'loading.html',
-                duration: 5000
+        $scope.loadMore = function() {
+            projectsService.getProjects(function(projects) {
+                $scope.projects = $scope.projects.concat(projects);
+                $scope.$broadcast('scroll.infiniteScrollComplete');
             });
+        };
+
+        $scope.refresh = function() {
             projectsService.getProjects(function(projects) {
                 $scope.projects = projects;
-                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
             });
-        }
+        };
 
-        init();
+        $scope.reload = function() {
+            $state.go($state.current, {}, { reload: true });
+        };
+
     }
 
     function ProjectsShowCtrl($scope, $ionicLoading, $stateParams, $ionicModal) {
@@ -32,8 +38,7 @@
         function init() {
             $scope.projects = [];
             $ionicLoading.show({
-                templateUrl: 'loading.html',
-                duration: 5000
+                templateUrl: 'loading.html'
             });
             service.getProjectById($stateParams.id, function(project) {
                 $scope.project = project;
@@ -68,7 +73,7 @@ var service = {
     getProjects: function(cb) {
         setTimeout(function() {
             cb(projects);
-        }, 1000);
+        }, 1500);
     },
     getProjectById: function(id, cb) {
         projects.forEach(function(project) {
@@ -135,6 +140,46 @@ var projects = [
         pictures: {
             small:  'http://desdetulugar.com.ar/panel/proyectos/principal/11_11_18Foto%20ICES%20web.jpeg',
             big: []
-        },
+        }
+    },
+    {
+        id: 6,
+        title: 'Materiales de Hockey para Ices',
+        status: 'closed',
+        description: '',
+        pictures: {
+            small:  'http://desdetulugar.com.ar/panel/proyectos/principal/11_11_18Foto%20ICES%20web.jpeg',
+            big: []
+        }
+    },
+    {
+        id: 7,
+        title: 'Materiales de Hockey para Ices',
+        status: 'closed',
+        description: '',
+        pictures: {
+            small:  'http://desdetulugar.com.ar/panel/proyectos/principal/11_11_18Foto%20ICES%20web.jpeg',
+            big: []
+        }
+    },
+    {
+        id: 8,
+        title: 'Materiales de Hockey para Ices',
+        status: 'closed',
+        description: '',
+        pictures: {
+            small:  'http://desdetulugar.com.ar/panel/proyectos/principal/11_11_18Foto%20ICES%20web.jpeg',
+            big: []
+        }
+    },
+    {
+        id: 9,
+        title: 'Materiales de Hockey para Ices',
+        status: 'closed',
+        description: '',
+        pictures: {
+            small:  'http://desdetulugar.com.ar/panel/proyectos/principal/11_11_18Foto%20ICES%20web.jpeg',
+            big: []
+        }
     }
 ];

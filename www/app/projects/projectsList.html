@@ -3,13 +3,24 @@
         <button menu-toggle="right" class="button button-icon icon ion-android-more-horizontal"></button>
     </ion-nav-buttons>
     <ion-content>
+
+        <ion-refresher
+            on-refresh="refresh()">
+        </ion-refresher>
+
         <div class="list projects">
 
-            <a class="item item-thumbnail-left" ng-repeat="project in projects" ui-sref="app.projectsShow({ id: project.id})">
+            <a class="item item-thumbnail-left" ng-repeat="project in projects track by $index" ui-sref="app.projectsShow({ id: project.id})">
                 <img src="{{ project.pictures.small }}">
                 <h2 class="title">{{ project.title }}</h2>
             </a>
 
         </div>
+
+        <ion-infinite-scroll
+            on-infinite="loadMore()"
+            distance="5%">
+        </ion-infinite-scroll>
+
     </ion-content>
 </ion-view>
