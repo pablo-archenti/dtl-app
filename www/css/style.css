@@ -8,6 +8,12 @@
 .item.item-toggle {
     white-space: normal;
 }
-.asterisk-error, input.ng-invalid {
-    color: red
+.asterisk-error {
+    color: red;
+}
+input.ng-invalid {
+    border-bottom: 2px solid red;
+}
+.joinForm label {
+    padding-right: 16px;
 }
