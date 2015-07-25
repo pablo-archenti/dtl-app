@@ -36,7 +36,7 @@
             service.getProjectById($stateParams.id, function(project) {
                 $scope.project = project;
             });
-            $ionicModal.fromTemplateUrl('app/projects/projectsGallery.html', {
+            $ionicModal.fromTemplateUrl('app/projects/templates/projectsGallery.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
               }).then(function(modal) {
