@@ -14,7 +14,7 @@
         function showPopupError() {
             var myPopup = $ionicPopup.show({
                 title: 'Error',
-                templateUrl: 'app/join/joinPopupError.html',
+                templateUrl: 'app/join/templates/joinPopupError.html',
                 buttons: [
                      { text: 'OK' }
                 ]
