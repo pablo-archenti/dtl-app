@@ -2,19 +2,25 @@
     'use strict';
 
     angular
-        .module('join')
-        .controller('JoinCtrl', JoinCtrl);
+        .module('myaccount')
+        .controller('SignupCtrl', SignupCtrl)
+        .controller('LoginCtrl', LoginCtrl);
 
-    JoinCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
+    LoginCtrl.$inject  = ['$scope'];
+    SignupCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
 
-    function JoinCtrl($scope, $state, $ionicPopup, $timeout, $ionicHistory) {
+    function LoginCtrl($scope) {
 
-        $scope.formData = {};
+    }
+
+    function SignupCtrl($scope, $state, $ionicPopup, $timeout, $ionicHistory) {
+
+        $scope.signupData = {};
 
         function showPopupError() {
             var myPopup = $ionicPopup.show({
                 title: 'Error',
-                templateUrl: 'app/join/templates/joinPopupError.html',
+                templateUrl: 'app/myaccount/templates/formError.html',
                 buttons: [
                      { text: 'OK' }
                 ]
@@ -33,8 +39,8 @@
             }
         };
 
-        $scope.submit = function(formData) {
-            console.log(formData);
+        $scope.submit = function() {
+            console.log($scope.signupData);
         };
 
         $scope.otro = function() {
@@ -42,7 +48,7 @@
         };
 
         $scope.cancel = function() {
-            $scope.formData = {};
+            $scope.signupData = {};
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });

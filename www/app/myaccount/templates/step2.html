@@ -4,67 +4,67 @@
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.donation">
+               <input type="checkbox" ng-model="signupData.help.donation">
              </label>
              Donación ($)
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.buy">
+               <input type="checkbox" ng-model="signupData.help.buy">
              </label>
              Compra chica
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.time">
+               <input type="checkbox" ng-model="signupData.help.time">
              </label>
              Tiempo
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.car">
+               <input type="checkbox" ng-model="signupData.help.car">
              </label>
              Auto
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.van">
+               <input type="checkbox" ng-model="signupData.help.van">
              </label>
              Camioneta
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.voluntary">
+               <input type="checkbox" ng-model="signupData.help.voluntary">
              </label>
              Voluntario en eventos
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.truck">
+               <input type="checkbox" ng-model="signupData.help.truck">
              </label>
              Camión
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.boat">
+               <input type="checkbox" ng-model="signupData.help.boat">
              </label>
              Barco/Lancha
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="formData.help.other">
+               <input type="checkbox" ng-model="signupData.help.other">
              </label>
              Otro
           </li>
-          <button class="button button-block button-positive" type="submit" ng-click="next('app.join.other', joinForm)">
+          <button class="button button-block button-positive" ng-click="next('app.signup.step3', signupForm)">
               Siguiente
           </button>
         </ul>

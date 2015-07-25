@@ -1,0 +1,27 @@
+<ion-view view-title="Iniciar sesión">
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-android-more-horizontal"></button>
+    </ion-nav-buttons>
+    <form name="loginForm" class="loginForm" novalidate="">
+        <ion-nav-view name="form">
+
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">
+                        <span ng-class="{'asterisk-error': loginForm.name.$invalid}">*</span>
+                        Email
+                    </span>
+                    <input type="text" name="name" ng-model="loginForm.email" placeholder="email@email.com" required>
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">
+                        <span ng-class="{'asterisk-error': loginForm.password.$invalid}">*</span>
+                        Email
+                    </span>
+                    <input type="password" name="password" ng-model="loginForm.password" required>
+                </label>
+
+        </ion-nav-view>
+    </form>
+</ion-view>

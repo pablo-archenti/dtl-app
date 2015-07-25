@@ -6,7 +6,7 @@
             'ionic',
             'ionic.service.core',
             'projects',
-            'join'
+            'myaccount'
         ])
         .run(run);
 

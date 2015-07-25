@@ -16,24 +16,6 @@
             templateUrl: 'app/layout/menu.html'
         })
 
-        .state('app.howItWorks', {
-            url: '/howItWorks',
-            views: {
-                menuContent: {
-                    templateUrl: 'app/howItWorks/howItWorks.html'
-                }
-            }
-        })
-
-        .state('app.whoAreWe', {
-            url: '/whoAreWe',
-            views: {
-                menuContent: {
-                    templateUrl: 'app/whoAreWe/whoAreWe.html'
-                }
-            }
-        })
-
         .state('app.configure', {
             url: '/configure',
             views: {

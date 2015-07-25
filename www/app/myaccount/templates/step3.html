@@ -4,7 +4,7 @@
           <li class="item item-toggle">
              ¿Te gustaría tener proyectos a cargo?
              <label class="toggle toggle-balanced">
-               <input type="checkbox" ng-model="formData.projects">
+               <input type="checkbox" ng-model="signupData.projects">
                <div class="track">
                  <div class="handle"></div>
                </div>
@@ -13,7 +13,7 @@
           <li class="item item-toggle">
              ¿Nos ayudarías a juntar cosas (comida, ropa, juguetes, etc) entre tus amigos, familia o compañeros de trabajo?
              <label class="toggle toggle-balanced">
-               <input type="checkbox" ng-model="formData.collect">
+               <input type="checkbox" ng-model="signupData.collect">
                <div class="track">
                  <div class="handle"></div>
                </div>
@@ -22,13 +22,13 @@
           <li>
               <label class="item item-input item-stacked-label">
                   <span class="input-label">¿Algo más que nos quieras contar?</span>
-                  <textarea ng-model="formData.comments" placeholder="Nos interesa saber más de vos..."></textarea>
+                  <textarea ng-model="signupData.comments" placeholder="Nos interesa saber más de vos..."></textarea>
               </label>
           </li>
-          <button ng-click="submit(formData)" class="button button-block button-balanced">
+          <button ng-click="submit(signupData)" class="button button-block button-balanced">
               Sumate
           </button>
-          <button ui-sref="app.join.user" ng-click="cancel()" class="button button-small button-block button-assertive">
+          <button ui-sref="app.signup.step1" ng-click="cancel()" class="button button-small button-block button-assertive">
               Cancelar
           </button>
         </ul>
