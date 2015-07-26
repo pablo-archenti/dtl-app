@@ -10,41 +10,19 @@
     SignupCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
 
     function LoginCtrl($scope) {
+        $scope.credentials = {};
 
+        $scope.login = function(credentials) {
+            console.log(credentials);
+        };
     }
 
     function SignupCtrl($scope, $state, $ionicPopup, $timeout, $ionicHistory) {
 
         $scope.signupData = {};
 
-        function showPopupError() {
-            var myPopup = $ionicPopup.show({
-                title: 'Error',
-                templateUrl: 'app/myaccount/templates/formError.html',
-                buttons: [
-                     { text: 'OK' }
-                ]
-            });
-            myPopup.then();
-            $timeout(function() {
-                myPopup.close();
-            }, 1500);
-        }
-
-        $scope.next = function(state, form) {
-            if (form.$valid) {
-                $state.go(state);
-            } else {
-                showPopupError();
-            }
-        };
-
-        $scope.submit = function() {
-            console.log($scope.signupData);
-        };
-
-        $scope.otro = function() {
-            console.log('TROOO');
+        $scope.signup = function(data) {
+            console.log('SI', data);
         };
 
         $scope.cancel = function() {

@@ -20,3 +20,6 @@ input.ng-invalid {
 .gallery img {
     width:100%;
 }
+.forgot-password {
+    float:right;
+}

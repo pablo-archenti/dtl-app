@@ -25,12 +25,14 @@
                   <textarea ng-model="signupData.comments" placeholder="Nos interesa saber más de vos..."></textarea>
               </label>
           </li>
-          <button ng-click="submit(signupData)" class="button button-block button-balanced">
-              Sumate
+      </ul>
+      <div class="padding">
+          <button type="submit" class="button button-block button-balanced">
+              Finalizar
           </button>
-          <button ui-sref="app.signup.step1" ng-click="cancel()" class="button button-small button-block button-assertive">
+          <button ui-sref="app.signup.step1" ng-click="cancel()" class="button button-block button-assertive">
               Cancelar
           </button>
-        </ul>
+      </div>
     </ion-content>
 </ion-view>

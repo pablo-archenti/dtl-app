@@ -19,6 +19,15 @@
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">
+                    <span ng-class="{'asterisk-error': signupForm.password.$invalid}">*</span>
+                    Contraseña
+                </span>
+                <input type="password" name="password" ng-model="signupData.user.password"
+                    placeholder="Crea una contraseña" ng-minlength="5" ng-maxlength="20" required>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
                     <span ng-class="{'asterisk-error': signupForm.phone.$invalid}">*</span>
                     Teléfono
                 </span>
@@ -52,8 +61,10 @@
                     <option value="otro" ng-click="otro()">Otro</option>
                 </select>
             </label>
-            <button class="button button-block button-positive" ng-click="next('app.signup.step2', signupForm)">
-                Siguiente
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ui-sref="app.signup.step2" ng-disabled="signupForm.$invalid">
+                Siguiente <i class="icon ion-arrow-right-a"></i>
             </button>
         </div>
     </ion-content>

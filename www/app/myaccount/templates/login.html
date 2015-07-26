@@ -1,27 +1,35 @@
 <ion-view view-title="Iniciar sesión">
-    <ion-nav-buttons side="right">
-        <button menu-toggle="right" class="button button-icon icon ion-android-more-horizontal"></button>
-    </ion-nav-buttons>
-    <form name="loginForm" class="loginForm" novalidate="">
         <ion-nav-view name="form">
+            <ion-content>
+                <form name="loginForm" ng-submit="login(credentials)" novalidate="" class="loginForm">
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">
+                                <span ng-class="{'asterisk-error': loginForm.email.$invalid}">*</span>
+                                Email
+                            </span>
+                            <input type="email" name="email" ng-model="credentials.email" placeholder="email@email.com" required>
+                        </label>
 
-            <div class="list">
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">
-                        <span ng-class="{'asterisk-error': loginForm.name.$invalid}">*</span>
-                        Email
-                    </span>
-                    <input type="text" name="name" ng-model="loginForm.email" placeholder="email@email.com" required>
-                </label>
-
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">
-                        <span ng-class="{'asterisk-error': loginForm.password.$invalid}">*</span>
-                        Email
-                    </span>
-                    <input type="password" name="password" ng-model="loginForm.password" required>
-                </label>
-
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">
+                                <span ng-class="{'asterisk-error': loginForm.password.$invalid}">*</span>
+                                Contraseña
+                            </span>
+                            <input type="password" name="password" ng-model="credentials.password"
+                                placeholder="Tu contraseña" required>
+                        </label>
+                    </div>
+                    <div class="padding">
+                        <button class="button button-block button-positive" type="submit" ng-disabled="loginForm.$invalid">
+                            Iniciar sesión
+                        </button>
+                        <button class="button button-block button-balanced" ui-sref="app.signup.step1">
+                            Registrarse
+                        </button>
+                        <a href="#" class="forgot-password">Recuperar contraseña</a>
+                    </div>
+                </form>
+            </ion-content>
         </ion-nav-view>
-    </form>
 </ion-view>
