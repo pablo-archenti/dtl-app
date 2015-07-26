@@ -9,6 +9,7 @@
             'projects',
             'myaccount'
         ])
+        .constant('serverUrl', 'http://server.com/')
         .run(ionicRun)
         .run(httpMock);
 
