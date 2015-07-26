@@ -5,7 +5,7 @@
         .module('app')
         .config(routes);
 
-    routes.$inject('$stateProvider', '$urlRouterProvider');
+    routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function routes($stateProvider, $urlRouterProvider) {
         $stateProvider

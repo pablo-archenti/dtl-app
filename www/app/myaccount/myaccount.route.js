@@ -5,7 +5,7 @@
         .module('myaccount')
         .config(routes);
 
-        routes.$inject('$stateProvider');
+        routes.$inject = ['$stateProvider'];
 
         function routes($stateProvider) {
             $stateProvider

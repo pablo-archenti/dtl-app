@@ -12,8 +12,8 @@
         .run(ionicRun)
         .run(httpMock);
 
-    ionicRun.$inject('$ionicPlatform');
-    httpMock.$inject('$rootScope', '$ionicPlatform', '$httpBackend', '$http');
+    ionicRun.$inject = ['$ionicPlatform'];
+    httpMock.$inject = ['$rootScope', '$ionicPlatform', '$httpBackend', '$http'];
 
     function ionicRun($ionicPlatform) {
         $ionicPlatform.ready(function() {
