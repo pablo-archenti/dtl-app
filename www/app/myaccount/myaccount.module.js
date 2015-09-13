@@ -2,6 +2,9 @@
     'use strict';
 
     angular
-        .module('myaccount', []);
+        .module('myaccount', [
+            'loader',
+            'session'
+        ]);
 
 })();

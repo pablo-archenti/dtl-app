@@ -6,37 +6,38 @@
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject  = ['$scope'];
+    LoginCtrl.$inject  = ['$scope', 'loader', '$timeout', 'userSession'];
     SignupCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
 
-    function LoginCtrl($scope) {
-        $scope.credentials = {};
-        $scope.showCode = 0;
-        $scope.hideCode = 1;
+    function LoginCtrl($scope, loader, $timeout, session) {
 
-        $scope.login = function(credentials) {
-            console.log("login:", credentials);
-            $scope.showCode = 0;
-            $scope.hideCode = 1;
-            console.log("showcode:", $scope.showCode);
-            console.log("hidecode:", $scope.hideCode);
+        $scope.showCode = function() {
+            $scope.codeShown = 1;
+            $scope.codeHidden = 0;
         };
 
-        $scope.requireCode = function(credentials) {
-            console.log("require code:", credentials);
-            $scope.showCode = 1;
-            $scope.hideCode = 0;
-            console.log("showcode:", $scope.showCode);
-            console.log("hidecode:", $scope.hideCode);
+        $scope.hideCode = function() {
+            $scope.codeShown = 0;
+            $scope.codeHidden = 1;
         };
 
-        $scope.cancelCode = function(credentials) {
-            console.log("cancel code:", credentials);
-            $scope.showCode = 0;
-            $scope.hideCode = 1;
-            console.log("showcode:", $scope.showCode);
-            console.log("hidecode:", $scope.hideCode);
+        $scope.login = function(email, code) {
+            //session.login(email, code);
         };
+
+        $scope.requireCode = function(email) {
+            loader.toggleLoadingWithMessage('Enviando email...', 500);
+
+            $timeout(function() {
+                $scope.showCode();
+            }, 500);
+        };
+
+        $scope.cancelLogin = function() {
+            $scope.hideCode();
+        };
+
+        $scope.hideCode();
     }
 
     function SignupCtrl($scope, $state, $ionicPopup, $timeout, $ionicHistory) {
