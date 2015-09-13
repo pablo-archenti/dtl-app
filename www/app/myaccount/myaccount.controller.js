@@ -11,9 +11,31 @@
 
     function LoginCtrl($scope) {
         $scope.credentials = {};
+        $scope.showCode = 0;
+        $scope.hideCode = 1;
 
         $scope.login = function(credentials) {
-            console.log(credentials);
+            console.log("login:", credentials);
+            $scope.showCode = 0;
+            $scope.hideCode = 1;
+            console.log("showcode:", $scope.showCode);
+            console.log("hidecode:", $scope.hideCode);
+        };
+
+        $scope.requireCode = function(credentials) {
+            console.log("require code:", credentials);
+            $scope.showCode = 1;
+            $scope.hideCode = 0;
+            console.log("showcode:", $scope.showCode);
+            console.log("hidecode:", $scope.hideCode);
+        };
+
+        $scope.cancelCode = function(credentials) {
+            console.log("cancel code:", credentials);
+            $scope.showCode = 0;
+            $scope.hideCode = 1;
+            console.log("showcode:", $scope.showCode);
+            console.log("hidecode:", $scope.hideCode);
         };
     }
 

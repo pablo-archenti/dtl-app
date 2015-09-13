@@ -1,35 +1,41 @@
 <ion-view view-title="Iniciar sesión">
         <ion-nav-view name="form">
             <ion-content>
-                <form name="loginForm" ng-submit="login(credentials)" novalidate="" class="loginForm">
-                    <div class="list">
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">
-                                <span ng-class="{'asterisk-error': loginForm.email.$invalid}">*</span>
-                                Email
-                            </span>
-                            <input type="email" name="email" ng-model="credentials.email" placeholder="email@email.com" required>
-                        </label>
-
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">
-                                <span ng-class="{'asterisk-error': loginForm.password.$invalid}">*</span>
-                                Contraseña
-                            </span>
-                            <input type="password" name="password" ng-model="credentials.password"
-                                placeholder="Tu contraseña" required>
-                        </label>
+                <form name="loginForm" novalidate="" class="loginForm">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">
+                            <span ng-class="{'asterisk-error': loginForm.email.$invalid}">*</span>
+                            Email
+                        </span>
+                        <input type="email" name="email" ng-model="credentials.email" placeholder="Para iniciar sesión ingresa tu email" required>
+                    </label>
+                    <label class="item item-input" ng-show="showCode" ng-hide="hideCode">
+                        <span class="input-label">Código:</span>
+                        <input type="number" name="code" ng-model="credentials.code" style="width:10%" minlength="4" maxlength="4" ng-required="showCode" placeholder="Ingresa código">
+                    </label>
+                    <div class="padding row" ng-show="showCode" ng-hide="hideCode">
+                        <div class="col">
+                            <button class="button button-block button-assertive" ng-click="cancelCode(credentials)">
+                                Cancelar
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="button button-block button-calm" ng-click="login(credentials)" ng-disabled="loginForm.$invalid">
+                                Iniciar sesión
+                            </button>
+                        </div>
                     </div>
-                    <div class="padding">
-                        <button class="button button-block button-positive" type="submit" ng-disabled="loginForm.$invalid">
-                            Iniciar sesión
+                    <div class="padding" ng-show="hideCode" ng-hide="showCode">
+                        <button class="button button-block button-positive" ng-click="requireCode(credentials)" ng-disabled="loginForm.$invalid">
+                            Recibe tu código vía email
                         </button>
-                        <button class="button button-block button-balanced" ui-sref="app.signup.step1">
-                            Registrarse
-                        </button>
-                        <a href="#" class="forgot-password">Recuperar contraseña</a>
                     </div>
                 </form>
+                <div class="padding">
+                    <button class="button button-block button-balanced" ui-sref="app.signup.step1">
+                        Registrate
+                    </button>
+                </div>
             </ion-content>
         </ion-nav-view>
 </ion-view>

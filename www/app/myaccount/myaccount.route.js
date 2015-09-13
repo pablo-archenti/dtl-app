@@ -25,7 +25,7 @@
                 abstract: true,
                 views: {
                     menuContent: {
-                        templateUrl: 'app/myaccount/templates/signup.html',
+                        templateUrl: 'app/myaccount/templates/signupMain.html',
                         controller: 'SignupCtrl'
                     }
                 }
@@ -34,7 +34,7 @@
                 url: '/step1',
                 views: {
                     form: {
-                        templateUrl: 'app/myaccount/templates/step1.html'
+                        templateUrl: 'app/myaccount/templates/signupStep1.html'
                     }
                 }
             })
@@ -42,7 +42,7 @@
                 url: '/step2',
                 views: {
                     form: {
-                        templateUrl: 'app/myaccount/templates/step2.html'
+                        templateUrl: 'app/myaccount/templates/signupStep2.html'
                     }
                 }
             })
@@ -50,7 +50,7 @@
                 url: '/step3',
                 views: {
                     form: {
-                        templateUrl: 'app/myaccount/templates/step3.html'
+                        templateUrl: 'app/myaccount/templates/signupStep3.html'
                     }
                 }
             });

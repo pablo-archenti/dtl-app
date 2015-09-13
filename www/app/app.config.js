@@ -3,6 +3,7 @@
 
     angular
         .module('app')
+        .constant('serverUrl', 'http://server.com/')
         .config(['$ionicAppProvider', configure]);
 
     function configure($ionicAppProvider) {
