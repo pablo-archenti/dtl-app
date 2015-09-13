@@ -6,10 +6,10 @@
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject  = ['$scope', 'loader', '$timeout', 'userSession'];
+    LoginCtrl.$inject  = ['$scope', 'loader', '$timeout', 'userService'];
     SignupCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
 
-    function LoginCtrl($scope, loader, $timeout, session) {
+    function LoginCtrl($scope, loader, $timeout, userService) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -26,6 +26,7 @@
         };
 
         $scope.requireCode = function(email) {
+            userService.login();
             loader.toggleLoadingWithMessage('Enviando email...', 500);
 
             $timeout(function() {

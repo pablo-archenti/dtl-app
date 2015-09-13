@@ -8,24 +8,19 @@
     userSession.$inject = ['localStorage'];
 
     function userSession(localStorage) {
+        var prefix = 'user';
         var userSession = {
-            login: login,
             logout: logout,
             isLogged: isLogged
         };
         return userSession;
 
-        function login(email, code) {
-
-            localStorage.set('user.loggedIn', true);
-        }
-
         function logout() {
-            localStorage.remove('user.loggedIn');
+            localStorage.remove(prefix + '.loggedIn');
         }
 
         function isLogged() {
-            return localStorage.get('user.loggedIn') || false;
+            return localStorage.get(prefix + '.loggedIn') || false;
         }
     }
 

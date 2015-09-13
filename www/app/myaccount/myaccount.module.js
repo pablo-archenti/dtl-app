@@ -4,7 +4,7 @@
     angular
         .module('myaccount', [
             'loader',
-            'session'
+            'user'
         ]);
 
 })();
