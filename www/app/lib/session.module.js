@@ -7,21 +7,16 @@
 
     userSession.$inject = ['localStorage'];
 
-    function userSession(localStorage) {
+    function userSession(storage) {
         var prefix = 'user';
-        var userSession = {
-            logout: logout,
-            isLogged: isLogged
+        return {
+            logout: function logout() {
+                storage.remove(prefix + '.loggedIn');
+            },
+            isLogged: function isLogged() {
+                return storage.get(prefix + '.loggedIn') || false;
+            }
         };
-        return userSession;
-
-        function logout() {
-            localStorage.remove(prefix + '.loggedIn');
-        }
-
-        function isLogged() {
-            return localStorage.get(prefix + '.loggedIn') || false;
-        }
     }
 
 })();

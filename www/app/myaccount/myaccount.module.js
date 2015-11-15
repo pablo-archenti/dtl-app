@@ -2,8 +2,6 @@
     'use strict';
 
     angular
-        .module('myaccount', [
-            'user'
-        ]);
+        .module('myaccount', []);
 
 })();
