@@ -4,15 +4,12 @@
     angular
         .module('app', [
             'ionic',
-            'ionic.service.core',
-            'ngMockE2E',
             'projects',
             'myaccount'
         ])
         .run(ionicRun);
 
     ionicRun.$inject = ['$ionicPlatform'];
-    httpMock.$inject = ['$rootScope', '$ionicPlatform', '$httpBackend', '$http'];
 
     function ionicRun($ionicPlatform) {
         $ionicPlatform.ready(function() {
