@@ -6,10 +6,10 @@
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    SignupCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$timeout', '$ionicHistory'];
-    LoginCtrl.$inject  = ['$scope', 'loader', '$timeout', 'Volunteer'];
+    SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory'];
+    LoginCtrl.$inject  = ['$scope', 'Volunteer'];
 
-    function SignupCtrl($scope, $state, $ionicPopup, $timeout, $ionicHistory) {
+    function SignupCtrl($scope, $state, $ionicHistory) {
 
         $scope.signupData = {};
 
@@ -26,7 +26,7 @@
 
     }
 
-    function LoginCtrl($scope, loader, $timeout, Volunteer) {
+    function LoginCtrl($scope, Volunteer) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -48,23 +48,24 @@
                 console.log(accessToken);
             })
             .catch(function(err) {
-                console.log(err);
+                $scope.ui.alert.show();
             });
         };
 
         $scope.requireCode = function(email) {
-            loader.toggleLoadingWithMessage('Enviando email...', 100);
+            $scope.ui.loader.showLoading('Enviando email...');
 
             Volunteer.sendLoginCode({
                 email: email
             })
             .$promise
-            .then(function() {
-
+            .then(function(code) {
+                console.log('CODE: ', code);
                 $scope.showCode();
+                $scope.ui.loader.hideLoading();
             })
             .catch(function(err) {
-                console.log(err);
+                $scope.ui.alert.show();
             });
         };
 

@@ -3,7 +3,6 @@
 
     angular
         .module('myaccount', [
-            'loader',
             'user'
         ]);
 

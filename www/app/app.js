@@ -5,12 +5,15 @@
         .module('app', [
             'ionic',
             'dtlServices',
+            'ui',
             'projects',
             'myaccount'
         ])
+        .run(setGlobalModules)
         .run(ionicRun);
 
     ionicRun.$inject = ['$ionicPlatform'];
+    setGlobalModules.$inject = ['$rootScope', 'loader', 'alert'];
 
     function ionicRun($ionicPlatform) {
         $ionicPlatform.ready(function() {
@@ -24,6 +27,13 @@
                 StatusBar.styleDefault();
             }
         });
+    }
+
+    function setGlobalModules($rootScope, loader, alert) {
+        $rootScope.ui = {
+            loader: loader,
+            alert: alert
+        };
     }
 
 })();
