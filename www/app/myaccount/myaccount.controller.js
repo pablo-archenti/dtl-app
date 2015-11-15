@@ -47,7 +47,7 @@
             .then(function(accessToken) {
                 console.log(accessToken);
             })
-            .catch(function(err) {
+            .catch(function() {
                 $scope.ui.alert.show();
             });
         };
@@ -64,7 +64,7 @@
                 $scope.showCode();
                 $scope.ui.loader.hideLoading();
             })
-            .catch(function(err) {
+            .catch(function() {
                 $scope.ui.alert.show();
             });
         };
