@@ -4,6 +4,7 @@
     angular
         .module('app', [
             'ionic',
+            'dtlServices',
             'projects',
             'myaccount'
         ])
