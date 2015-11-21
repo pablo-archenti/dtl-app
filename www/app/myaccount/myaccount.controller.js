@@ -7,7 +7,7 @@
         .controller('LoginCtrl', LoginCtrl);
 
     SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory'];
-    LoginCtrl.$inject  = ['$scope', 'Volunteer'];
+    LoginCtrl.$inject  = ['$scope', 'authService'];
 
     function SignupCtrl($scope, $state, $ionicHistory) {
 
@@ -26,7 +26,7 @@
 
     }
 
-    function LoginCtrl($scope, Volunteer) {
+    function LoginCtrl($scope, authService) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -38,29 +38,21 @@
             $scope.codeHidden = 1;
         };
 
-        $scope.login = function(email, code) {
-            Volunteer.loginWithCode({
-                email: email,
-                code: code
-            })
-            .$promise
-            .then(function(accessToken) {
-                console.log(accessToken);
+        $scope.login = function(credentials) {
+            authService.login(credentials)
+            .then(function() {
+
             })
             .catch(function() {
                 $scope.ui.alert.show();
             });
         };
 
-        $scope.requireCode = function(email) {
+        $scope.sendCode = function(email) {
             $scope.ui.loader.showLoading('Enviando email...');
 
-            Volunteer.sendLoginCode({
-                email: email
-            })
-            .$promise
-            .then(function(code) {
-                console.log('CODE: ', code);
+            authService.sendLoginCode(email)
+            .then(function() {
                 $scope.showCode();
                 $scope.ui.loader.hideLoading();
             })

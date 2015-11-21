@@ -4,16 +4,16 @@
     angular
         .module('app')
         .constant('config', {
-            'dtlServices': {
+            'dtlService': {
                 'apiUrlBase': 'http://localhost:3000/api/'
             }
         })
-        .config(setUpDtlServices);
+        .config(setUpDtlService);
 
-        setUpDtlServices.$inject = ['LoopBackResourceProvider', 'config'];
+        setUpDtlService.$inject = ['LoopBackResourceProvider', 'config'];
 
-        function setUpDtlServices(LoopBackResourceProvider, config) {
-            LoopBackResourceProvider.setUrlBase(config.dtlServices.apiUrlBase);
+        function setUpDtlService(LoopBackResourceProvider, config) {
+            LoopBackResourceProvider.setUrlBase(config.dtlService.apiUrlBase);
         }
 
 })();
