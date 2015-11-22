@@ -11,7 +11,8 @@
             var service = {
                 set: set,
                 get: get,
-                remove: remove
+                remove: remove,
+                clear: clear
             };
             return service;
 
@@ -26,5 +27,10 @@
             function remove(key) {
                 return $window.localStorage.removeItem(key);
             }
+
+            function clear() {
+                 return $window.localStorag.clear();
+            }
+
         }
 })();

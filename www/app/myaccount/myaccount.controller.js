@@ -41,7 +41,7 @@
         $scope.login = function(credentials) {
             authService.login(credentials)
             .then(function() {
-
+                console.log(authService.isAuthenticated());
             })
             .catch(function() {
                 $scope.ui.alert.show();

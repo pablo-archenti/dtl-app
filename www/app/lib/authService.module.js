@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('authService', ['dtlService', 'session'])
+        .module('authService', ['dtlService'])
         .factory('authService', authService);
 
-    authService.$inject = ['Volunteer', 'userSession'];
+    authService.$inject = ['Volunteer'];
 
-    function authService(Volunteer, userSession) {
+    function authService(Volunteer) {
         var service = {};
 
         service.login = function login(credentials) {
@@ -31,6 +31,10 @@
 
                 return true;
             });
+        };
+
+        service.isAuthenticated = function isAuthenticated() {
+            return Volunteer.isAuthenticated();
         };
 
         return service;
