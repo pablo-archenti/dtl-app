@@ -11,7 +11,7 @@
         var service = {};
 
         service.login = function login(credentials) {
-            return Volunteer.loginWithCode({
+            return Volunteer.login({
                 email: credentials.email,
                 code: credentials.code
             })
@@ -30,6 +30,9 @@
             .then(function(code) {
 
                 return true;
+            })
+            .catch(function(err) {
+                console.log(err);
             });
         };
 

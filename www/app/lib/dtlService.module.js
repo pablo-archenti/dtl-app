@@ -5,11 +5,11 @@ var authHeader = 'authorization';
 
 /**
  * @ngdoc overview
- * @name dtlServices
+ * @name dtlService
  * @module
  * @description
  *
- * The `dtlServices` module provides services for interacting with
+ * The `dtlService` module provides services for interacting with
  * the models exposed by the LoopBack server via the REST API.
  *
  */
@@ -17,8 +17,8 @@ var module = angular.module("dtlService", ['ngResource']);
 
 /**
  * @ngdoc object
- * @name dtlServices.Volunteer
- * @header dtlServices.Volunteer
+ * @name dtlService.Volunteer
+ * @header dtlService.Volunteer
  * @object
  *
  * @description
@@ -42,8 +42,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__findById__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__findById__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -80,8 +80,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__destroyById__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__destroyById__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -115,8 +115,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__updateById__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__updateById__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -157,8 +157,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__get__loginCode
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__get__loginCode
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -168,7 +168,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `refresh` – `{boolean=}` -
+         *  - `refresh` – `{boolean=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -192,8 +192,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__create__loginCode
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__create__loginCode
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -229,8 +229,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__update__loginCode
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__update__loginCode
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -266,8 +266,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__destroy__loginCode
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__destroy__loginCode
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -296,8 +296,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__get__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__get__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -307,7 +307,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` -
+         *  - `filter` – `{object=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -332,8 +332,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__create__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__create__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -369,8 +369,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__delete__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__delete__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -399,8 +399,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$__count__accessTokens
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$__count__accessTokens
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -424,7 +424,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "prototype$__count__accessTokens": {
           url: urlBase + "/Volunteers/:id/accessTokens/count",
@@ -433,8 +433,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#create
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#create
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -471,8 +471,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#createMany
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#createMany
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -510,8 +510,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#upsert
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#upsert
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -548,8 +548,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#exists
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#exists
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -571,7 +571,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/Volunteers/:id/exists",
@@ -580,8 +580,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#findById
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#findById
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -615,8 +615,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#find
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#find
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -649,8 +649,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#findOne
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#findOne
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -682,8 +682,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#updateAll
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#updateAll
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -716,8 +716,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#deleteById
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#deleteById
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -746,8 +746,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#count
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#count
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -769,7 +769,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/Volunteers/count",
@@ -778,8 +778,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#prototype$updateAttributes
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#prototype$updateAttributes
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -815,8 +815,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#createChangeStream
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#createChangeStream
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -829,7 +829,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -843,7 +843,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/Volunteers/change-stream",
@@ -852,8 +852,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#login
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#login
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -884,9 +884,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -908,8 +908,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#logout
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#logout
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -950,8 +950,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#confirm
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#confirm
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -959,11 +959,11 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `uid` – `{string}` -
+         *  - `uid` – `{string}` - 
          *
-         *  - `token` – `{string}` -
+         *  - `token` – `{string}` - 
          *
-         *  - `redirect` – `{string=}` -
+         *  - `redirect` – `{string=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -984,8 +984,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#resetPassword
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#resetPassword
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1019,8 +1019,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#loginWithCode
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#login
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1028,8 +1028,12 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
+         *   Default value: `user`.
+         *
+         *  - `rememberMe` - `boolean` - Whether the authentication credentials
+         *     should be remembered in localStorage across app/browser restarts.
+         *     Default: `true`.
          *
          * @param {Object} postData Request data.
          *
@@ -1050,15 +1054,27 @@ module.factory(
          * This usually means the response is a `Volunteer` object.)
          * </em>
          */
-        "loginWithCode": {
-          url: urlBase + "/Volunteers/loginWithCode",
+        "login": {
+          params: {
+            include: "user"
+          },
+          interceptor: {
+            response: function(response) {
+              var accessToken = response.data;
+              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
+              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
+              LoopBackAuth.save();
+              return response.resource;
+            }
+          },
+          url: urlBase + "/Volunteers/login",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#sendLoginCode
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#sendLoginCode
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1066,7 +1082,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `email` – `{string}` -
+         *  - `email` – `{string}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1090,8 +1106,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#getCurrent
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#getCurrent
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1133,8 +1149,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#updateOrCreate
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#updateOrCreate
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1168,8 +1184,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#update
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#update
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1199,8 +1215,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#destroyById
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#destroyById
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1226,8 +1242,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#removeById
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#removeById
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
@@ -1253,14 +1269,14 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#getCachedCurrent
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#getCachedCurrent
+         * @methodOf dtlService.Volunteer
          *
          * @description
          *
          * Get data of the currently logged user that was returned by the last
-         * call to {@link dtlServices.Volunteer#login} or
-         * {@link dtlServices.Volunteer#getCurrent}. Return null when there
+         * call to {@link dtlService.Volunteer#login} or
+         * {@link dtlService.Volunteer#getCurrent}. Return null when there
          * is no user logged in or the data of the current user were not fetched
          * yet.
          *
@@ -1273,8 +1289,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#isAuthenticated
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#isAuthenticated
+         * @methodOf dtlService.Volunteer
          *
          * @returns {boolean} True if the current user is authenticated (logged in).
          */
@@ -1284,8 +1300,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Volunteer#getCurrentId
-         * @methodOf dtlServices.Volunteer
+         * @name dtlService.Volunteer#getCurrentId
+         * @methodOf dtlService.Volunteer
          *
          * @returns {Object} Id of the currently logged-in user or null.
          */
@@ -1295,8 +1311,8 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name dtlServices.Volunteer#modelName
-    * @propertyOf dtlServices.Volunteer
+    * @name dtlService.Volunteer#modelName
+    * @propertyOf dtlService.Volunteer
     * @description
     * The name of the model represented by this $resource,
     * i.e. `Volunteer`.
@@ -1309,8 +1325,8 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name dtlServices.Project
- * @header dtlServices.Project
+ * @name dtlService.Project
+ * @header dtlService.Project
  * @object
  *
  * @description
@@ -1334,8 +1350,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#create
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#create
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1372,8 +1388,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#createMany
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#createMany
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1411,8 +1427,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#upsert
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#upsert
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1449,8 +1465,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#exists
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#exists
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1472,7 +1488,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/Projects/:id/exists",
@@ -1481,8 +1497,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#findById
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#findById
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1516,8 +1532,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#find
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#find
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1550,8 +1566,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#findOne
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#findOne
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1583,8 +1599,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#updateAll
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#updateAll
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1617,8 +1633,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#deleteById
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#deleteById
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1647,8 +1663,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#count
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#count
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1670,7 +1686,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/Projects/count",
@@ -1679,8 +1695,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#prototype$updateAttributes
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#prototype$updateAttributes
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1716,8 +1732,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#createChangeStream
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#createChangeStream
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1730,7 +1746,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1744,7 +1760,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/Projects/change-stream",
@@ -1757,8 +1773,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#updateOrCreate
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#updateOrCreate
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1792,8 +1808,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#update
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#update
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1823,8 +1839,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#destroyById
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#destroyById
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1850,8 +1866,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Project#removeById
-         * @methodOf dtlServices.Project
+         * @name dtlService.Project#removeById
+         * @methodOf dtlService.Project
          *
          * @description
          *
@@ -1878,8 +1894,8 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name dtlServices.Project#modelName
-    * @propertyOf dtlServices.Project
+    * @name dtlService.Project#modelName
+    * @propertyOf dtlService.Project
     * @description
     * The name of the model represented by this $resource,
     * i.e. `Project`.
@@ -1892,8 +1908,8 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name dtlServices.Admin
- * @header dtlServices.Admin
+ * @name dtlService.Admin
+ * @header dtlService.Admin
  * @object
  *
  * @description
@@ -1917,8 +1933,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__findById__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__findById__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -1955,8 +1971,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__destroyById__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__destroyById__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -1990,8 +2006,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__updateById__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__updateById__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2032,8 +2048,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__get__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__get__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2043,7 +2059,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` -
+         *  - `filter` – `{object=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2068,8 +2084,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__create__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__create__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2105,8 +2121,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__delete__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__delete__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2135,8 +2151,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$__count__accessTokens
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$__count__accessTokens
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2160,7 +2176,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "prototype$__count__accessTokens": {
           url: urlBase + "/Admins/:id/accessTokens/count",
@@ -2169,8 +2185,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#create
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#create
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2207,8 +2223,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#createMany
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#createMany
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2246,8 +2262,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#upsert
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#upsert
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2284,8 +2300,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#exists
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#exists
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2307,7 +2323,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/Admins/:id/exists",
@@ -2316,8 +2332,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#findById
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#findById
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2351,8 +2367,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#find
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#find
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2385,8 +2401,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#findOne
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#findOne
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2418,8 +2434,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#updateAll
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#updateAll
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2452,8 +2468,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#deleteById
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#deleteById
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2482,8 +2498,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#count
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#count
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2505,7 +2521,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/Admins/count",
@@ -2514,8 +2530,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#prototype$updateAttributes
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#prototype$updateAttributes
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2551,8 +2567,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#createChangeStream
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#createChangeStream
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2565,7 +2581,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2579,7 +2595,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/Admins/change-stream",
@@ -2588,8 +2604,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#login
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#login
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2620,9 +2636,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -2644,8 +2660,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#logout
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#logout
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2686,8 +2702,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#confirm
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#confirm
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2695,11 +2711,11 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `uid` – `{string}` -
+         *  - `uid` – `{string}` - 
          *
-         *  - `token` – `{string}` -
+         *  - `token` – `{string}` - 
          *
-         *  - `redirect` – `{string=}` -
+         *  - `redirect` – `{string=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2720,8 +2736,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#resetPassword
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#resetPassword
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2755,8 +2771,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#getCurrent
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#getCurrent
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2798,8 +2814,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#updateOrCreate
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#updateOrCreate
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2833,8 +2849,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#update
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#update
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2864,8 +2880,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#destroyById
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#destroyById
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2891,8 +2907,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#removeById
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#removeById
+         * @methodOf dtlService.Admin
          *
          * @description
          *
@@ -2918,14 +2934,14 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#getCachedCurrent
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#getCachedCurrent
+         * @methodOf dtlService.Admin
          *
          * @description
          *
          * Get data of the currently logged user that was returned by the last
-         * call to {@link dtlServices.Admin#login} or
-         * {@link dtlServices.Admin#getCurrent}. Return null when there
+         * call to {@link dtlService.Admin#login} or
+         * {@link dtlService.Admin#getCurrent}. Return null when there
          * is no user logged in or the data of the current user were not fetched
          * yet.
          *
@@ -2938,8 +2954,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#isAuthenticated
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#isAuthenticated
+         * @methodOf dtlService.Admin
          *
          * @returns {boolean} True if the current user is authenticated (logged in).
          */
@@ -2949,8 +2965,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlServices.Admin#getCurrentId
-         * @methodOf dtlServices.Admin
+         * @name dtlService.Admin#getCurrentId
+         * @methodOf dtlService.Admin
          *
          * @returns {Object} Id of the currently logged-in user or null.
          */
@@ -2960,8 +2976,8 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name dtlServices.Admin#modelName
-    * @propertyOf dtlServices.Admin
+    * @name dtlService.Admin#modelName
+    * @propertyOf dtlService.Admin
     * @description
     * The name of the model represented by this $resource,
     * i.e. `Admin`.
@@ -3062,8 +3078,8 @@ module
 
   /**
    * @ngdoc object
-   * @name dtlServices.LoopBackResourceProvider
-   * @header dtlServices.LoopBackResourceProvider
+   * @name dtlService.LoopBackResourceProvider
+   * @header dtlService.LoopBackResourceProvider
    * @description
    * Use `LoopBackResourceProvider` to change the global configuration
    * settings used by all models. Note that the provider is available
@@ -3083,8 +3099,8 @@ module
   .provider('LoopBackResource', function LoopBackResourceProvider() {
     /**
      * @ngdoc method
-     * @name dtlServices.LoopBackResourceProvider#setAuthHeader
-     * @methodOf dtlServices.LoopBackResourceProvider
+     * @name dtlService.LoopBackResourceProvider#setAuthHeader
+     * @methodOf dtlService.LoopBackResourceProvider
      * @param {string} header The header name to use, e.g. `X-Access-Token`
      * @description
      * Configure the REST transport to use a different header for sending
@@ -3097,8 +3113,8 @@ module
 
     /**
      * @ngdoc method
-     * @name dtlServices.LoopBackResourceProvider#setUrlBase
-     * @methodOf dtlServices.LoopBackResourceProvider
+     * @name dtlService.LoopBackResourceProvider#setUrlBase
+     * @methodOf dtlService.LoopBackResourceProvider
      * @param {string} url The URL to use, e.g. `/api` or `//example.com/api`.
      * @description
      * Change the URL of the REST API server. By default, the URL provided
@@ -3110,8 +3126,8 @@ module
 
     /**
      * @ngdoc method
-     * @name dtlServices.LoopBackResourceProvider#getUrlBase
-     * @methodOf dtlServices.LoopBackResourceProvider
+     * @name dtlService.LoopBackResourceProvider#getUrlBase
+     * @methodOf dtlService.LoopBackResourceProvider
      * @description
      * Get the URL of the REST API server. The URL provided
      * to the code generator (`lb-ng` or `grunt-loopback-sdk-angular`) is used.
