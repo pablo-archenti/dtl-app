@@ -2,6 +2,8 @@
     'use strict';
 
     angular
-        .module('myaccount', ['authService']);
+        .module('myaccount', [
+            'authService'
+        ]);
 
 })();

@@ -2,13 +2,23 @@
     'use strict';
 
     angular
-        .module('authService', ['dtlService'])
+        .module('authService', ['dtlService', 'storage'])
         .factory('authService', authService);
 
-    authService.$inject = ['Volunteer'];
+    authService.$inject = ['Volunteer', 'localStorage'];
 
-    function authService(Volunteer) {
+    function authService(Volunteer, localStorage) {
         var service = {};
+
+        function createSession(token, data) {
+            localStorage.set('user.token', token);
+            localStorage.set('user.data', data);
+        }
+
+        function clearSession() {
+            localStorage.remove('user.data');
+            localStorage.remove('user.token');
+        }
 
         service.login = function login(credentials) {
             return Volunteer.login({
@@ -17,7 +27,9 @@
             })
             .$promise
             .then(function(accessToken) {
-
+                return createSession(accessToken.id, accessToken.user);
+            })
+            .then(function() {
                 return true;
             });
         };
@@ -27,17 +39,32 @@
                 email: email
             })
             .$promise
-            .then(function(code) {
-
+            .then(function() {
                 return true;
-            })
-            .catch(function(err) {
-                console.log(err);
             });
         };
 
-        service.isAuthenticated = function isAuthenticated() {
+        service.logout = function logout() {
+            return Volunteer.logout()
+            .$promise
+            .then(function() {
+                return clearSession();
+            })
+            .then(function() {
+                return true;
+            });
+        };
+
+        service.isLoggedIn = function isLoggedIn() {
             return Volunteer.isAuthenticated();
+        };
+
+        service.getUserId = function getUserId() {
+            return localStorage.get('user.data').id || null;
+        };
+
+        service.getUserData = function getUserData() {
+            return localStorage.get('user.data') || null;
         };
 
         return service;

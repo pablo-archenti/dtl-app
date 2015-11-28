@@ -41,7 +41,7 @@
         $scope.login = function(credentials) {
             authService.login(credentials)
             .then(function() {
-                console.log(authService.isAuthenticated());
+
             })
             .catch(function() {
                 $scope.ui.alert.show();
@@ -54,10 +54,12 @@
             authService.sendLoginCode(email)
             .then(function() {
                 $scope.showCode();
-                $scope.ui.loader.hideLoading();
             })
             .catch(function() {
                 $scope.ui.alert.show();
+            })
+            .finally(function() {
+                $scope.ui.loader.hideLoading();
             });
         };
 

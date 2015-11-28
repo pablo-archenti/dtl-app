@@ -29,7 +29,7 @@
             }
 
             function clear() {
-                 return $window.localStorag.clear();
+                 return $window.localStorage.clear();
             }
 
         }
