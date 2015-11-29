@@ -25,7 +25,11 @@
                 });
             })
             .then(function() {
-
+                //prevent back button
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
+                $state.go('app.projectsList');
             })
             .catch(function(err) {
                 var message = null;
