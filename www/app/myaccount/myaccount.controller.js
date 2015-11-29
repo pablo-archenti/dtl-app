@@ -6,15 +6,33 @@
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory'];
+    SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService'];
     LoginCtrl.$inject  = ['$scope', 'authService'];
 
-    function SignupCtrl($scope, $state, $ionicHistory) {
+    function SignupCtrl($scope, $state, $ionicHistory, accountService, authService) {
 
         $scope.signupData = {};
 
-        $scope.signup = function(data) {
-            console.log('SI', data);
+        $scope.signup = function(userData) {
+            accountService.prepareUserData(userData)
+            .then(function(pUserData) {
+                return accountService.signUp(pUserData);
+            })
+            .then(function(volunteer) {
+                return authService.login({
+                    email: volunteer.email,
+                    code: volunteer.code
+                });
+            })
+            .then(function() {
+
+            })
+            .catch(function(err) {
+                var message = null;
+                if (err.code == 'uniqueness')
+                    message = 'Ya existe un usuario con el email ' + userData.email;
+                $scope.ui.alert.show(message);
+            });
         };
 
         $scope.cancel = function() {

@@ -6,7 +6,7 @@
                     <span ng-class="{'asterisk-error': signupForm.name.$invalid}">*</span>
                     Nombre y Apellido
                 </span>
-                <input type="text" name="name" ng-model="signupData.user.name" placeholder="Pablo Entiarch" required>
+                <input type="text" name="name" ng-model="signupData.name" placeholder="Pablo Entiarch" required>
             </label>
 
             <label class="item item-input item-stacked-label">
@@ -14,7 +14,7 @@
                     <span ng-class="{'asterisk-error': signupForm.email.$invalid}">*</span>
                     Email
                 </span>
-                <input type="email" name="email" ng-model="signupData.user.email" placeholder="entiarch@email.com" required>
+                <input type="email" name="email" ng-model="signupData.email" placeholder="entiarch@email.com" required>
             </label>
 
             <label class="item item-input item-stacked-label">
@@ -22,24 +22,24 @@
                     <span ng-class="{'asterisk-error': signupForm.phone.$invalid}">*</span>
                     Teléfono
                 </span>
-                <input type="tel" name="phone" ng-model="signupData.user.phone" placeholder="01122223333" required>
+                <input type="tel" name="phone" ng-model="signupData.phone" placeholder="01122223333" required>
             </label>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Fecha de Nacimiento</span>
-                <input class="textbox-n" type="text" onfocus="this.type='date';this.setAttribute('onfocus','');this.blur();this.focus();" ng-model="signupData.user.birthdate" placeholder="02/08/1979">
+                <input class="textbox-n" type="text" onfocus="this.type='date';this.setAttribute('onfocus','');this.blur();this.focus();" ng-model="signupData.birthdate" placeholder="02/08/1979">
             </label>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Localidad / Barrio</span>
-                <input type="text" ng-model="signupData.user.neighborhood" placeholder="Palermo">
+                <input type="text" ng-model="signupData.district" placeholder="Palermo">
             </label>
 
             <label class="item item-input item-select">
                 <div class="input-label">
                     Profesión / Oficio
                 </div>
-                <select ng-model="signupData.user.profession">
+                <select ng-model="signupData.profession">
                     <option value=""></option>
                     <option value="arquitecto">Arquitecto</option>
                     <option value="diseñador">Diseñador</option>

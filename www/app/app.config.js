@@ -1,19 +1,21 @@
 (function() {
     'use strict';
 
+    var config = {
+        dtlService: {
+            apiUrlBase: 'http://localhost:3000/api/'
+        }
+    };
+
     angular
         .module('app')
-        .constant('config', {
-            'dtlService': {
-                'apiUrlBase': 'http://localhost:3000/api/'
-            }
-        })
-        .config(setUpDtlService);
+        .constant('dtlServiceConfig', config.dtlService)
+        .config(configDtlService);
 
-        setUpDtlService.$inject = ['LoopBackResourceProvider', 'config'];
+    configDtlService.$inject = ['dtlServiceResourceProvider', 'dtlServiceConfig'];
 
-        function setUpDtlService(LoopBackResourceProvider, config) {
-            LoopBackResourceProvider.setUrlBase(config.dtlService.apiUrlBase);
-        }
+    function configDtlService(dtlServiceResourceProvider, dtlServiceConfig) {
+        dtlServiceResourceProvider.setUrlBase(dtlServiceConfig.apiUrlBase);
+    }
 
 })();

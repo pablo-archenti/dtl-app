@@ -4,7 +4,7 @@
           <li class="item item-toggle">
              ¿Te gustaría tener proyectos a cargo?
              <label class="toggle toggle-balanced">
-               <input type="checkbox" ng-model="signupData.projects">
+               <input type="checkbox" ng-model="signupData.projectsInCharge">
                <div class="track">
                  <div class="handle"></div>
                </div>
@@ -13,7 +13,16 @@
           <li class="item item-toggle">
              ¿Nos ayudarías a juntar cosas (comida, ropa, juguetes, etc) entre tus amigos, familia o compañeros de trabajo?
              <label class="toggle toggle-balanced">
-               <input type="checkbox" ng-model="signupData.collect">
+               <input type="checkbox" ng-model="signupData.collectThings">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+          <li class="item item-toggle">
+             Mantenerme informado
+             <label class="toggle toggle-balanced">
+               <input type="checkbox" ng-model="signupData.keepUpdated">
                <div class="track">
                  <div class="handle"></div>
                </div>
