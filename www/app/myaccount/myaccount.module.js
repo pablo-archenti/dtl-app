@@ -3,7 +3,8 @@
 
     angular
         .module('myaccount', [
-            'userService'
+            'userService',
+            'ui'
         ]);
 
 })();

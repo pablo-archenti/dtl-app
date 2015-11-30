@@ -6,10 +6,10 @@
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService'];
-    LoginCtrl.$inject  = ['$scope', 'authService'];
+    SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
+    LoginCtrl.$inject  = ['$scope', 'authService', 'loader', 'alert'];
 
-    function SignupCtrl($scope, $state, $ionicHistory, accountService, authService) {
+    function SignupCtrl($scope, $state, $ionicHistory, accountService, authService, alert) {
 
         $scope.signupData = {};
 
@@ -35,7 +35,7 @@
                 var message = null;
                 if (err.code == 'uniqueness')
                     message = 'Ya existe un usuario con el email ' + userData.email;
-                $scope.ui.alert.show(message);
+                alert.show(message);
             });
         };
 
@@ -48,7 +48,7 @@
 
     }
 
-    function LoginCtrl($scope, authService) {
+    function LoginCtrl($scope, authService, loader, alert) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -66,22 +66,22 @@
 
             })
             .catch(function() {
-                $scope.ui.alert.show();
+                alert.show();
             });
         };
 
         $scope.sendCode = function(email) {
-            $scope.ui.loader.showLoading('Enviando email...');
+            loader.showLoading('Enviando email...');
 
             authService.sendLoginCode(email)
             .then(function() {
                 $scope.showCode();
             })
             .catch(function() {
-                $scope.ui.alert.show();
+                alert.show();
             })
             .finally(function() {
-                $scope.ui.loader.hideLoading();
+                loader.hideLoading();
             });
         };
 

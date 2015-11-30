@@ -6,7 +6,6 @@
             'ionic',
             'dtlServiceSetup',
             'userService',
-            'ui',
             'projects',
             'myaccount'
         ])
