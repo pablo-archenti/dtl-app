@@ -20,6 +20,16 @@
                 }
             })
 
+            .state('app.myaccount', {
+                url: '/myaccount',
+                views: {
+                    menuContent: {
+                        templateUrl: 'app/myaccount/templates/myaccount.html',
+                        controller: 'MyAccountCtrl'
+                    }
+                }
+            })
+
             .state('app.signup', {
                 url: '/signup',
                 abstract: true,

@@ -20,14 +20,14 @@
         <ion-item menu-close ui-sref=".projectsList">
           Proyectos
         </ion-item>
-        <ion-item menu-close ui-sref=".login">
+        <ion-item menu-close ui-sref=".myaccount">
           Mi cuenta
         </ion-item>
         <ion-item menu-close class="item-icon-left" ui-sref=".configure">
           <i class="icon ion-ios-gear"></i>
           Configuración
         </ion-item>
-        <ion-item menu-close ui-sref=".logout">
+        <ion-item menu-close ng-if="isLoggedIn" ng-click="logout()">
           Cerrar sesión
         </ion-item>
       </ion-list>
