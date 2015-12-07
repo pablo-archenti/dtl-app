@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="padding" ng-show="codeHidden" ng-hide="codeShown">
-                        <button class="button button-block button-positive" ng-click="sendCode(credentials.email)" ng-disabled="loginForm.$invalid">
+                        <button class="button button-block button-positive" ng-click="requestLoginCode(credentials.email)" ng-disabled="loginForm.$invalid">
                             Recibe tu código vía email
                         </button>
                     </div>

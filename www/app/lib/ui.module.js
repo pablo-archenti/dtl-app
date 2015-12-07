@@ -35,7 +35,18 @@
     function alert($ionicPopup, $timeout) {
         var alertPopup;
         return {
-            show: function(text) {
+            info: function(text, timeout) {
+                alertPopup = $ionicPopup.alert({
+                    title: 'Info',
+                    template: text
+                });
+                $timeout(function() {
+                        alertPopup.close();
+                    },
+                    timeout || 10000
+                );
+            },
+            error: function(text, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Error',
                     template: text || 'Ha ocurrido un error. Inténtalo nuevamente.'
@@ -43,7 +54,7 @@
                 $timeout(function() {
                         alertPopup.close();
                     },
-                    10000
+                    timeout || 10000
                 );
             }
         };

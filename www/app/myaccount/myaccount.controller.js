@@ -3,11 +3,18 @@
 
     angular
         .module('myaccount')
+        .controller('MyAccountCtrl', MyAccountCtrl)
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    SignupCtrl.$inject = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
-    LoginCtrl.$inject  = ['$scope', 'authService', 'loader', 'alert'];
+    MyAccountCtrl.$inject  = ['$scope'];
+    SignupCtrl.$inject     = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
+    LoginCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'authService', 'loader', 'alert'];
+
+    function MyAccountCtrl($scope) {
+
+    }
+
 
     function SignupCtrl($scope, $state, $ionicHistory, accountService, authService, alert) {
 
@@ -35,7 +42,7 @@
                 var message = null;
                 if (err.code == 'uniqueness')
                     message = 'Ya existe un usuario con el email ' + userData.email;
-                alert.show(message);
+                alert.error(message);
             });
         };
 
@@ -48,7 +55,7 @@
 
     }
 
-    function LoginCtrl($scope, authService, loader, alert) {
+    function LoginCtrl($scope, $state, $ionicHistory, authService, loader, alert) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -63,22 +70,28 @@
         $scope.login = function(credentials) {
             authService.login(credentials)
             .then(function() {
-
+                //prevent back button
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
+                $scope.hideCode();
+                $scope.setIsLoggedIn(true);
+                $state.go('app.projectsList');
             })
             .catch(function() {
-                alert.show();
+                alert.error();
             });
         };
 
-        $scope.sendCode = function(email) {
+        $scope.requestLoginCode = function(email) {
             loader.showLoading('Enviando email...');
 
-            authService.sendLoginCode(email)
+            authService.requestLoginCode(email)
             .then(function() {
                 $scope.showCode();
             })
             .catch(function() {
-                alert.show();
+                alert.error();
             })
             .finally(function() {
                 loader.hideLoading();
