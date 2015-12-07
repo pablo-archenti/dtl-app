@@ -12,6 +12,7 @@
         $scope.setIsLoggedIn = function setIsLoggedIn(isLoggedIn) {
             $scope.isLoggedIn = isLoggedIn;
         };
+        
         $scope.$log = $log;
 
         $scope.$on('$stateChangeStart', function(event, toState) {

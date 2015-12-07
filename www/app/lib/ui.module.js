@@ -56,6 +56,16 @@
                     },
                     timeout || 10000
                 );
+            },
+            confirm: function(text) {
+                return $ionicPopup.confirm({
+                    title: 'Estás seguro?',
+                    template: text
+                })
+                .then(function(yes) {
+                    if (yes) return true;
+                    else return false;
+                });
             }
         };
     }

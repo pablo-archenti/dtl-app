@@ -1,3 +1,17 @@
-<ion-view view-title="Sumate">
-    hola
+<ion-view view-title="Mi cuenta">
+        <ion-nav-view name="form">
+            <ion-content>
+                <div class="padding">
+                    <button class="button button-block button-balanced" ui-sref="app.signup.step1">
+                        Editar cuenta
+                    </button>
+                    <button class="button button-block button-balanced" ui-sref="app.signup.step1">
+                        Cerrar Sesión
+                    </button>
+                    <button class="button button-block button-assertive" ng-click="delete()">
+                        Borrar Cuenta
+                    </button>
+                </div>
+            </ion-content>
+        </ion-nav-view>
 </ion-view>

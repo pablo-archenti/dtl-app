@@ -7,14 +7,32 @@
         .controller('SignupCtrl', SignupCtrl)
         .controller('LoginCtrl', LoginCtrl);
 
-    MyAccountCtrl.$inject  = ['$scope'];
+    MyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService'];
     SignupCtrl.$inject     = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
     LoginCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'authService', 'loader', 'alert'];
 
-    function MyAccountCtrl($scope) {
+    function MyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
 
+        $scope.delete = function() {
+            alert.confirm('Tu cuenta se eliminará por completo!!')
+            .then(function(ok) {
+                if (ok) {
+                    accountService.deleteAccount()
+                    .then(function() {
+                        $ionicHistory.nextViewOptions({
+                            historyRoot: true
+                        });
+                        $state.go('app.login');
+                        alert.info('Tu cuenta ha sido eliminada');
+                    });
+                }
+            })
+            .catch(function() {
+                alert.error();
+            });
+
+        };
     }
-
 
     function SignupCtrl($scope, $state, $ionicHistory, accountService, authService, alert) {
 
@@ -36,6 +54,7 @@
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });
+                $scope.setIsLoggedIn(true);
                 $state.go('app.projectsList');
             })
             .catch(function(err) {
@@ -90,8 +109,9 @@
             .then(function() {
                 $scope.showCode();
             })
-            .catch(function() {
-                alert.error();
+            .catch(function(err) {
+                var message = (err.status === 404) ? 'La cuenta no existe. Registrate y comenzá a ayudar!' : null;
+                alert.error(message);
             })
             .finally(function() {
                 loader.hideLoading();

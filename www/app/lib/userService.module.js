@@ -7,7 +7,7 @@
         .factory('accountService', accountService);
 
     authService.$inject = ['Volunteer', 'localStorage', 'LoopBackAuth'];
-    accountService.$inject = ['$q', 'Volunteer'];
+    accountService.$inject = ['$q', 'Volunteer', 'authService'];
 
     function authService(Volunteer, localStorage, LoopBackAuth) {
         var service = {};
@@ -75,12 +75,22 @@
         return service;
     }
 
-    function accountService($q, Volunteer) {
+    function accountService($q, Volunteer, authService) {
         var service = {};
 
         service.signUp = function signUp(data) {
             return Volunteer.create(data)
                     .$promise;
+        };
+
+        service.deleteAccount = function deleteAccount() {
+            return Volunteer.deleteById({
+                        id: authService.getUserId()
+                    })
+                    .$promise
+                    .then(function() {
+                        authService.clearSession();
+                    });
         };
 
         service.prepareUserData = function prepareUserData(userFormData) {
