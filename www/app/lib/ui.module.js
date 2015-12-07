@@ -2,11 +2,26 @@
     'use strict';
 
     angular.module('ui', [])
+    .provider('uiResource', uiResource)
     .factory('loader', loader)
     .factory('alert', alert);
 
     loader.$inject = ['$ionicLoading', '$timeout'];
-    alert.$inject  = ['$ionicPopup', '$timeout'];
+    alert.$inject  = ['$ionicPopup', '$timeout', 'uiResource'];
+
+    function uiResource() {
+        var texts;
+        return {
+            setTexts: function(t) {
+                texts = t;
+            },
+            $get: function () {
+                return {
+                    texts: texts
+                };
+            }
+        };
+    }
 
     function loader($ionicLoading, $timeout) {
         return {
@@ -32,13 +47,18 @@
         };
     }
 
-    function alert($ionicPopup, $timeout) {
+    function alert($ionicPopup, $timeout, uiResource) {
         var alertPopup;
+
+        function getMessage(key) {
+            return uiResource.texts[key] || null;
+        }
+
         return {
             info: function(text, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Info',
-                    template: text
+                    template: getMessage(text)
                 });
                 $timeout(function() {
                         alertPopup.close();
@@ -49,7 +69,7 @@
             error: function(text, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Error',
-                    template: text || 'Ha ocurrido un error. Inténtalo nuevamente.'
+                    template: getMessage(text) || 'Ha ocurrido un error. Inténtalo nuevamente.'
                 });
                 $timeout(function() {
                         alertPopup.close();
@@ -60,7 +80,7 @@
             confirm: function(text) {
                 return $ionicPopup.confirm({
                     title: 'Estás seguro?',
-                    template: text
+                    template: getMessage(text)
                 })
                 .then(function(yes) {
                     if (yes) return true;

@@ -12,7 +12,7 @@
         $scope.setIsLoggedIn = function setIsLoggedIn(isLoggedIn) {
             $scope.isLoggedIn = isLoggedIn;
         };
-        
+
         $scope.$log = $log;
 
         $scope.$on('$stateChangeStart', function(event, toState) {
@@ -27,7 +27,7 @@
             .then(function() {
                 $scope.setIsLoggedIn(false);
                 $state.go('app.login');
-                alert.info('Sesión cerrada');
+                alert.info('account.logout');
             })
             .catch(function() {
                 alert.error();

@@ -12,9 +12,8 @@
     LoginCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'authService', 'loader', 'alert'];
 
     function MyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
-
         $scope.delete = function() {
-            alert.confirm('Tu cuenta se eliminará por completo!!')
+            alert.confirm('account.confirmDeletion')
             .then(function(ok) {
                 if (ok) {
                     accountService.deleteAccount()
@@ -22,8 +21,9 @@
                         $ionicHistory.nextViewOptions({
                             historyRoot: true
                         });
+                        $scope.setIsLoggedIn(false);
                         $state.go('app.login');
-                        alert.info('Tu cuenta ha sido eliminada');
+                        alert.info('account.deleted');
                     });
                 }
             })
@@ -60,7 +60,7 @@
             .catch(function(err) {
                 var message = null;
                 if (err.code == 'uniqueness')
-                    message = 'Ya existe un usuario con el email ' + userData.email;
+                    message = 'account.exists';
                 alert.error(message);
             });
         };
@@ -110,7 +110,7 @@
                 $scope.showCode();
             })
             .catch(function(err) {
-                var message = (err.status === 404) ? 'La cuenta no existe. Registrate y comenzá a ayudar!' : null;
+                var message = (err.status === 404) ? 'account.notExists' : null;
                 alert.error(message);
             })
             .finally(function() {
