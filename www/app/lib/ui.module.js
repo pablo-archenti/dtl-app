@@ -58,6 +58,7 @@
             info: function(text, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Info',
+                    cssClass: 'alert-info',
                     template: getMessage(text)
                 });
                 $timeout(function() {
@@ -69,6 +70,7 @@
             error: function(text, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Error',
+                    cssClass: 'alert-error',
                     template: getMessage(text) || 'Ha ocurrido un error. Inténtalo nuevamente.'
                 });
                 $timeout(function() {
@@ -80,6 +82,7 @@
             confirm: function(text) {
                 return $ionicPopup.confirm({
                     title: 'Estás seguro?',
+                    cssClass: 'alert-confirm',
                     template: getMessage(text)
                 })
                 .then(function(yes) {

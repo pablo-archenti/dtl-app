@@ -23,3 +23,9 @@ input.ng-invalid {
 .forgot-password {
     float:right;
 }
+
+/*
+.alert-error .popup-head {
+  background-color: red;
+}
+*/
