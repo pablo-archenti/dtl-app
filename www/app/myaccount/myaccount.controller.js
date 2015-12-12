@@ -37,9 +37,20 @@
     }
 
     function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
-        $scope.submitData = function(userData) {
-            console.log('yesssssssssss');
-        };
+        $scope.$on('$ionicView.enter', function() {
+            loader.showLoading('Cargando datos...');
+            accountService.getAccount()
+            .then(function(data) {
+                $scope.data = data;
+            })
+            .catch(function() {
+                alert.error();
+            })
+            .finally(function() {
+                loader.hideLoading();
+            });
+
+        });
     }
 
     function LoginCtrl($scope, $state, $ionicHistory, authService, loader, alert) {
@@ -98,10 +109,7 @@
         $scope.data = {};
 
         $scope.submitData = function(userData) {
-            accountService.prepareUserData(userData)
-            .then(function(pUserData) {
-                return accountService.signUp(pUserData);
-            })
+            accountService.signUp(userData)
             .then(function(volunteer) {
                 return authService.login({
                     email: volunteer.email,

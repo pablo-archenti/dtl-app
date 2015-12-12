@@ -31,7 +31,7 @@
             })
             .$promise
             .then(function(accessToken) {
-                return createSession(accessToken.id, accessToken.user);
+                return createSession(accessToken.id, tranformUserData(accessToken.user));
             })
             .then(function() {
                 return true;
@@ -79,8 +79,10 @@
         var service = {};
 
         service.signUp = function signUp(data) {
-            return Volunteer.create(data)
-                    .$promise;
+            return  prepareUserData(data)
+                    .then(function(data) {
+                        return Volunteer.create(data).$promise;
+                    });
         };
 
         service.deleteAccount = function deleteAccount() {
@@ -93,26 +95,44 @@
                     });
         };
 
-        service.prepareUserData = function prepareUserData(userFormData) {
-            var data = angular.copy(userFormData);
-            var helpWith = '';
-            if (data.helpWith) {
-                Object.keys(data.helpWith).forEach(function(h) {
-                    helpWith += h + ', ';
-                });
-                helpWith = helpWith.substring(0, helpWith.length-2);
-                data.helpWith = helpWith;
-            }
-            data.collectThings = data.collectThings ? 'yes' : 'no';
-            data.projectsInCharge = data.projectsInCharge ? 'yes' : 'no';
-            data.keepUpdated = data.keepUpdated ? 'yes' : 'no';
-            if (data.birthdate)
-                data.birthdate = data.birthdate.substring(8) + '/' + data.birthdate.substring(5, 7) + '/' + data.birthdate.substring(0, 4);
-
-            return $q.resolve(data);
+        service.getAccountData = function getAccountData() {
+            return Volunteer.findById({
+                        id: authService.getUserId()
+                    })
+                    .$promise
+                    .then(function(data) {
+                        return tranformUserData(data);
+                    });
         };
 
         return service;
+    }
+
+    function prepareUserData(userData) {
+        var data = angular.copy(userData);
+        var helpWith = '';
+        if (data.helpWith) {
+            Object.keys(data.helpWith).forEach(function(h) {
+                helpWith += h + ', ';
+            });
+            helpWith = helpWith.substring(0, helpWith.length-2);
+            data.helpWith = helpWith;
+        }
+        data.collectThings = data.collectThings ? 'yes' : 'no';
+        data.projectsInCharge = data.projectsInCharge ? 'yes' : 'no';
+        data.keepUpdated = data.keepUpdated ? 'yes' : 'no';
+        if (data.birthdate)
+            data.birthdate = data.birthdate.substring(8) + '/' + data.birthdate.substring(5, 7) + '/' + data.birthdate.substring(0, 4);
+
+        return $q.resolve(data);
+    }
+
+    function tranformUserData(userData) {
+        var data = angular.copy(userData);
+
+        //to finish
+
+        return $q.resolve(data);
     }
 
 })();
