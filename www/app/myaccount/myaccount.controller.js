@@ -4,14 +4,17 @@
     angular
         .module('myaccount')
         .controller('MyAccountCtrl', MyAccountCtrl)
-        .controller('SignupCtrl', SignupCtrl)
-        .controller('LoginCtrl', LoginCtrl);
+        .controller('EditMyAccountCtrl', EditMyAccountCtrl)
+        .controller('LoginCtrl', LoginCtrl)
+        .controller('SignupCtrl', SignupCtrl);
 
-    MyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService'];
-    SignupCtrl.$inject     = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
-    LoginCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'authService', 'loader', 'alert'];
+    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert'];
+    EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService'];
+    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'authService', 'loader', 'alert'];
+    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
 
-    function MyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
+    function MyAccountCtrl($scope, $state, $ionicHistory, alert) {
+
         $scope.delete = function() {
             alert.confirm('account.confirmDeletion')
             .then(function(ok) {
@@ -30,48 +33,13 @@
             .catch(function() {
                 alert.error();
             });
-
         };
     }
 
-    function SignupCtrl($scope, $state, $ionicHistory, accountService, authService, alert) {
-
-        $scope.signupData = {};
-
-        $scope.signup = function(userData) {
-            accountService.prepareUserData(userData)
-            .then(function(pUserData) {
-                return accountService.signUp(pUserData);
-            })
-            .then(function(volunteer) {
-                return authService.login({
-                    email: volunteer.email,
-                    code: volunteer.code
-                });
-            })
-            .then(function() {
-                //prevent back button
-                $ionicHistory.nextViewOptions({
-                    historyRoot: true
-                });
-                $scope.setIsLoggedIn(true);
-                $state.go('app.projectsList');
-            })
-            .catch(function(err) {
-                var message = null;
-                if (err.code == 'uniqueness')
-                    message = 'account.exists';
-                alert.error(message);
-            });
+    function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
+        $scope.submitData = function(userData) {
+            console.log('yesssssssssss');
         };
-
-        $scope.cancel = function() {
-            $scope.signupData = {};
-            $ionicHistory.nextViewOptions({
-                disableBack: true
-            });
-        };
-
     }
 
     function LoginCtrl($scope, $state, $ionicHistory, authService, loader, alert) {
@@ -123,6 +91,46 @@
         };
 
         $scope.hideCode();
+    }
+
+    function SignupCtrl($scope, $state, $ionicHistory, accountService, authService, alert) {
+
+        $scope.data = {};
+
+        $scope.submitData = function(userData) {
+            accountService.prepareUserData(userData)
+            .then(function(pUserData) {
+                return accountService.signUp(pUserData);
+            })
+            .then(function(volunteer) {
+                return authService.login({
+                    email: volunteer.email,
+                    code: volunteer.code
+                });
+            })
+            .then(function() {
+                //prevent back button
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
+                $scope.setIsLoggedIn(true);
+                $state.go('app.projectsList');
+            })
+            .catch(function(err) {
+                var message = null;
+                if (err.code == 'uniqueness')
+                    message = 'account.exists';
+                alert.error(message);
+            });
+        };
+
+        $scope.cancel = function() {
+            $scope.data = {};
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go('app.myaccount');
+        };
     }
 
 })();

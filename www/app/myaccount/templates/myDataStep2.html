@@ -4,71 +4,71 @@
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.donacion">
+               <input type="checkbox" ng-model="data.helpWith.donacion">
              </label>
              Donación ($)
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.compra_chica">
+               <input type="checkbox" ng-model="data.helpWith.compra_chica">
              </label>
              Compra chica
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.tiempo">
+               <input type="checkbox" ng-model="data.helpWith.tiempo">
              </label>
              Tiempo
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.auto">
+               <input type="checkbox" ng-model="data.helpWith.auto">
              </label>
              Auto
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.camioneta">
+               <input type="checkbox" ng-model="data.helpWith.camioneta">
              </label>
              Camioneta
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.voluntario_eventos">
+               <input type="checkbox" ng-model="data.helpWith.voluntario_eventos">
              </label>
              Voluntario en eventos
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.camion">
+               <input type="checkbox" ng-model="data.helpWith.camion">
              </label>
              Camión
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.barco_lancha">
+               <input type="checkbox" ng-model="data.helpWith.barco_lancha">
              </label>
              Barco/Lancha
           </li>
 
           <li class="item item-checkbox">
              <label class="checkbox">
-               <input type="checkbox" ng-model="signupData.helpWith.otro">
+               <input type="checkbox" ng-model="data.helpWith.otro">
              </label>
              Otro
           </li>
       </ul>
-          <div class="padding">
-          <button class="button button-block button-positive" ui-sref="app.signup.step3">
-              Siguiente <i class="icon ion-arrow-right-a"></i>
-          </button>
-      </div>
     </ion-content>
+    <div class="bar bar-footer bar-positive">
+        <button class="button button-positive pull-right" ui-sref="^.step3" ng-disabled="myDataForm.$invalid">
+            Siguiente <i class="icon ion-arrow-right-a"></i>
+        </button>
+    </div>
 </ion-view>

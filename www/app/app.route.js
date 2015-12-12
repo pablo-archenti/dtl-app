@@ -14,15 +14,6 @@
             url: '/app',
             abstract: true,
             templateUrl: 'app/layout/menu.html'
-        })
-
-        .state('app.configure', {
-            url: '/configure',
-            views: {
-                menuContent: {
-                    templateUrl: 'app/configure/configure.html'
-                }
-            }
         });
 
         $urlRouterProvider.otherwise('/app/projects');

@@ -5,9 +5,9 @@
         .module('projects')
         .config(routes);
 
-    routes.$inject = ['$stateProvider'];
+    routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function routes($stateProvider) {
+    function routes($stateProvider, $urlRouterProvider) {
         $stateProvider
 
         .state('app.projectsList', {
@@ -29,6 +29,8 @@
                 }
             }
         });
+
+        $urlRouterProvider.otherwise('/app/projects');
     }
 
 })();
