@@ -5,34 +5,17 @@
         .module('app')
         .controller('ApplicationController', ApplicationController);
 
-    ApplicationController.$inject = ['$scope', '$log', 'authService', '$state', 'alert'];
+    ApplicationController.$inject = ['$scope', '$log', 'userSession', '$state'];
 
-    function ApplicationController($scope, $log, authService, $state, alert) {
-        $scope.isLoggedIn = authService.isLoggedIn();
-        $scope.setIsLoggedIn = function setIsLoggedIn(isLoggedIn) {
-            $scope.isLoggedIn = isLoggedIn;
-        };
-
+    function ApplicationController($scope, $log, userSession, $state) {
         $scope.$log = $log;
 
         $scope.$on('$stateChangeStart', function(event, toState) {
-            if (toState.name === 'app.myaccount' && !authService.isLoggedIn()) {
+            if (toState.name === 'app.myaccount' && !userSession.isAuthenticated()) {
                 $state.go('app.login');
                 event.preventDefault();
             }
         });
-
-        $scope.logout = function() {
-            authService.logout()
-            .then(function() {
-                $scope.setIsLoggedIn(false);
-                $state.go('app.login');
-                alert.info('account.logout');
-            })
-            .catch(function() {
-                alert.error();
-            });
-        };
     }
 
 })();

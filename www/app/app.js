@@ -5,7 +5,7 @@
         .module('app', [
             'ionic',
             'dtlServiceSetup',
-            'userService',
+            'session',
             'projects',
             'myaccount'
         ])

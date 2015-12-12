@@ -8,12 +8,12 @@
         .controller('LoginCtrl', LoginCtrl)
         .controller('SignupCtrl', SignupCtrl);
 
-    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert'];
-    EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService'];
-    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'authService', 'loader', 'alert'];
-    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'accountService', 'authService', 'alert'];
+    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService'];
+    EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService', 'loader'];
+    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'accountService', 'loader', 'alert'];
+    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'accountService', 'alert'];
 
-    function MyAccountCtrl($scope, $state, $ionicHistory, alert) {
+    function MyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
 
         $scope.delete = function() {
             alert.confirm('account.confirmDeletion')
@@ -24,7 +24,6 @@
                         $ionicHistory.nextViewOptions({
                             historyRoot: true
                         });
-                        $scope.setIsLoggedIn(false);
                         $state.go('app.login');
                         alert.info('account.deleted');
                     });
@@ -34,10 +33,21 @@
                 alert.error();
             });
         };
+
+        $scope.logout = function() {
+            accountService.logout()
+            .then(function() {
+                $state.go('app.login');
+                alert.info('account.logout');
+            })
+            .catch(function() {
+                alert.error();
+            });
+        };
     }
 
-    function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
-        $scope.$on('$ionicView.enter', function() {
+    function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService, loader) {
+        $scope.$on('$ionicView.beforeEnter', function() {
             loader.showLoading('Cargando datos...');
             accountService.getAccount()
             .then(function(data) {
@@ -53,7 +63,7 @@
         });
     }
 
-    function LoginCtrl($scope, $state, $ionicHistory, authService, loader, alert) {
+    function LoginCtrl($scope, $state, $ionicHistory, accountService, loader, alert) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -66,14 +76,13 @@
         };
 
         $scope.login = function(credentials) {
-            authService.login(credentials)
+            accountService.login(credentials)
             .then(function() {
                 //prevent back button
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });
                 $scope.hideCode();
-                $scope.setIsLoggedIn(true);
                 $state.go('app.projectsList');
             })
             .catch(function() {
@@ -84,7 +93,7 @@
         $scope.requestLoginCode = function(email) {
             loader.showLoading('Enviando email...');
 
-            authService.requestLoginCode(email)
+            accountService.requestLoginCode(email)
             .then(function() {
                 $scope.showCode();
             })
@@ -104,14 +113,14 @@
         $scope.hideCode();
     }
 
-    function SignupCtrl($scope, $state, $ionicHistory, accountService, authService, alert) {
+    function SignupCtrl($scope, $state, $ionicHistory, accountService, alert) {
 
         $scope.data = {};
 
         $scope.submitData = function(userData) {
-            accountService.signUp(userData)
+            accountService.createAccount(userData)
             .then(function(volunteer) {
-                return authService.login({
+                return accountService.login({
                     email: volunteer.email,
                     code: volunteer.code
                 });
@@ -121,7 +130,6 @@
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });
-                $scope.setIsLoggedIn(true);
                 $state.go('app.projectsList');
             })
             .catch(function(err) {
