@@ -31,6 +31,7 @@
             })
 
             .state('app.editMyAccount', {
+                cache: false,
                 url: '/editMyAccount',
                 abstract: true,
                 views: {

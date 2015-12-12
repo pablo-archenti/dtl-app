@@ -47,7 +47,8 @@
     }
 
     function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService, loader) {
-        $scope.$on('$ionicView.beforeEnter', function() {
+        initView();
+        function initView() {
             loader.showLoading('Cargando datos...');
             accountService.getAccount()
             .then(function(data) {
@@ -55,12 +56,26 @@
             })
             .catch(function() {
                 alert.error();
+                $state.go('app.myaccount');
             })
             .finally(function() {
                 loader.hideLoading();
             });
+        }
 
-        });
+        $scope.submitData = function(userData) {
+            accountService.updateAccount(userData)
+            .then(function() {
+                //prevent back button
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
+                $state.go('app.myaccount');
+            })
+            .catch(function() {
+                alert.error();
+            });
+        };
     }
 
     function LoginCtrl($scope, $state, $ionicHistory, accountService, loader, alert) {

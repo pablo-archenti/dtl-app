@@ -48,10 +48,7 @@
         };
 
         service.createAccount = function createAccount(data) {
-            return  preUserData(data)
-                    .then(function(data) {
-                        return Volunteer.create(data).$promise;
-                    });
+            return  Volunteer.create(preUserData(data)).$promise;
         };
 
         service.deleteAccount = function deleteAccount() {
@@ -70,9 +67,21 @@
                     })
                     .$promise
                     .then(function(data) {
-                        return posUserData(data);
-                    })
+                        data = posUserData(data);
+                        userSession.setUserData(data);
+                        return data;
+                    });
+        };
+
+        service.updateAccount = function updateAccount(data) {
+            return Volunteer.prototype$updateAttributes({
+                            id: userSession.getUserId()
+                        },
+                            preUserData(data)
+                    )
+                    .$promise
                     .then(function(data) {
+                        data = posUserData(data);
                         userSession.setUserData(data);
                         return data;
                     });
@@ -83,7 +92,9 @@
             var helpWith = '';
             if (data.helpWith) {
                 Object.keys(data.helpWith).forEach(function(h) {
-                    helpWith += h + ', ';
+                    if (data.helpWith[h]) {
+                        helpWith += h + ', ';
+                    }
                 });
                 helpWith = helpWith.substring(0, helpWith.length-2);
                 data.helpWith = helpWith;
@@ -94,15 +105,28 @@
             if (data.birthdate)
                 data.birthdate = data.birthdate.substring(8) + '/' + data.birthdate.substring(5, 7) + '/' + data.birthdate.substring(0, 4);
 
-            return $q.resolve(data);
+            return data;
         }
 
         function posUserData(userData) {
             var data = angular.copy(userData);
 
-            //to finish
+            if (data.birthdate)
+                data.birthdate = data.birthdate.substring(6) + '-' + data.birthdate.substring(3, 5) + '-' + data.birthdate.substring(0, 2);
 
-            return $q.resolve(data);
+            if (data.helpWith) {
+                var help = data.helpWith.split(", ");
+                data.helpWith = {};
+                help.forEach(function(help) {
+                    data.helpWith[help] = true;
+                });
+            }
+
+            data.projectsInCharge = data.projectsInCharge === 'yes' ? true : false;
+            data.collectThings = data.collectThings === 'yes' ? true : false;
+            data.keepUpdated = data.keepUpdated === 'yes' ? true : false;
+
+            return data;
         }
 
 
