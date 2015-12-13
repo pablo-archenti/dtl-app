@@ -85,6 +85,14 @@
                 loader.hide();
             });
         };
+
+        $scope.cancel = function() {
+            $scope.data = {};
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go('app.myaccount');
+        };
     }
 
     function LoginCtrl($scope, $state, $ionicHistory, accountService, loader, alert) {
