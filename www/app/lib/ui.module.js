@@ -6,7 +6,7 @@
     .factory('loader', loader)
     .factory('alert', alert);
 
-    loader.$inject = ['$ionicLoading', '$timeout'];
+    loader.$inject = ['$ionicLoading', '$timeout', 'uiResource'];
     alert.$inject  = ['$ionicPopup', '$timeout', 'uiResource'];
 
     function uiResource() {
@@ -23,22 +23,27 @@
         };
     }
 
-    function loader($ionicLoading, $timeout) {
+    function loader($ionicLoading, $timeout, uiResource) {
+
+        function getMessage(key) {
+            return uiResource.texts[key] || null;
+        }
+
         return {
-            showLoading: function(text) {
-                text = text || 'Loading...';
+            show: function(text) {
+                text = getMessage(text) || 'Loading...';
                 $ionicLoading.show({
                     template: text
                 });
             },
 
-            hideLoading: function() {
+            hide: function() {
                 $ionicLoading.hide();
             },
 
-            toggleLoadingWithMessage: function(text, timeout) {
+            toggle: function(text, timeout) {
                 var self = this;
-                self.showLoading(text);
+                self.show(text);
 
                 $timeout(function() {
                     self.hideLoading();

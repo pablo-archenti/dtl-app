@@ -8,17 +8,18 @@
         .controller('LoginCtrl', LoginCtrl)
         .controller('SignupCtrl', SignupCtrl);
 
-    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService'];
+    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService', 'loader'];
     EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'accountService', 'loader'];
     LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'accountService', 'loader', 'alert'];
-    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'accountService', 'alert'];
+    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'accountService', 'alert', 'loader'];
 
-    function MyAccountCtrl($scope, $state, $ionicHistory, alert, accountService) {
+    function MyAccountCtrl($scope, $state, $ionicHistory, alert, accountService, loader) {
 
         $scope.delete = function() {
             alert.confirm('account.confirmDeletion')
             .then(function(ok) {
                 if (ok) {
+                    loader.show('deletingAccount');
                     accountService.deleteAccount()
                     .then(function() {
                         $ionicHistory.nextViewOptions({
@@ -26,6 +27,7 @@
                         });
                         $state.go('app.login');
                         alert.info('account.deleted');
+                        loader.hide();
                     });
                 }
             })
@@ -35,13 +37,16 @@
         };
 
         $scope.logout = function() {
+            loader.show('loggingOut');
             accountService.logout()
             .then(function() {
                 $state.go('app.login');
-                alert.info('account.logout');
             })
             .catch(function() {
                 alert.error();
+            })
+            .finally(function() {
+                loader.hide();
             });
         };
     }
@@ -49,7 +54,7 @@
     function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService, loader) {
         initView();
         function initView() {
-            loader.showLoading('Cargando datos...');
+            loader.show('loadingData');
             accountService.getAccount()
             .then(function(data) {
                 $scope.data = data;
@@ -59,11 +64,12 @@
                 $state.go('app.myaccount');
             })
             .finally(function() {
-                loader.hideLoading();
+                loader.hide();
             });
         }
 
         $scope.submitData = function(userData) {
+            loader.show('updatingData');
             accountService.updateAccount(userData)
             .then(function() {
                 //prevent back button
@@ -74,6 +80,9 @@
             })
             .catch(function() {
                 alert.error();
+            })
+            .finally(function() {
+                loader.hide();
             });
         };
     }
@@ -91,6 +100,7 @@
         };
 
         $scope.login = function(credentials) {
+            loader.show('loggingIn');
             accountService.login(credentials)
             .then(function() {
                 //prevent back button
@@ -102,11 +112,14 @@
             })
             .catch(function() {
                 alert.error();
+            })
+            .finally(function() {
+                loader.hide();
             });
         };
 
         $scope.requestLoginCode = function(email) {
-            loader.showLoading('Enviando email...');
+            loader.show('sendingCode');
 
             accountService.requestLoginCode(email)
             .then(function() {
@@ -117,7 +130,7 @@
                 alert.error(message);
             })
             .finally(function() {
-                loader.hideLoading();
+                loader.hide();
             });
         };
 
@@ -128,11 +141,12 @@
         $scope.hideCode();
     }
 
-    function SignupCtrl($scope, $state, $ionicHistory, accountService, alert) {
+    function SignupCtrl($scope, $state, $ionicHistory, accountService, alert, loader) {
 
         $scope.data = {};
 
         $scope.submitData = function(userData) {
+            loader.show('signingUp');
             accountService.createAccount(userData)
             .then(function(volunteer) {
                 return accountService.login({
@@ -152,6 +166,9 @@
                 if (err.code == 'uniqueness')
                     message = 'account.exists';
                 alert.error(message);
+            })
+            .finally(function() {
+                loader.hide();
             });
         };
 

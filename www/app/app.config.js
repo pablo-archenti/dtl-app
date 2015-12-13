@@ -6,14 +6,20 @@
             debugEnabled: true
         },
         dtlService: {
-            apiUrlBase: 'http://localhost:3000/api/'
+            apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
         },
         texts: {
             "account.exists": 'Ya existe un usuario con el email ingresado',
             "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
-            "account.logout": 'Sesión cerrada',
             "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
-            "account.deleted": 'Tu cuenta ha sido eliminada'
+            "account.deleted": 'Tu cuenta ha sido eliminada',
+            "loggingOut": 'Cerrando sesión...',
+            "deletingAccount": 'Eliminando cuenta...',
+            "loadingData": 'Cargando datos...',
+            "updatingData": 'Actualizando datos...',
+            "loggingIn": 'Iniciando sesión...',
+            "sendingCode": 'Enviando email...',
+            "signingUp": 'Finalizando registración...'
         }
     };
 
