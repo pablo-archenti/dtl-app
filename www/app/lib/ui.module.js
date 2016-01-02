@@ -31,9 +31,9 @@
 
         return {
             show: function(text) {
-                text = getMessage(text) || 'Loading...';
+                text = getMessage(text) || 'Cargando...';
                 $ionicLoading.show({
-                    template: text
+                    template: '<ion-spinner></ion-spinner><div>' + text + '</div>'
                 });
             },
 
@@ -69,7 +69,7 @@
                 $timeout(function() {
                         alertPopup.close();
                     },
-                    timeout || 10000
+                    timeout || 5000
                 );
             },
             error: function(text, timeout) {
@@ -81,7 +81,7 @@
                 $timeout(function() {
                         alertPopup.close();
                     },
-                    timeout || 10000
+                    timeout || 5000
                 );
             },
             confirm: function(text) {

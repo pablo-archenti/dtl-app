@@ -33,7 +33,7 @@
                     err.codes = codes;
                 }
                 err.code = codes[0] || null;
-                $log.debug(err);
+                $log.debug(err + ', serviceError: ', rejection);
                 return $q.reject(err);
             }
         };

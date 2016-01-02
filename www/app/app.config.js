@@ -6,7 +6,8 @@
             debugEnabled: true
         },
         dtlService: {
-            apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
+            //apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
+            apiUrlBase: 'http://localhost:3030/api'
         },
         texts: {
             "account.exists": 'Ya existe un usuario con el email ingresado',

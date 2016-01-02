@@ -26,8 +26,10 @@
                             historyRoot: true
                         });
                         $state.go('app.login');
-                        alert.info('account.deleted');
+                    })
+                    .finally(function() {
                         loader.hide();
+                        alert.info('account.deleted');
                     });
                 }
             })
@@ -126,10 +128,10 @@
             });
         };
 
-        $scope.requestLoginCode = function(email) {
+        $scope.sendLoginCode = function(email) {
             loader.show('sendingCode');
 
-            accountService.requestLoginCode(email)
+            accountService.sendLoginCode(email)
             .then(function() {
                 $scope.showCode();
             })

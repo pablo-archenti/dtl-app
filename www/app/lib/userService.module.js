@@ -25,7 +25,7 @@
             });
         };
 
-        service.requestLoginCode = function requestLoginCode(email) {
+        service.sendLoginCode = function sendLoginCode(email) {
             return Volunteer.sendLoginCode({
                 email: email
             })
