@@ -41,14 +41,9 @@
         $scope.logout = function() {
             loader.show('loggingOut');
             accountService.logout()
-            .then(function() {
-                $state.go('app.login');
-            })
-            .catch(function() {
-                alert.error();
-            })
             .finally(function() {
                 loader.hide();
+                $state.go('app.login');
             });
         };
     }
@@ -56,7 +51,7 @@
     function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, accountService, loader) {
         initView();
         function initView() {
-            loader.show('loadingData');
+            loader.show();
             accountService.getAccount()
             .then(function(data) {
                 $scope.data = data;

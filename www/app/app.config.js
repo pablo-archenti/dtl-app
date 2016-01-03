@@ -16,7 +16,6 @@
             "account.deleted": 'Tu cuenta ha sido eliminada',
             "loggingOut": 'Cerrando sesión...',
             "deletingAccount": 'Eliminando cuenta...',
-            "loadingData": 'Cargando datos...',
             "updatingData": 'Actualizando datos...',
             "loggingIn": 'Iniciando sesión...',
             "sendingCode": 'Enviando email...',

@@ -31,9 +31,10 @@
 
         return {
             show: function(text) {
-                text = getMessage(text) || 'Cargando...';
+                text = getMessage(text);
+                text = text && '<div>' + text + '</div>' || '';
                 $ionicLoading.show({
-                    template: '<ion-spinner></ion-spinner><div>' + text + '</div>'
+                    template: '<ion-spinner></ion-spinner>' + text
                 });
             },
 
