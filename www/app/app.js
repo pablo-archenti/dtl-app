@@ -5,16 +5,20 @@
         .module('app', [
             'ionic',
             'dtlServiceSetup',
+            'ui',
             'session',
             'projects',
             'myaccount'
         ])
-        .run(ionicRun);
+        .run(ionicBase)
+        .run(ionicInternetConnection);
 
-    ionicRun.$inject = ['$ionicPlatform'];
+    ionicBase.$inject = ['$ionicPlatform'];
+    ionicInternetConnection.$inject = ['$ionicPlatform', 'alert'];
 
-    function ionicRun($ionicPlatform) {
-        $ionicPlatform.ready(function() {
+    function ionicBase($ionicPlatform) {
+        $ionicPlatform.ready()
+        .then(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -25,6 +29,20 @@
                 StatusBar.styleDefault();
             }
         });
+    }
+
+    function ionicInternetConnection($ionicPlatform, alert) {
+        $ionicPlatform.ready()
+        .then(function() {
+            if (window.Connection) {
+                if (navigator.connection.type == Connection.NONE) noConnectionHandler();
+                document.addEventListener("offline", noConnectionHandler, false);
+            }
+        });
+
+        function noConnectionHandler() {
+            alert.error('noConnection');
+        }
     }
 
 })();

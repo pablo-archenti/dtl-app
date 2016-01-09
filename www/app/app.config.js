@@ -6,10 +6,11 @@
             debugEnabled: true
         },
         dtlService: {
-            //apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
-            apiUrlBase: 'http://localhost:3030/api'
+            apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
+            //apiUrlBase: 'http://localhost:3030/api'
         },
         texts: {
+            "noConnection": 'Aparentemente no estás conectado a Internet. Verificá tu conexión e inténtalo nuevamente.',
             "account.exists": 'Ya existe un usuario con el email ingresado',
             "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
             "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
