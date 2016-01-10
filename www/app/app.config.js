@@ -5,7 +5,7 @@
         app: {
             debugEnabled: true
         },
-        dtlService: {
+        dtl: {
             //apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
             apiUrlBase: 'http://localhost:3030/api'
         },
@@ -26,22 +26,22 @@
     angular
         .module('app')
         .constant('appConfig', config.app)
-        .constant('dtlServiceConfig', config.dtlService)
+        .constant('dtlConfig', config.dtl)
         .constant('appTexts', config.texts)
         .config(app)
-        .config(dtlService)
+        .config(dtl)
         .config(uiModule);
 
-    app.$inject        = ['$logProvider', 'appConfig'];
-    dtlService.$inject = ['dtlServiceResourceProvider', 'dtlServiceConfig'];
-    uiModule.$inject   = ['uiResourceProvider', 'appTexts'];
+    app.$inject       = ['$logProvider', 'appConfig'];
+    dtl.$inject       = ['dtlResourceProvider', 'dtlConfig'];
+    uiModule.$inject  = ['uiResourceProvider', 'appTexts'];
 
     function app($logProvider, appConfig) {
         $logProvider.debugEnabled(appConfig.debugEnabled);
     }
 
-    function dtlService(dtlServiceResourceProvider, dtlServiceConfig) {
-        dtlServiceResourceProvider.setUrlBase(dtlServiceConfig.apiUrlBase);
+    function dtl(dtlResourceProvider, dtlConfig) {
+        dtlResourceProvider.setUrlBase(dtlConfig.apiUrlBase);
     }
 
     function uiModule(uiResourceProvider, appTexts) {

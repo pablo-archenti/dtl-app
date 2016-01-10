@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('userService', ['session', 'dtlService'])
-        .factory('accountService', accountService);
+        .module('dtl')
+        .factory('dtlAccount', dtlAccount);
 
-    accountService.$inject = ['userSession', 'Volunteer', '$q'];
+    dtlAccount.$inject = ['userSession', 'Volunteer'];
 
-    function accountService(userSession, Volunteer, $q) {
+    function dtlAccount(userSession, Volunteer) {
         var service = {};
 
         service.login = function login(credentials) {

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('session', ['storage', 'dtlService'])
+        .module('session', ['storage', 'dtlClient'])
         .factory('userSession', userSession);
 
     userSession.$inject = ['localStorage', 'Volunteer', 'LoopBackAuth'];

@@ -2,16 +2,16 @@
     'use strict';
 
     angular
-        .module('dtlServiceSetup', ['dtlService'])
-        .provider('dtlServiceResource', dtlServiceResourceProvider)
+        .module('dtl', ['dtlClient','session'])
+        .provider('dtlResource', dtlResourceProvider)
         .config(pushInterceptors)
         .factory('dtlErrorsInterceptor', dtlErrorsInterceptor);
 
-    dtlServiceResourceProvider.$inject = ['LoopBackResourceProvider'];
+    dtlResourceProvider.$inject = ['LoopBackResourceProvider'];
     pushInterceptors.$inject = ['$httpProvider'];
     dtlErrorsInterceptor.$inject = ['$q', '$log'];
 
-    function dtlServiceResourceProvider(LoopBackResourceProvider) {
+    function dtlResourceProvider(LoopBackResourceProvider) {
         return LoopBackResourceProvider;
     }
 
