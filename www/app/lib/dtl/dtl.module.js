@@ -12,7 +12,20 @@
     dtlErrorsInterceptor.$inject = ['$q', '$log'];
 
     function dtlResourceProvider(LoopBackResourceProvider) {
-        return LoopBackResourceProvider;
+        var limit = null;
+        return {
+            setPaginationLimit: function(l) {
+                limit = l;
+            },
+            setUrlBase: function(url) {
+                LoopBackResourceProvider.setUrlBase(url);
+            },
+            $get: function () {
+                return {
+                    limit: limit
+                };
+            }
+        };
     }
 
     function pushInterceptors($httpProvider) {

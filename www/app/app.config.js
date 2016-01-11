@@ -7,7 +7,8 @@
         },
         dtl: {
             //apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api/'
-            apiUrlBase: 'http://localhost:3030/api'
+            apiUrlBase: 'http://localhost:3030/api',
+            paginationLimit: 10
         },
         texts: {
             "account.exists": 'Ya existe un usuario con el email ingresado',
@@ -42,6 +43,7 @@
 
     function dtl(dtlResourceProvider, dtlConfig) {
         dtlResourceProvider.setUrlBase(dtlConfig.apiUrlBase);
+        dtlResourceProvider.setPaginationLimit(dtlConfig.paginationLimit);
     }
 
     function uiModule(uiResourceProvider, appTexts) {

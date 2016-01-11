@@ -6,17 +6,19 @@
         .controller('ProjectsListCtrl', ProjectsListCtrl)
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
-    ProjectsListCtrl.$inject = ['$scope', 'projectsService'];
-    ProjectsShowCtrl.$inject = ['$scope', 'projectsService', '$stateParams', '$ionicModal'];
+    ProjectsListCtrl.$inject = ['$scope', 'dtlProject'];
+    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', '$stateParams', '$ionicModal'];
 
-    function ProjectsListCtrl($scope, projectsService) {
+    function ProjectsListCtrl($scope, dtlProject) {
         $scope.projects = [];
+        var page = 0;
 
         $scope.loadMore = function() {
-            projectsService.getAll()
+            dtlProject.findByStatus('finalizado', { page: page })
             .then(function(projects) {
                 $scope.projects = $scope.projects.concat(projects);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                page++;
             });
         };
 
@@ -26,6 +28,17 @@
                 $scope.projects = projects;
                 $scope.$broadcast('scroll.refreshComplete');
             });
+        };
+
+        $scope.moreProjectsCanBeLoaded = function() {
+            console.log('yes');
+            return false;
+            /*return dtlProject.count()
+            .then(function(count) {
+                return false;
+                console.log(count);
+                return count > 0 ? true : false;
+            });*/
         };
 
     }
