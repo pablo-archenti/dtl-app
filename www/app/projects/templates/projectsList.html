@@ -1,6 +1,6 @@
 <ion-view view-title="Proyectos">
     <ion-nav-buttons side="right">
-        <button menu-toggle="right" class="button button-icon icon ion-android-more-horizontal"></button>
+        <button class="button button-icon icon ion-android-more-horizontal"></button>
     </ion-nav-buttons>
     <ion-content>
         <ion-refresher
@@ -14,7 +14,7 @@
         </div>
         <ion-infinite-scroll
             on-infinite="loadMore()"
-            ng-if="moreProjectsCanBeLoaded()"
+            ng-if="moreProjectsCanBeLoaded"
             distance="5%">
         </ion-infinite-scroll>
 

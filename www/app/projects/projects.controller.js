@@ -1,3 +1,4 @@
+
 (function() {
     'use strict';
 
@@ -11,35 +12,41 @@
 
     function ProjectsListCtrl($scope, dtlProject) {
         $scope.projects = [];
+        $scope.moreProjectsCanBeLoaded = true;
         var page = 0;
 
         $scope.loadMore = function() {
-            dtlProject.findByStatus('finalizado', { page: page })
+            findProjects()
             .then(function(projects) {
                 $scope.projects = $scope.projects.concat(projects);
+            })
+            .finally(function() {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
-                page++;
             });
         };
 
         $scope.refresh = function() {
-            projectsService.getAll()
+            page = 0;
+            findProjects()
             .then(function(projects) {
                 $scope.projects = projects;
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
 
-        $scope.moreProjectsCanBeLoaded = function() {
-            console.log('yes');
-            return false;
-            /*return dtlProject.count()
-            .then(function(count) {
-                return false;
-                console.log(count);
-                return count > 0 ? true : false;
-            });*/
-        };
+        function findProjects() {
+            return dtlProject.findSubscribed({status: 'finalizado'}, { page: page })
+            .then(function(projects) {
+                if (projects.length > 0) {
+                    page++;
+                    $scope.moreProjectsCanBeLoaded = true;
+                    return projects;
+                } else {
+                    $scope.moreProjectsCanBeLoaded = false;
+                    return [];
+                }
+            });
+        }
 
     }
 
