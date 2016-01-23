@@ -12,11 +12,15 @@
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, userSession) {
         var page = 0;
+        var status = null;
+        var suscribed = false;
+
+        //scope
+        $scope.filters = {};
+        $scope.filters.status = status;
+        $scope.filters.suscribed = suscribed;
         $scope.projects = [];
         $scope.moreProjectsCanBeLoaded = true;
-        $scope.filters = {};
-        $scope.filters.status = null;
-        $scope.filters.suscribed = false;
         $scope.isAuthenticated = userSession.isAuthenticated;
 
         $scope.showFilters = function() {
@@ -28,19 +32,25 @@
                 cssClass: 'projects-filters-popup',
                 buttons: [{
                     text: 'Cancelar',
-                    type: 'button-default'
+                    type: 'button-default',
+                    onTap: function() {
+                        $scope.filters.status = status;
+                        $scope.filters.suscribed = suscribed;
+                    }
                   }, {
-                    text: 'Filtrar',
-                    type: 'button-positive'
+                    text: 'Aplicar',
+                    type: 'button-positive',
+                    onTap: function() {
+                        status = $scope.filters.status;
+                        suscribed = $scope.filters.suscribed;
+                        $scope.refresh();
+                    }
                   }]
-            })
-            .then(function() {
-                $scope.refresh();
             });
         };
 
         $scope.loadMore = function() {
-            findProjects($scope.filters)
+            findProjects()
             .then(function(projects) {
                 $scope.projects = $scope.projects.concat(projects);
             })
@@ -54,7 +64,7 @@
 
         $scope.refresh = function() {
             page = 0;
-            findProjects($scope.filters)
+            findProjects()
             .then(function(projects) {
                 $scope.projects = projects;
             })
@@ -66,11 +76,11 @@
             });
         };
 
-        function findProjects(filters) {
+        function findProjects() {
             var finder;
-            var where = filters.status && { status: filters.status } || {};
+            var where = status && { status: status } || {};
 
-            if (filters.suscribed)
+            if (suscribed)
                 finder = dtlProject.findSubscribed(where, { page: page });
             else
                 finder = dtlProject.find(where, { page: page });
