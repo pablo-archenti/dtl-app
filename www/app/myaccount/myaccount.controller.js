@@ -43,6 +43,9 @@
             dtlAccount.logout()
             .finally(function() {
                 loader.hide();
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
                 $state.go('app.login');
             });
         };
