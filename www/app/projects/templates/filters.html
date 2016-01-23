@@ -1,0 +1,9 @@
+<ion-list>
+  <ion-radio name="status" ng-model="filters.status" ng-value="'encurso'">En curso</ion-radio>
+  <ion-radio name="status" ng-model="filters.status" ng-value="'finalizado'">Finalizados</ion-radio>
+  <ion-radio name="status" ng-model="filters.status" ng-value="null">Todos</ion-radio>
+</ion-list>
+<ion-list ng-if="isAuthenticated()">
+  <ion-radio name="suscribed" ng-model="filters.suscribed" ng-value="true">Suscripto</ion-radio>
+  <ion-radio name="suscribed" ng-model="filters.suscribed" ng-value="false">Todos</ion-radio>
+</ion-list>

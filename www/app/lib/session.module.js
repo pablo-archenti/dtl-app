@@ -15,11 +15,12 @@
         };
 
         session.getUserId = function getUserId() {
-            return localStorage.get('user.data').id || null;
+            var userData = session.getUserData();
+            return userData && userData.id || null;
         };
 
         session.getUserData = function getUserData() {
-            return localStorage.get('user.data');
+            return localStorage.get('user.data') || null;
         };
 
         session.setUserData = function setUserData(data) {

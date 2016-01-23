@@ -23,6 +23,9 @@ input.ng-invalid {
 .forgot-password {
     float:right;
 }
+.projects-filters-popup .popup-head {
+  display: none;
+}
 
 /*
 .alert-error .popup-head {
