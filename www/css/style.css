@@ -1,7 +1,3 @@
-
-.projects .item h2, .project .item-avatar h2 {
-    white-space: normal;
-}
 .modal {
     background-color: black;
 }
@@ -26,7 +22,9 @@ input.ng-invalid {
 .projects-filters-popup .popup-head {
   display: none;
 }
-
+.open, .closed {
+    font-weight: bold;
+}
 /*
 .alert-error .popup-head {
   background-color: red;

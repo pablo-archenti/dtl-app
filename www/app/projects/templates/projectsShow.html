@@ -3,7 +3,7 @@
     <ion-content class="has-header">
         <div class="list card project">
 
-            <div class="item item-avatar">
+            <div class="item item-avatar item-text-wrap">
                 <img src="{{ project.picture }}">
                 <h2>{{ project.title }}</h2>
             </div>
@@ -12,12 +12,40 @@
                 <img class="full-image" src="{{ project.pictures.big[0] }}" ng-click="openModal()">
                 <p ng-bind-html="displaySafeHtml(project.description)"></p>
                 <p>
-                    <span ng-if="project.openingDate">Inicio: {{ project.openingDate }}<br></span>
-                    <span ng-if="project.closingDate">Finalizado: {{ project.closingDate }}</span>
+                    <span class="open" ng-if="project.openingDate">Inicio: {{ project.openingDate }}<br></span>
+                    <span class="closed" ng-if="project.closingDate">Finalizado: {{ project.closingDate }}</span>
                 </p>
             </div>
-
-            <div class="item tabs tabs-secondary tabs-icon-left">
+            <div ng-if="project.need1 || project.need2 || project.need3 || project.need4 || project.need5 || project.need6">
+                <div class="item item-divider">
+                  SE NECESITA
+                </div>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need1">
+                  <i class="icon"><img src="img/icons/{{ project.iconNeed1 || 'OTROS' }}.png"></i>
+                  <span>{{ project.need1 }}</span>
+                </a>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need2">
+                  <i class="icon"><img src="img/icons/{{ project.iconNeed2 }}.png"></i>
+                  <span>{{ project.need2 }}</span>
+                </a>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need3">
+                  <i class="icon"><img src="img/icons/{{ project.iconNeed3 }}.png"></i>
+                  <span>{{ project.need3 }}</span>
+                </a>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need4">
+                  <i class="icon"><img src="img/icons/{{ project.iconNeed4 }}.png"></i>
+                  <span>{{ project.need4 }}</span>
+                </a>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need5">
+                  <i class="icon"><img src="img/icons/{{ project.iconNeed5 }}.png"></i>
+                  <span>{{ project.need5 }}</span>
+                </a>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need6">
+                  <i class="icon"><img src="img/icons/{{ project.iconNeed6 }}.png"></i>
+                  <span>{{ project.need6 }}</span>
+                </a>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left" ng-if="project.status != 'finalizado'">
                 <a class="tab-item" href="#">
                     <i class="icon ion-heart assertive"></i>
                     Ayudar

@@ -7,9 +7,9 @@
             on-refresh="refresh()">
         </ion-refresher>
         <div class="list projects">
-            <a class="item item-thumbnail-left" ng-repeat="project in projects track by $index" ui-sref="app.projectsShow({ id: project.id})">
+            <a class="item item-thumbnail-left item-text-wrap" ng-repeat="project in projects track by $index" ui-sref="app.projectsShow({ id: project.id})">
                 <img src="{{ project.picture }}">
-                <h2 class="title">{{ project.title }}</h2>
+                <h2 class="title ">{{ project.title }}</h2>
             </a>
         </div>
         <ion-infinite-scroll
