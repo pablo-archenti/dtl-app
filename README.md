@@ -1,3 +1,3 @@
 # dtl-app
 
-DesdeTuLugar mobile app
+DesdeTuLugar hybrid mobile app
