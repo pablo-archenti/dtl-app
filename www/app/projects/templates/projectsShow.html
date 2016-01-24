@@ -45,10 +45,14 @@
                   <span>{{ project.need6 }}</span>
                 </a>
             </div>
-            <div class="item tabs tabs-secondary tabs-icon-left" ng-if="project.status != 'finalizado'">
-                <a class="tab-item" href="#">
+            <div class="item tabs tabs-secondary tabs-icon-left" ng-if="project.status == 'encurso'">
+                <a class="tab-item" href="#" ng-hide="project.isSuscribed">
                     <i class="icon ion-heart assertive"></i>
                     Ayudar
+                </a>
+                <a class="tab-item" href="#" ng-show="project.isSuscribed">
+                    <i class="icon ion-close-circled assertive"></i>
+                    Desuscribirse
                 </a>
                 <a class="tab-item" href="#">
                     <i class="icon ion-share positive"></i>
