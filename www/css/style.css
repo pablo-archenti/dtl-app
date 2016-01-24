@@ -26,11 +26,8 @@ input.ng-invalid {
     font-weight: bold;
 }
 .not-found {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    padding-top: 30px;
+    text-align:center;
+    padding-top: 25px;
 }
 /*
 .alert-error .popup-head {
