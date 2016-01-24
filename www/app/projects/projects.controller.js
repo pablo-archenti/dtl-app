@@ -105,13 +105,19 @@
     }
 
     function ProjectsShowCtrl($scope, projectsService, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce, loader) {
+        var projectId = $stateParams.id;
         $scope.project = {};
 
         function init() {
             loader.show();
-            projectsService.findById($stateParams.id)
+            projectsService.findById(projectId)
             .then(function(project) {
                 $scope.project = project;
+                return projectsService.isSuscribed(projectId)
+                        .then(function() {
+                            $scope.project.isSuscribed = true;
+                        })
+                        .catch(function() {});
             })
             .catch(function() {
                 $ionicHistory.nextViewOptions({
