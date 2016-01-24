@@ -21,27 +21,27 @@
                   {{ project.status == 'finalizado' ? 'SE NECESITÓ' : 'SE NECESITA' }}
                 </div>
                 <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need1">
-                  <i class="icon"><img src="img/icons/{{ project.iconNeed1 || 'OTROS' }}.png"></i>
+                  <i class="icon"><img ng-src="img/icons/{{ project.iconNeed1 || 'OTROS' }}.png"></i>
                   <span>{{ project.need1 }}</span>
                 </a>
-                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need2">
-                  <i class="icon"><img src="img/icons/{{ project.iconNeed2 }}.png"></i>
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="false">
+                  <i class="icon"><img ng-src="img/icons/{{ project.iconNeed2 || 'OTROS' }}.png"></i>
                   <span>{{ project.need2 }}</span>
                 </a>
                 <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need3">
-                  <i class="icon"><img src="img/icons/{{ project.iconNeed3 }}.png"></i>
+                  <i class="icon"><img ng-src="img/icons/{{ project.iconNeed3 || 'OTROS' }}.png"></i>
                   <span>{{ project.need3 }}</span>
                 </a>
                 <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need4">
-                  <i class="icon"><img src="img/icons/{{ project.iconNeed4 }}.png"></i>
+                  <i class="icon"><img ng-src="img/icons/{{ project.iconNeed4 || 'OTROS' }}.png"></i>
                   <span>{{ project.need4 }}</span>
                 </a>
                 <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need5">
-                  <i class="icon"><img src="img/icons/{{ project.iconNeed5 }}.png"></i>
+                  <i class="icon"><img ng-src="img/icons/{{ project.iconNeed5 || 'OTROS' }}.png"></i>
                   <span>{{ project.need5 }}</span>
                 </a>
                 <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need6">
-                  <i class="icon"><img src="img/icons/{{ project.iconNeed6 }}.png"></i>
+                  <i class="icon"><img ng-src="img/icons/{{ project.iconNeed6 || 'OTROS' }}.png"></i>
                   <span>{{ project.need6 }}</span>
                 </a>
             </div>
