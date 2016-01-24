@@ -8,7 +8,7 @@
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
     ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'userSession'];
-    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce'];
+    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce', 'loader'];
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, userSession) {
         var page = 0;
@@ -104,10 +104,11 @@
 
     }
 
-    function ProjectsShowCtrl($scope, projectsService, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce) {
+    function ProjectsShowCtrl($scope, projectsService, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce, loader) {
         $scope.project = {};
 
         function init() {
+            loader.show();
             projectsService.findById($stateParams.id)
             .then(function(project) {
                 $scope.project = project;
@@ -118,6 +119,9 @@
                 });
                 $state.go('app.projectsList');
                 alert.error();
+            })
+            .finally(function() {
+                loader.hide();
             });
             $ionicModal.fromTemplateUrl('app/projects/templates/projectsGallery.html', {
                 scope: $scope,
@@ -140,8 +144,8 @@
         });
 
         $scope.displaySafeHtml = function(html){
-          return $sce.trustAsHtml(html);
-      };
+            return $sce.trustAsHtml(html);
+        };
 
         init();
     }

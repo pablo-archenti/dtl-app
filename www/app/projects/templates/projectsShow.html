@@ -18,7 +18,7 @@
             </div>
             <div ng-if="project.need1 || project.need2 || project.need3 || project.need4 || project.need5 || project.need6">
                 <div class="item item-divider">
-                  SE NECESITA
+                  {{ project.status == 'finalizado' ? 'SE NECESITÓ' : 'SE NECESITA' }}
                 </div>
                 <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need1">
                   <i class="icon"><img src="img/icons/{{ project.iconNeed1 || 'OTROS' }}.png"></i>
