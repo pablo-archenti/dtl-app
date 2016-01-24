@@ -8,7 +8,7 @@
         </ion-refresher>
         <div class="list projects">
             <a class="item item-thumbnail-left" ng-repeat="project in projects track by $index" ui-sref="app.projectsShow({ id: project.id})">
-                <img src="{{ project.pictures.small }}">
+                <img src="{{ project.picture }}">
                 <h2 class="title">{{ project.title }}</h2>
             </a>
         </div>

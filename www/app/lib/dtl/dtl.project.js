@@ -25,6 +25,11 @@
             .$promise;
         };
 
+        service.findById = function(id) {
+            return Project.findById({id: id})
+            .$promise;
+        };
+
         service.findSubscribed = function findSubscribed(where, options) {
             var query = prepareQuery(where, options);
             query.id = userSession.getUserId();

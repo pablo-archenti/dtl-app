@@ -4,16 +4,17 @@
         <div class="list card project">
 
             <div class="item item-avatar">
-                <img src="{{ project.pictures.small }}">
+                <img src="{{ project.picture }}">
                 <h2>{{ project.title }}</h2>
             </div>
 
             <div class="item item-body">
                 <img class="full-image" src="{{ project.pictures.big[0] }}" ng-click="openModal()">
+                <p ng-bind-html="displaySafeHtml(project.description)"></p>
                 <p>
-                    {{ project.description }}
+                    <span ng-if="project.openingDate">Inicio: {{ project.openingDate }}<br></span>
+                    <span ng-if="project.closingDate">Finalizado: {{ project.closingDate }}</span>
                 </p>
-                <p><span>Apertura</span>: Nov 05, 2014 - <span>Cierre</span>: Dic 10, 2014</p>
             </div>
 
             <div class="item tabs tabs-secondary tabs-icon-left">

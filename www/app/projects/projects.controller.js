@@ -8,20 +8,20 @@
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
     ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'userSession'];
-    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', '$stateParams', '$ionicModal'];
+    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce'];
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, userSession) {
         var page = 0;
         var status = null;
         var suscribed = false;
 
-        //scope
-        $scope.filters = {};
-        $scope.filters.status = status;
-        $scope.filters.suscribed = suscribed;
         $scope.projects = [];
         $scope.moreProjectsCanBeLoaded = true;
         $scope.isAuthenticated = userSession.isAuthenticated;
+
+        $scope.filters = {};
+        $scope.filters.status = status;
+        $scope.filters.suscribed = suscribed;
 
         $scope.showFilters = function() {
             $ionicPopup.show({
@@ -100,13 +100,20 @@
 
     }
 
-    function ProjectsShowCtrl($scope, projectsService, $stateParams, $ionicModal) {
+    function ProjectsShowCtrl($scope, projectsService, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce) {
         $scope.project = {};
 
         function init() {
-            projectsService.getById($stateParams.id)
+            projectsService.findById($stateParams.id)
             .then(function(project) {
                 $scope.project = project;
+            })
+            .catch(function() {
+                $ionicHistory.nextViewOptions({
+                    historyRoot: true
+                });
+                $state.go('app.projectsList');
+                alert.error();
             });
             $ionicModal.fromTemplateUrl('app/projects/templates/projectsGallery.html', {
                 scope: $scope,
@@ -127,6 +134,10 @@
         $scope.$on('$destroy', function() {
             $scope.modal.remove();
         });
+
+        $scope.displaySafeHtml = function(html){
+          return $sce.trustAsHtml(html);
+      };
 
         init();
     }
