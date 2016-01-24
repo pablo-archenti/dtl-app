@@ -95,6 +95,10 @@
                             $scope.moreProjectsCanBeLoaded = false;
                             return [];
                         }
+                    })
+                    .catch(function(e) {
+                        $scope.moreProjectsCanBeLoaded = false;
+                        throw e;
                     });
         }
 
