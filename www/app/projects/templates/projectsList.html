@@ -11,6 +11,9 @@
                 <img src="{{ project.picture }}">
                 <h2 class="title ">{{ project.title }}</h2>
             </a>
+            <h4 class="not-found" ng-show="!projects.length">
+                No se encontraron proyectos
+            </h4>
         </div>
         <ion-infinite-scroll
             on-infinite="loadMore()"

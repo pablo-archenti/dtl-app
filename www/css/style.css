@@ -25,6 +25,13 @@ input.ng-invalid {
 .open, .closed {
     font-weight: bold;
 }
+.not-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding-top: 30px;
+}
 /*
 .alert-error .popup-head {
   background-color: red;
