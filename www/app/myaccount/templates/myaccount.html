@@ -1,15 +1,22 @@
 <ion-view view-title="Mi cuenta">
     <ion-content>
-        <div class="padding">
-            <button class="button button-block button-balanced" ui-sref="app.editMyAccount.step1">
-                Editar cuenta
-            </button>
-            <button class="button button-block button-positive" ng-click="logout()">
-                Cerrar Sesión
-            </button>
-            <button class="button button-block button-assertive" ng-click="delete()">
-                Borrar Cuenta
-            </button>
+        <div class="list card">
+
+          <a ui-sref="app.editMyAccount.step1" class="item item-icon-left">
+            <i class="icon ion-person"></i>
+            Editar cuenta
+          </a>
+
+          <a ng-click="logout()" class="item item-icon-left">
+            <i class="icon ion-android-close"></i>
+            Cerrar sesión
+          </a>
+
+          <a ng-click="delete()" class="item item-icon-left">
+            <i class="icon ion-trash-b"></i>
+            Eliminar cuenta
+          </a>
+
         </div>
     </ion-content>
 </ion-view>
