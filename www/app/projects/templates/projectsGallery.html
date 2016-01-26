@@ -1,8 +1,8 @@
 <ion-modal-view>
     <ion-content class="gallery">
         <ion-slide-box show-pager="false" ng-click="closeModal()">
-            <ion-slide ng-repeat="picture in project.pictures.big">
-                <img ng-src="{{ picture }}"/>
+            <ion-slide ng-repeat="p in project.gallery">
+                <img ng-src="{{ p.picture }}"/>
             </ion-slide>
         </ion-slide-box>
     </ion-content>

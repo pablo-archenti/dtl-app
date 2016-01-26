@@ -110,7 +110,7 @@
 
         function init() {
             loader.show();
-            projectsService.findById(projectId)
+            projectsService.findById(projectId, 'gallery')
             .then(function(project) {
                 $scope.project = project;
                 return projectsService.isSuscribed(projectId)

@@ -1848,6 +1848,258 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name dtlClient.Project#prototype$__findById__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Find a related item by id for pictures.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for pictures
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        "prototype$__findById__pictures": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Projects/:id/pictures/:fk",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Project#prototype$__destroyById__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Delete a related item by id for pictures.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for pictures
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__destroyById__pictures": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Projects/:id/pictures/:fk",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Project#prototype$__updateById__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Update a related item by id for pictures.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for pictures
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        "prototype$__updateById__pictures": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Projects/:id/pictures/:fk",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Project#prototype$__get__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Queries pictures of Project.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        "prototype$__get__pictures": {
+          isArray: true,
+          url: urlBase + "/Projects/:id/pictures",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Project#prototype$__create__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Creates a new instance in pictures of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        "prototype$__create__pictures": {
+          url: urlBase + "/Projects/:id/pictures",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Project#prototype$__delete__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Deletes all pictures of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$__delete__pictures": {
+          url: urlBase + "/Projects/:id/pictures",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Project#prototype$__count__pictures
+         * @methodOf dtlClient.Project
+         *
+         * @description
+         *
+         * Counts pictures of Project.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "prototype$__count__pictures": {
+          url: urlBase + "/Projects/:id/pictures/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
          * @name dtlClient.Project#create
          * @methodOf dtlClient.Project
          *

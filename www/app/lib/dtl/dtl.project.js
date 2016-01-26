@@ -25,8 +25,11 @@
             .$promise;
         };
 
-        service.findById = function(id) {
-            return Project.findById({id: id})
+        service.findById = function(id, include) {
+            var query = {};
+            query.id = id;
+            query.filter = include && { include: include } || {};
+            return Project.findById(query)
             .$promise;
         };
 
