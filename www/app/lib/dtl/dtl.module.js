@@ -35,19 +35,22 @@
     function dtlErrorsInterceptor($q, $log) {
         return {
             responseError: function(rejection) {
-                var err = new Error(rejection.data.error.message);
+                var error = rejection.data.error || {};
+                var message = error.message || rejection.statusText;
                 var codes = [];
-                err.status = rejection.status;
-                err.name = rejection.data.error.name;
-                if (rejection.data.error.details && rejection.data.error.details.codes) {
-                    Object.keys(rejection.data.error.details.codes).forEach(function(field) {
-                        codes.push(rejection.data.error.details.codes[field][0]);
+
+                var myError = new Error(message);
+                myError.status = rejection.status;
+                if (error.details && error.details.codes) {
+                    Object.keys(error.details.codes).forEach(function(field) {
+                        codes.push(error.details.codes[field][0]);
                     });
-                    err.codes = codes;
+                    myError.codes = codes;
                 }
-                err.code = codes[0] || null;
-                $log.debug(err + ', serviceError: ', rejection);
-                return $q.reject(err);
+                myError.code = codes[0] || error.code || null;
+                $log.debug(myError + ', serviceError: ', error);
+
+                return $q.reject(myError);
             }
         };
     }
