@@ -9,7 +9,7 @@
             </div>
 
             <div class="item item-body">
-                <img class="full-image" src="{{ project.gallery[0].picture }}" ng-click="openModal()">
+                <img class="full-image" src="{{ project.gallery[0].url }}" ng-click="openModal()">
                 <p ng-bind-html="displaySafeHtml(project.description)"></p>
                 <p>
                     <span class="open" ng-if="project.openingDate">Inicio: {{ project.openingDate }}<br></span>
