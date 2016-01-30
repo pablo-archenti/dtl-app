@@ -46,11 +46,11 @@
                 </a>
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left" ng-if="project.status == 'actual'">
-                <a class="tab-item" href="#" ng-hide="project.isSuscribed">
+                <a class="tab-item" href="#" ng-hide="project.isSuscribed" ng-click="suscribe()">
                     <i class="icon ion-heart assertive"></i>
                     Ayudar
                 </a>
-                <a class="tab-item" href="#" ng-show="project.isSuscribed">
+                <a class="tab-item" href="#" ng-show="project.isSuscribed" ng-click="unsuscribe()">
                     <i class="icon ion-close-circled assertive"></i>
                     Desuscribirse
                 </a>

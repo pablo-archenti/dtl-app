@@ -8,10 +8,11 @@
         </ion-refresher>
         <div class="list projects">
             <a class="item item-thumbnail-left item-text-wrap" ng-repeat="project in projects track by $index" ui-sref="app.projectsShow({ id: project.id})">
-                <img src="{{ project.picture }}">
+                <img ng-class="{gray: project.status==='finalizado'}" src="{{ project.picture }}">
                 <h2 class="title ">{{ project.title }}</h2>
+                <p ng-if="project.status === 'finalizado'">Finalizado</p>
             </a>
-            <h4 class="not-found" ng-show="!projects.length">
+            <h4 class="not-found" ng-show="!projects.length && loading === false">
                 No se encontraron proyectos
             </h4>
         </div>

@@ -50,6 +50,7 @@
         };
 
         $scope.loadMore = function() {
+            $scope.loading = true;
             findProjects()
             .then(function(projects) {
                 $scope.projects = $scope.projects.concat(projects);
@@ -59,6 +60,7 @@
             })
             .finally(function() {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.loading = false;
             });
         };
 
@@ -136,6 +138,14 @@
                 $scope.modal = modal;
             });
         }
+
+        $scope.suscribe = function() {
+            console.log('suscribe');
+        };
+
+        $scope.unsuscribe = function() {
+            console.log('unsuscribe');
+        };
 
         $scope.openModal = function() {
             $scope.modal.show();
