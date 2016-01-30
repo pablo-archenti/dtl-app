@@ -129,7 +129,7 @@
             .finally(function() {
                 loader.hide();
             });
-            $ionicModal.fromTemplateUrl('app/projects/templates/projectsGallery.html', {
+            $ionicModal.fromTemplateUrl('app/projects/templates/gallery.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
               }).then(function(modal) {

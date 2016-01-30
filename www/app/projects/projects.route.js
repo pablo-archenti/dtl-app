@@ -14,7 +14,7 @@
             url: '/projects',
             views: {
                 menuContent: {
-                    templateUrl: 'app/projects/templates/projectsList.html',
+                    templateUrl: 'app/projects/templates/list.html',
                     controller: 'ProjectsListCtrl'
                 }
             }
@@ -24,7 +24,7 @@
             url: '/projects/{id:int}',
             views: {
                 menuContent: {
-                    templateUrl: 'app/projects/templates/projectsShow.html',
+                    templateUrl: 'app/projects/templates/project.html',
                     controller: 'ProjectsShowCtrl'
                 }
             }
