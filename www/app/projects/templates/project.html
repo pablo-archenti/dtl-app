@@ -4,8 +4,9 @@
         <div class="list card project">
 
             <div class="item item-avatar item-text-wrap">
-                <img src="{{ project.picture }}">
+                <img ng-class="{gray: project.status==='finalizado'}" src="{{ project.picture }}">
                 <h2>{{ project.title }}</h2>
+                <p ng-if="project.status === 'finalizado'">Finalizado</p>
             </div>
 
             <div class="item item-body">
