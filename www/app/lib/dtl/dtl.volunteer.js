@@ -95,6 +95,25 @@
             .$promise;
         };
 
+        service.suscribe = function suscribe(projectId, help) {
+            return Volunteer.projects.create({
+                id: userSession.getUserId(),
+                fk: projectId,
+                data: {
+                    help: help
+                }
+            })
+            .$promise;
+        };
+
+        service.unsuscribe = function unsuscribe(projectId) {
+            return Volunteer.projects.remove({
+                id: userSession.getUserId(),
+                fk: projectId
+            })
+            .$promise;
+        };
+
         function preUserData(userData) {
             var data = angular.copy(userData);
             var helpWith = '';
