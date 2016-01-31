@@ -8,19 +8,19 @@
         .controller('LoginCtrl', LoginCtrl)
         .controller('SignupCtrl', SignupCtrl);
 
-    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlAccount', 'loader'];
-    EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlAccount', 'loader'];
-    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'dtlAccount', 'loader', 'alert'];
-    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlAccount', 'alert', 'loader'];
+    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
+    EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
+    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'loader', 'alert'];
+    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'alert', 'loader'];
 
-    function MyAccountCtrl($scope, $state, $ionicHistory, alert, dtlAccount, loader) {
+    function MyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader) {
 
         $scope.delete = function() {
             alert.confirm('account.confirmDeletion')
             .then(function(ok) {
                 if (ok) {
                     loader.show('deletingAccount');
-                    dtlAccount.deleteAccount()
+                    dtlVolunteer.deleteAccount()
                     .then(function() {
                         $ionicHistory.nextViewOptions({
                             historyRoot: true
@@ -40,7 +40,7 @@
 
         $scope.logout = function() {
             loader.show('loggingOut');
-            dtlAccount.logout()
+            dtlVolunteer.logout()
             .finally(function() {
                 loader.hide();
                 $ionicHistory.nextViewOptions({
@@ -51,11 +51,11 @@
         };
     }
 
-    function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, dtlAccount, loader) {
+    function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader) {
         initView();
         function initView() {
             loader.show();
-            dtlAccount.getAccount()
+            dtlVolunteer.getAccount()
             .then(function(data) {
                 $scope.data = data;
             })
@@ -70,7 +70,7 @@
 
         $scope.submitData = function(userData) {
             loader.show('updatingData');
-            dtlAccount.updateAccount(userData)
+            dtlVolunteer.updateAccount(userData)
             .then(function() {
                 //prevent back button
                 $ionicHistory.nextViewOptions({
@@ -95,7 +95,7 @@
         };
     }
 
-    function LoginCtrl($scope, $state, $ionicHistory, dtlAccount, loader, alert) {
+    function LoginCtrl($scope, $state, $ionicHistory, dtlVolunteer, loader, alert) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -109,7 +109,7 @@
 
         $scope.login = function(credentials) {
             loader.show('loggingIn');
-            dtlAccount.login(credentials)
+            dtlVolunteer.login(credentials)
             .then(function() {
                 //prevent back button
                 $ionicHistory.nextViewOptions({
@@ -129,7 +129,7 @@
         $scope.sendLoginCode = function(email) {
             loader.show('sendingCode');
 
-            dtlAccount.sendLoginCode(email)
+            dtlVolunteer.sendLoginCode(email)
             .then(function() {
                 $scope.showCode();
             })
@@ -149,15 +149,15 @@
         $scope.hideCode();
     }
 
-    function SignupCtrl($scope, $state, $ionicHistory, dtlAccount, alert, loader) {
+    function SignupCtrl($scope, $state, $ionicHistory, dtlVolunteer, alert, loader) {
 
         $scope.data = {};
 
         $scope.submitData = function(userData) {
             loader.show('signingUp');
-            dtlAccount.createAccount(userData)
+            dtlVolunteer.createAccount(userData)
             .then(function(volunteer) {
-                return dtlAccount.login({
+                return dtlVolunteer.login({
                     email: volunteer.email,
                     code: volunteer.code
                 });

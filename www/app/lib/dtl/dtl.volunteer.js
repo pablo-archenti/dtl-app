@@ -3,11 +3,11 @@
 
     angular
         .module('dtl')
-        .factory('dtlAccount', dtlAccount);
+        .factory('dtlVolunteer', dtlVolunteer);
 
-    dtlAccount.$inject = ['userSession', 'Volunteer'];
+    dtlVolunteer.$inject = ['userSession', 'Volunteer'];
 
-    function dtlAccount(userSession, Volunteer) {
+    function dtlVolunteer(userSession, Volunteer) {
         var service = {};
 
         service.login = function login(credentials) {
@@ -87,6 +87,14 @@
                     });
         };
 
+        service.isSuscribed = function isSuscribed(projectId) {
+            return Volunteer.projects.exists({
+                id: userSession.getUserId(),
+                fk: projectId
+            })
+            .$promise;
+        };
+
         function preUserData(userData) {
             var data = angular.copy(userData);
             var helpWith = '';
@@ -128,7 +136,6 @@
 
             return data;
         }
-
 
         return service;
     }

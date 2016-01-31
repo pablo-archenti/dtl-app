@@ -40,14 +40,6 @@
             .$promise;
         };
 
-        service.isSuscribed = function isSuscribed(id) {
-            return Volunteer.projects.exists({
-                id: userSession.getUserId(),
-                fk: id
-            })
-            .$promise;
-        };
-
         return service;
     }
 

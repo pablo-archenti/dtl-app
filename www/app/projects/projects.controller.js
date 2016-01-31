@@ -8,7 +8,7 @@
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
     ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'userSession'];
-    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce', 'loader'];
+    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce', 'loader'];
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, userSession) {
         var page = 0;
@@ -106,7 +106,7 @@
 
     }
 
-    function ProjectsShowCtrl($scope, projectsService, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce, loader) {
+    function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce, loader) {
         var projectId = $stateParams.id;
         $scope.project = {};
 
@@ -115,7 +115,7 @@
             projectsService.findById(projectId, 'gallery')
             .then(function(project) {
                 $scope.project = project;
-                return projectsService.isSuscribed(projectId)
+                return dtlVolunteer.isSuscribed(projectId)
                         .then(function() {
                             $scope.project.isSuscribed = true;
                         })
