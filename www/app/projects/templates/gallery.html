@@ -1,6 +1,6 @@
 <ion-modal-view>
     <ion-content class="gallery">
-        <ion-slide-box show-pager="false" ng-click="closeModal()">
+        <ion-slide-box show-pager="false" ng-click="closeGalleryModal()">
             <ion-slide ng-repeat="p in project.gallery">
                 <img ng-src="{{ p.url }}"/>
             </ion-slide>

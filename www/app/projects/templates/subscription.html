@@ -1,0 +1,28 @@
+<ion-modal-view>
+    <ion-content class="subscribe">
+        <div class="row col">
+            <h3>{{ project.title}}<h3>
+            <h4>Una vez suscripto te estaremos contactando muy pronto por teléfono</h4>
+            <h6>Desuscribirse es tán fácil como suscribirse y podés hacerlo cuando quieras<h6>
+        </div>
+        <ul class="list">
+            <li>
+                <label class="item item-input item-stacked-label">
+                    <textarea ng-model="subscriptionData.help" placeholder="Contanos como te gustaría ayudar (opcional)" rows="5"></textarea>
+                </label>
+            </li>
+        </ul>
+        <div class="padding row">
+            <div class="col">
+                <button class="button button-block button-assertive" ng-click="closeSubscriptionModal()">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col">
+                <button class="button button-block button-balanced" ng-click="subscribe()">
+                    Suscribirse
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

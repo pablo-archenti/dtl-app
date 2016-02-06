@@ -87,9 +87,11 @@
             },
             confirm: function(text) {
                 return $ionicPopup.confirm({
-                    title: 'Estás seguro?',
+                    title: 'Confirmación',
                     cssClass: 'alert-confirm',
-                    template: getMessage(text)
+                    template: getMessage(text),
+                    okText: 'Confirmar',
+                    cancelText: 'Cancelar'
                 })
                 .then(function(yes) {
                     if (yes) return true;

@@ -77,7 +77,7 @@
             return Volunteer.prototype$updateAttributes({
                             id: userSession.getUserId()
                         },
-                            preUserData(data)
+                        preUserData(data)
                     )
                     .$promise
                     .then(function(data) {
@@ -87,7 +87,7 @@
                     });
         };
 
-        service.isSuscribed = function isSuscribed(projectId) {
+        service.isSubscribed = function isSubscribed(projectId) {
             return Volunteer.projects.exists({
                 id: userSession.getUserId(),
                 fk: projectId
@@ -95,19 +95,21 @@
             .$promise;
         };
 
-        service.suscribe = function suscribe(projectId, help) {
-            return Volunteer.projects.create({
-                id: userSession.getUserId(),
-                fk: projectId,
-                data: {
-                    help: help
-                }
+        service.subscribe = function subscribe(projectId, data) {
+            data = data || {};
+            return Volunteer.projects.link({
+                    id: userSession.getUserId()
+                },
+                {
+                    fk: projectId,
+                    help: data.help || null,
+                    volunteerId: userSession.getUserId()
             })
             .$promise;
         };
 
-        service.unsuscribe = function unsuscribe(projectId) {
-            return Volunteer.projects.remove({
+        service.unsubscribe = function unsubscribe(projectId) {
+            return Volunteer.projects.unlink({
                 id: userSession.getUserId(),
                 fk: projectId
             })

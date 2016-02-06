@@ -109,15 +109,16 @@
     function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce, loader) {
         var projectId = $stateParams.id;
         $scope.project = {};
+        $scope.subscriptionData = {};
 
         function init() {
             loader.show();
             projectsService.findById(projectId, 'gallery')
             .then(function(project) {
                 $scope.project = project;
-                return dtlVolunteer.isSuscribed(projectId)
+                return dtlVolunteer.isSubscribed(projectId)
                         .then(function() {
-                            $scope.project.isSuscribed = true;
+                            $scope.project.isSubscribed = true;
                         })
                         .catch(function() {});
             })
@@ -135,28 +136,68 @@
                 scope: $scope,
                 animation: 'slide-in-up'
               }).then(function(modal) {
-                $scope.modal = modal;
+                $scope.galleryModal = modal;
+            });
+            $ionicModal.fromTemplateUrl('app/projects/templates/subscription.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+              }).then(function(modal) {
+                $scope.subscriptionModal = modal;
             });
         }
 
-        $scope.suscribe = function() {
-            console.log('suscribe');
+        $scope.subscribe = function() {
+            loader.show();
+            dtlVolunteer.subscribe($scope.project.id, $scope.subscriptionData)
+            .then(function() {
+                $scope.project.isSubscribed = true;
+                $scope.closeSubscriptionModal();
+            })
+            .catch(function() {
+                alert.error();
+            })
+            .finally(function() {
+                loader.hide();
+            });
         };
 
-        $scope.unsuscribe = function() {
-            console.log('unsuscribe');
+        $scope.unsubscribe = function() {
+            alert.confirm('projects.confirmUnsubscription')
+            .then(function(confirm) {
+                if (confirm === true) {
+                    loader.show();
+                    return dtlVolunteer.unsubscribe($scope.project.id)
+                            .then(function() {
+                                $scope.project.isSubscribed = false;
+                                loader.hide();
+                            });
+                }
+            })
+            .catch(function() {
+                alert.error();
+            });
         };
 
-        $scope.openModal = function() {
-            $scope.modal.show();
+        $scope.openSubscriptionModal = function() {
+            $scope.subscriptionData = {};
+            $scope.subscriptionModal.show();
         };
 
-        $scope.closeModal = function() {
-            $scope.modal.hide();
+        $scope.closeSubscriptionModal = function() {
+            $scope.subscriptionModal.hide();
+        };
+
+        $scope.openGalleryModal = function() {
+            $scope.galleryModal.show();
+        };
+
+        $scope.closeGalleryModal = function() {
+            $scope.galleryModal.hide();
         };
 
         $scope.$on('$destroy', function() {
-            $scope.modal.remove();
+            $scope.subscriptionModal.remove();
+            $scope.galleryModal.remove();
         });
 
         $scope.displaySafeHtml = function(html){

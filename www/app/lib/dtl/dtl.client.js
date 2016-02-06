@@ -17,6 +17,50 @@ var module = angular.module("dtlClient", ['ngResource']);
 
 /**
  * @ngdoc object
+ * @name dtlClient.Email
+ * @header dtlClient.Email
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Email` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Email",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Emails/:id",
+      { 'id': '@id' },
+      {
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name dtlClient.Email#modelName
+    * @propertyOf dtlClient.Email
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Email`.
+    */
+    R.modelName = "Email";
+
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
  * @name dtlClient.Volunteer
  * @header dtlClient.Volunteer
  * @object
@@ -222,7 +266,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `refresh` – `{boolean=}` - 
+         *  - `refresh` – `{boolean=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -361,7 +405,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` - 
+         *  - `filter` – `{object=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -478,7 +522,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "prototype$__count__accessTokens": {
           url: urlBase + "/Volunteers/:id/accessTokens/count",
@@ -650,7 +694,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/Volunteers/:id/exists",
@@ -851,7 +895,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/Volunteers/count",
@@ -911,7 +955,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -925,7 +969,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/Volunteers/change-stream",
@@ -966,9 +1010,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
+         *
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
+         *
          *
          */
         "login": {
@@ -1041,11 +1085,11 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `uid` – `{string}` - 
+         *  - `uid` – `{string}` -
          *
-         *  - `token` – `{string}` - 
+         *  - `token` – `{string}` -
          *
-         *  - `redirect` – `{string=}` - 
+         *  - `redirect` – `{string=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1164,7 +1208,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `email` – `{string}` - 
+         *  - `email` – `{string}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1183,6 +1227,12 @@ module.factory(
          */
         "sendLoginCode": {
           url: urlBase + "/Volunteers/sendLoginCode",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Subscription.volunteer() instead.
+        "::get::Subscription::volunteer": {
+          url: urlBase + "/Subscriptions/:id/volunteer",
           method: "GET"
         },
 
@@ -1435,7 +1485,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` - 
+         *  - `filter` – `{object=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1485,7 +1535,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         R.projects.count = function() {
           var TargetResource = $injector.get("Project");
@@ -1848,18 +1898,18 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__findById__pictures
+         * @name dtlClient.Project#prototype$__findById__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Find a related item by id for pictures.
+         * Find a related item by id for gallery.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `fk` – `{*}` - Foreign key for pictures
+         *  - `fk` – `{*}` - Foreign key for gallery
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1876,28 +1926,28 @@ module.factory(
          * This usually means the response is a `Project` object.)
          * </em>
          */
-        "prototype$__findById__pictures": {
+        "prototype$__findById__gallery": {
           params: {
           'fk': '@fk'
           },
-          url: urlBase + "/Projects/:id/pictures/:fk",
+          url: urlBase + "/Projects/:id/gallery/:fk",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__destroyById__pictures
+         * @name dtlClient.Project#prototype$__destroyById__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Delete a related item by id for pictures.
+         * Delete a related item by id for gallery.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `fk` – `{*}` - Foreign key for pictures
+         *  - `fk` – `{*}` - Foreign key for gallery
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1911,28 +1961,28 @@ module.factory(
          *
          * This method returns no data.
          */
-        "prototype$__destroyById__pictures": {
+        "prototype$__destroyById__gallery": {
           params: {
           'fk': '@fk'
           },
-          url: urlBase + "/Projects/:id/pictures/:fk",
+          url: urlBase + "/Projects/:id/gallery/:fk",
           method: "DELETE"
         },
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__updateById__pictures
+         * @name dtlClient.Project#prototype$__updateById__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Update a related item by id for pictures.
+         * Update a related item by id for gallery.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `fk` – `{*}` - Foreign key for pictures
+         *  - `fk` – `{*}` - Foreign key for gallery
          *
          * @param {Object} postData Request data.
          *
@@ -1953,28 +2003,28 @@ module.factory(
          * This usually means the response is a `Project` object.)
          * </em>
          */
-        "prototype$__updateById__pictures": {
+        "prototype$__updateById__gallery": {
           params: {
           'fk': '@fk'
           },
-          url: urlBase + "/Projects/:id/pictures/:fk",
+          url: urlBase + "/Projects/:id/gallery/:fk",
           method: "PUT"
         },
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__get__pictures
+         * @name dtlClient.Project#prototype$__get__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Queries pictures of Project.
+         * Queries gallery of Project.
          *
          * @param {Object=} parameters Request parameters.
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `filter` – `{object=}` - 
+         *  - `filter` – `{object=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1991,20 +2041,20 @@ module.factory(
          * This usually means the response is a `Project` object.)
          * </em>
          */
-        "prototype$__get__pictures": {
+        "prototype$__get__gallery": {
           isArray: true,
-          url: urlBase + "/Projects/:id/pictures",
+          url: urlBase + "/Projects/:id/gallery",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__create__pictures
+         * @name dtlClient.Project#prototype$__create__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Creates a new instance in pictures of this model.
+         * Creates a new instance in gallery of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -2029,19 +2079,19 @@ module.factory(
          * This usually means the response is a `Project` object.)
          * </em>
          */
-        "prototype$__create__pictures": {
-          url: urlBase + "/Projects/:id/pictures",
+        "prototype$__create__gallery": {
+          url: urlBase + "/Projects/:id/gallery",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__delete__pictures
+         * @name dtlClient.Project#prototype$__delete__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Deletes all pictures of this model.
+         * Deletes all gallery of this model.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -2059,19 +2109,19 @@ module.factory(
          *
          * This method returns no data.
          */
-        "prototype$__delete__pictures": {
-          url: urlBase + "/Projects/:id/pictures",
+        "prototype$__delete__gallery": {
+          url: urlBase + "/Projects/:id/gallery",
           method: "DELETE"
         },
 
         /**
          * @ngdoc method
-         * @name dtlClient.Project#prototype$__count__pictures
+         * @name dtlClient.Project#prototype$__count__gallery
          * @methodOf dtlClient.Project
          *
          * @description
          *
-         * Counts pictures of Project.
+         * Counts gallery of Project.
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -2091,10 +2141,10 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
-        "prototype$__count__pictures": {
-          url: urlBase + "/Projects/:id/pictures/count",
+        "prototype$__count__gallery": {
+          url: urlBase + "/Projects/:id/gallery/count",
           method: "GET"
         },
 
@@ -2238,7 +2288,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/Projects/:id/exists",
@@ -2439,7 +2489,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/Projects/count",
@@ -2499,7 +2549,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2513,7 +2563,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/Projects/change-stream",
@@ -2603,6 +2653,12 @@ module.factory(
         // INTERNAL. Use Volunteer.projects.count() instead.
         "::count::Volunteer::projects": {
           url: urlBase + "/Volunteers/:id/projects/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Subscription.project() instead.
+        "::get::Subscription::project": {
+          url: urlBase + "/Subscriptions/:id/project",
           method: "GET"
         },
       }
@@ -2747,6 +2803,682 @@ module.factory(
     */
     R.modelName = "Project";
 
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name dtlClient.Subscription
+ * @header dtlClient.Subscription
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Subscription` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Subscription",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Subscriptions/:id",
+      { 'id': '@id' },
+      {
+
+        // INTERNAL. Use Subscription.project() instead.
+        "prototype$__get__project": {
+          url: urlBase + "/Subscriptions/:id/project",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Subscription.volunteer() instead.
+        "prototype$__get__volunteer": {
+          url: urlBase + "/Subscriptions/:id/volunteer",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#create
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "create": {
+          url: urlBase + "/Subscriptions",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#createMany
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "createMany": {
+          isArray: true,
+          url: urlBase + "/Subscriptions",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#upsert
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/Subscriptions",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#exists
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Check whether a model instance exists in the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `exists` – `{boolean=}` -
+         */
+        "exists": {
+          url: urlBase + "/Subscriptions/:id/exists",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#findById
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         *  - `filter` – `{object=}` - Filter defining fields and include
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/Subscriptions/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#find
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/Subscriptions",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#findOne
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Find first instance of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "findOne": {
+          url: urlBase + "/Subscriptions/findOne",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#updateAll
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The number of instances updated
+         */
+        "updateAll": {
+          url: urlBase + "/Subscriptions/update",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#deleteById
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "deleteById": {
+          url: urlBase + "/Subscriptions/:id",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#count
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Count instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` -
+         */
+        "count": {
+          url: urlBase + "/Subscriptions/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#prototype$updateAttributes
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Update attributes for a model instance and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        "prototype$updateAttributes": {
+          url: urlBase + "/Subscriptions/:id",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#createChangeStream
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Create a change stream.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `options` – `{object=}` -
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `changes` – `{ReadableStream=}` -
+         */
+        "createChangeStream": {
+          url: urlBase + "/Subscriptions/change-stream",
+          method: "POST"
+        },
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#updateOrCreate
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#update
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The number of instances updated
+         */
+        R["update"] = R["updateAll"];
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#destroyById
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        R["destroyById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#removeById
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Subscription` object.)
+         * </em>
+         */
+        R["removeById"] = R["deleteById"];
+
+
+    /**
+    * @ngdoc property
+    * @name dtlClient.Subscription#modelName
+    * @propertyOf dtlClient.Subscription
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Subscription`.
+    */
+    R.modelName = "Subscription";
+
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#project
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Fetches belongsTo relation project.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` -
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        R.project = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::get::Subscription::project"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Subscription#volunteer
+         * @methodOf dtlClient.Subscription
+         *
+         * @description
+         *
+         * Fetches belongsTo relation volunteer.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` -
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Volunteer` object.)
+         * </em>
+         */
+        R.volunteer = function() {
+          var TargetResource = $injector.get("Volunteer");
+          var action = TargetResource["::get::Subscription::volunteer"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -2904,7 +3636,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` - 
+         *  - `filter` – `{object=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -3021,7 +3753,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "prototype$__count__accessTokens": {
           url: urlBase + "/Admins/:id/accessTokens/count",
@@ -3168,7 +3900,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/Admins/:id/exists",
@@ -3369,7 +4101,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/Admins/count",
@@ -3429,7 +4161,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -3443,7 +4175,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/Admins/change-stream",
@@ -3484,9 +4216,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
+         *
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
+         *
          *
          */
         "login": {
@@ -3559,11 +4291,11 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `uid` – `{string}` - 
+         *  - `uid` – `{string}` -
          *
-         *  - `token` – `{string}` - 
+         *  - `token` – `{string}` -
          *
-         *  - `redirect` – `{string=}` - 
+         *  - `redirect` – `{string=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.

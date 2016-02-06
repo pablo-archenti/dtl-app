@@ -10,7 +10,7 @@
             </div>
 
             <div class="item item-body">
-                <img class="full-image" src="{{ project.gallery[0].url }}" ng-click="openModal()">
+                <img class="full-image" src="{{ project.gallery[0].url }}" ng-click="openGalleryModal()">
                 <p ng-bind-html="displaySafeHtml(project.description)"></p>
                 <p>
                     <span class="open" ng-if="project.openingDate">Inicio: {{ project.openingDate }}<br></span>
@@ -46,21 +46,20 @@
                   <span>{{ project.need6 }}</span>
                 </a>
             </div>
-            <div class="item tabs tabs-secondary tabs-icon-left" ng-if="project.status == 'actual'">
-                <a class="tab-item" href="#" ng-hide="project.isSuscribed" ng-click="suscribe()">
-                    <i class="icon ion-heart assertive"></i>
-                    Ayudar
-                </a>
-                <a class="tab-item" href="#" ng-show="project.isSuscribed" ng-click="unsuscribe()">
-                    <i class="icon ion-close-circled assertive"></i>
-                    Desuscribirse
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-share positive"></i>
-                    Compartir
-                </a>
-            </div>
-
         </div>
     </ion-content>
+    <div class="tabs tabs-icon-top tabs-stable" ng-if="project.status == 'actual'">
+        <a class="tab-item" href="#" ng-hide="project.isSubscribed" ng-click="openSubscriptionModal()">
+            <i class="icon ion-heart assertive"></i>
+            Ayudar
+        </a>
+        <a class="tab-item" href="#" ng-show="project.isSubscribed" ng-click="unsubscribe()">
+            <i class="icon ion-close-circled"></i>
+            Desuscribirse
+        </a>
+        <a class="tab-item" href="#">
+            <i class="icon ion-share positive"></i>
+            Compartir
+        </a>
+    </div>
 </ion-view>

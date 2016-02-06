@@ -13,8 +13,9 @@
         texts: {
             "account.exists": 'Ya existe un usuario con el email ingresado',
             "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
-            "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
             "account.deleted": 'Tu cuenta ha sido eliminada',
+            "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
+            "projects.confirmUnsubscription": '¿Estás seguro que querés desuscribirte del proyecto?',
             "loggingOut": 'Cerrando sesión...',
             "deletingAccount": 'Eliminando cuenta...',
             "updatingData": 'Actualizando datos...',
