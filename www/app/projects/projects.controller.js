@@ -7,17 +7,17 @@
         .controller('ProjectsListCtrl', ProjectsListCtrl)
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
-    ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'userSession'];
+    ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'dtlVolunteer'];
     ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce', 'loader'];
 
-    function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, userSession) {
+    function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, dtlVolunteer) {
         var page = 0;
         var status = null;
         var suscribed = false;
 
         $scope.projects = [];
         $scope.moreProjectsCanBeLoaded = true;
-        $scope.isAuthenticated = userSession.isAuthenticated;
+        $scope.isAuthenticated = dtlVolunteer.isAuthenticated;
 
         $scope.filters = {};
         $scope.filters.status = status;
