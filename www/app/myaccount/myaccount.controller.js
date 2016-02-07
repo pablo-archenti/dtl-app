@@ -46,6 +46,7 @@
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });
+                $ionicHistory.clearCache();
                 $state.go('app.login');
             });
         };
