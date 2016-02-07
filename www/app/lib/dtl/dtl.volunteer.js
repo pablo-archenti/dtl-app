@@ -89,23 +89,23 @@
 
         service.isSubscribed = function isSubscribed(projectId) {
             return Volunteer.projects.exists({
-                id: userSession.getUserId(),
-                fk: projectId
-            })
-            .$promise;
+                        id: userSession.getUserId(),
+                        fk: projectId
+                    })
+                    .$promise;
         };
 
         service.subscribe = function subscribe(projectId, data) {
             data = data || {};
             return Volunteer.projects.link({
-                    id: userSession.getUserId()
-                },
-                {
-                    fk: projectId,
-                    help: data.help || null,
-                    volunteerId: userSession.getUserId()
-            })
-            .$promise;
+                        id: userSession.getUserId()
+                    },
+                    {
+                        fk: projectId,
+                        help: data.help || null,
+                        volunteerId: userSession.getUserId()
+                    })
+                    .$promise;
         };
 
         service.unsubscribe = function unsubscribe(projectId) {
