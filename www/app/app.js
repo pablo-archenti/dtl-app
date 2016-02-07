@@ -5,7 +5,6 @@
         .module('app', [
             'ionic',
             'dtl',
-            'session',
             'projects',
             'myaccount'
         ])

@@ -4,8 +4,7 @@
     angular
         .module('projects', [
             'dtl',
-            'ui',
-            'session'
+            'ui'
         ]);
 
 })();

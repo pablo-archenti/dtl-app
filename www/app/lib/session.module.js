@@ -2,17 +2,13 @@
     'use strict';
 
     angular
-        .module('session', ['storage', 'dtlClient'])
+        .module('session', ['storage'])
         .factory('userSession', userSession);
 
-    userSession.$inject = ['localStorage', 'Volunteer', 'LoopBackAuth'];
+    userSession.$inject = ['localStorage'];
 
-    function userSession(localStorage, Volunteer, LoopBackAuth) {
+    function userSession(localStorage) {
         var session = {};
-
-        session.isAuthenticated = function isAuthenticated() {
-            return Volunteer.isAuthenticated();
-        };
 
         session.getUserId = function getUserId() {
             var userData = session.getUserData();
@@ -38,8 +34,6 @@
         session.clearSession = function clearSession() {
             localStorage.remove('user.data');
             localStorage.remove('user.token');
-            LoopBackAuth.clearUser();
-            LoopBackAuth.clearStorage();
         };
 
         return session;

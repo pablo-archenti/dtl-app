@@ -10,6 +10,10 @@
     function dtlVolunteer(userSession, Volunteer) {
         var service = {};
 
+        service.isAuthenticated = function isAuthenticated() {
+            return Volunteer.isAuthenticated();
+        };
+
         service.login = function login(credentials) {
             return Volunteer.login({
                 email: credentials.email,
@@ -47,18 +51,19 @@
             });
         };
 
-        service.createAccount = function createAccount(data) {
-            return  Volunteer.create(preUserData(data)).$promise;
-        };
-
         service.deleteAccount = function deleteAccount() {
+            var self = this;
             return Volunteer.deleteById({
                         id: userSession.getUserId()
                     })
                     .$promise
                     .then(function() {
-                        userSession.clearSession();
+                        return self.logout();
                     });
+        };
+
+        service.createAccount = function createAccount(data) {
+            return  Volunteer.create(preUserData(data)).$promise;
         };
 
         service.getAccount = function getAccount() {
