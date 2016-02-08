@@ -154,6 +154,7 @@
             .then(function() {
                 $scope.project.isSubscribed = true;
                 $scope.closeSubscriptionModal();
+                alert.info('project.suscribed', 3000);
             })
             .catch(function() {
                 alert.error();
@@ -164,7 +165,7 @@
         };
 
         $scope.unsubscribe = function() {
-            alert.confirm('projects.confirmUnsubscription')
+            alert.confirm('project.confirmUnsubscription')
             .then(function(confirm) {
                 if (confirm === true) {
                     loader.show();
