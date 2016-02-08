@@ -3,7 +3,8 @@
 
     angular
         .module('session', ['storage'])
-        .factory('userSession', userSession);
+        .factory('userSession', userSession)
+        .service('goBackState', goBackState);
 
     userSession.$inject = ['localStorage'];
 
@@ -37,6 +38,28 @@
         };
 
         return session;
+    }
+
+    function goBackState() {
+        var state = null;
+        var params = {};
+
+        return {
+            save: function(s, p) {
+                state = s;
+                params = p;
+            },
+            getState: function(defaultState) {
+                var s = state || defaultState;
+                state = null;
+                return s;
+            },
+            getParams: function(defaultParams) {
+                var p = params || defaultParams || {};
+                params = {};
+                return p;
+            }
+        };
     }
 
 })();
