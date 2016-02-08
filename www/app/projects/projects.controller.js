@@ -8,7 +8,8 @@
         .controller('ProjectsShowCtrl', ProjectsShowCtrl);
 
     ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'dtlVolunteer'];
-    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal', 'alert', '$state', '$ionicHistory', '$sce', 'loader'];
+    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal',
+                                    'alert', '$state', '$ionicHistory', '$sce', 'loader', 'goBackState'];
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, dtlVolunteer) {
         var page = 0;
@@ -106,7 +107,8 @@
 
     }
 
-    function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams, $ionicModal, alert, $state, $ionicHistory, $sce, loader) {
+    function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams,
+                                $ionicModal, alert, $state, $ionicHistory, $sce, loader, goBackState) {
         var projectId = $stateParams.id;
         $scope.project = {};
         $scope.subscriptionData = {};
@@ -179,8 +181,13 @@
         };
 
         $scope.openSubscriptionModal = function() {
-            $scope.subscriptionData = {};
-            $scope.subscriptionModal.show();
+            if (dtlVolunteer.isAuthenticated()) {
+                $scope.subscriptionData = {};
+                $scope.subscriptionModal.show();
+            } else {
+                goBackState.save('app.projectsShow', { id: projectId });
+                $state.go('app.signup.step1');
+            }
         };
 
         $scope.closeSubscriptionModal = function() {

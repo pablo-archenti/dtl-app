@@ -11,7 +11,7 @@
     MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
     EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
     LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'loader', 'alert'];
-    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'alert', 'loader'];
+    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'alert', 'loader', 'goBackState'];
 
     function MyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader) {
 
@@ -150,7 +150,7 @@
         $scope.hideCode();
     }
 
-    function SignupCtrl($scope, $state, $ionicHistory, dtlVolunteer, alert, loader) {
+    function SignupCtrl($scope, $state, $ionicHistory, dtlVolunteer, alert, loader, goBackState) {
 
         $scope.data = {};
 
@@ -168,7 +168,7 @@
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });
-                $state.go('app.projectsList');
+                $state.go(goBackState.getState('app.projectsList'), goBackState.getParams());
             })
             .catch(function(err) {
                 var message = null;
