@@ -23,6 +23,11 @@
             "loggingIn": 'Iniciando sesión...',
             "sendingCode": 'Enviando email...',
             "signingUp": 'Finalizando registración...'
+        },
+        shareProject: {
+            message: 'Sumate y ayudá a cumplir este proyecto!!',
+            subject: 'Desde tu lugar',
+            link: 'http://desdetulugar.com.ar/?s=proyectos_actuales_ampliado&p={projectId}'
         }
     };
 
@@ -31,6 +36,7 @@
         .constant('appConfig', config.app)
         .constant('dtlConfig', config.dtl)
         .constant('appTexts', config.texts)
+        .constant('shareProject', config.shareProject)
         .config(app)
         .config(dtl)
         .config(uiModule);

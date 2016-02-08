@@ -9,7 +9,8 @@
 
     ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'dtlVolunteer'];
     ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal',
-                                    'alert', '$state', '$ionicHistory', '$sce', 'loader', 'goBackState'];
+                                    'alert', '$state', '$ionicHistory', '$sce', 'loader', 'goBackState',
+                                    '$ionicPlatform', '$cordovaSocialSharing', 'shareProject'];
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, dtlVolunteer) {
         var page = 0;
@@ -107,8 +108,8 @@
 
     }
 
-    function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams,
-                                $ionicModal, alert, $state, $ionicHistory, $sce, loader, goBackState) {
+    function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams, $ionicModal, alert,
+                                $state, $ionicHistory, $sce, loader, goBackState, $ionicPlatform, $socialSharing, shareProject) {
         var projectId = $stateParams.id;
         $scope.project = {};
         $scope.subscriptionData = {};
@@ -210,6 +211,20 @@
 
         $scope.displaySafeHtml = function(html){
             return $sce.trustAsHtml(html);
+        };
+
+        $scope.share = function() {
+            var message = shareProject.message;
+            var subject = shareProject.subject;
+            var link = shareProject.link.replace("{projectId}", projectId);
+
+            $ionicPlatform.ready(function() {
+                $socialSharing
+                .share(message, subject, null, link)
+                .catch(function(err) {
+                    alert.error(err);
+                });
+            });
         };
 
         init();

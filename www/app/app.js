@@ -6,7 +6,8 @@
             'ionic',
             'dtl',
             'projects',
-            'myaccount'
+            'myaccount',
+            'ngCordova'
         ])
         .run(ionicRun);
 

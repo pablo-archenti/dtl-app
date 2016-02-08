@@ -50,15 +50,15 @@
         </div>
     </ion-content>
     <div class="tabs tabs-icon-top tabs-stable" ng-if="project.status == 'actual'">
-        <a class="tab-item" href="#" ng-hide="project.isSubscribed" ng-click="openSubscriptionModal()">
+        <a class="tab-item" ng-hide="project.isSubscribed" ng-click="openSubscriptionModal()">
             <i class="icon ion-heart assertive"></i>
             Ayudar
         </a>
-        <a class="tab-item" href="#" ng-show="project.isSubscribed" ng-click="unsubscribe()">
+        <a class="tab-item" ng-show="project.isSubscribed" ng-click="unsubscribe()">
             <i class="icon ion-close-circled"></i>
             Desuscribirse
         </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item"  ng-click="share()">
             <i class="icon ion-share positive"></i>
             Compartir
         </a>
