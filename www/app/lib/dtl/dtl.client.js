@@ -302,62 +302,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlClient.Volunteer#login
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Login a user with username/email and password.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
-         *   Default value: `user`.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The response body contains properties of the AccessToken created on login.
-         * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
-         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
-         *
-         */
-        "login": {
-          params: {
-            include: "user"
-          },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Volunteers/login",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name dtlClient.Volunteer#logout
          * @methodOf dtlClient.Volunteer
          *
@@ -400,7 +344,7 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name dtlClient.Volunteer#login
+         * @name dtlClient.Volunteer#loginWithCode
          * @methodOf dtlClient.Volunteer
          *
          * @description
@@ -411,10 +355,6 @@ module.factory(
          *
          *   This method does not accept any parameters.
          *   Supply an empty object or omit this argument altogether.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
          *
          * @param {Object} postData Request data.
          *
@@ -435,20 +375,8 @@ module.factory(
          * This usually means the response is a `Volunteer` object.)
          * </em>
          */
-        "login": {
-          params: {
-            include: "user"
-          },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Volunteers/login",
+        "loginWithCode": {
+          url: urlBase + "/Volunteers/loginWithCode",
           method: "POST"
         },
 
