@@ -42,3 +42,12 @@ img.gray {
         -ms-filter: grayscale(100%);
             filter: grayscale(100%);
 }
+.menu .bar-header {
+    background-color: #EDE9DC;
+}
+.bar.bar-assertive .title {
+    color: black
+}
+.bar.bar-dark {
+    border-color: grey
+}
