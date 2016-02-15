@@ -15,7 +15,7 @@
         };
 
         service.login = function login(credentials) {
-            return Volunteer.loginWithCode({
+            return Volunteer.login({
                 email: credentials.email,
                 code: credentials.code
             })
