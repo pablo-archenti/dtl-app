@@ -17,6 +17,7 @@
         "karma-chai": "^0.1.0",
         "karma-mocha": "^0.2.2",
         "karma-phantomjs-launcher": "^1.0.0",
+        "karma-mocha-reporter": "1.2.0",
         "mocha": "^2.4.5",
         "phantomjs-prebuilt": "^2.1.4",
         "shelljs": "^0.3.0"
