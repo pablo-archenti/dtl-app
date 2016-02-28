@@ -21,7 +21,8 @@
             }
 
             function get(key) {
-                return JSON.parse($window.localStorage.getItem(key)) || null;
+                var value = $window.localStorage.getItem(key);
+                return value !== undefined ? JSON.parse(value) : null;
             }
 
             function remove(key) {
