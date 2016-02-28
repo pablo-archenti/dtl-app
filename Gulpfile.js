@@ -56,6 +56,8 @@ gulp.task('test:unit', function(done) {
     new Karma({
         configFile: __dirname + '/tests/karma.conf.js',
         singleRun: true
-    },
-    done).start();
+    }, function (exitCode) {
+        done();
+        process.exit(exitCode);
+    }).start();
 });
