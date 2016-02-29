@@ -6,7 +6,7 @@
     .factory('loader', loader)
     .factory('alert', alert);
 
-    loader.$inject = ['$ionicLoading', '$timeout', 'uiResource'];
+    loader.$inject = ['$ionicLoading', 'uiResource'];
     alert.$inject  = ['$ionicPopup', '$timeout', 'uiResource'];
 
     function uiResource() {
@@ -17,21 +17,19 @@
             },
             $get: function () {
                 return {
-                    texts: texts
+                    getText: function(key) {
+                        return texts[key] || null;
+                    }
                 };
             }
         };
     }
 
-    function loader($ionicLoading, $timeout, uiResource) {
-
-        function getMessage(key) {
-            return uiResource.texts[key] || null;
-        }
+    function loader($ionicLoading, uiResource) {
 
         return {
-            show: function(text) {
-                text = getMessage(text);
+            show: function(textKey) {
+                var text = uiResource.getText(textKey);
                 text = text && '<div>' + text + '</div>' || '';
                 $ionicLoading.show({
                     template: '<ion-spinner></ion-spinner>' + text
@@ -40,15 +38,6 @@
 
             hide: function() {
                 $ionicLoading.hide();
-            },
-
-            toggle: function(text, timeout) {
-                var self = this;
-                self.show(text);
-
-                $timeout(function() {
-                    self.hideLoading();
-                }, timeout || 3000);
             }
         };
     }
@@ -56,16 +45,12 @@
     function alert($ionicPopup, $timeout, uiResource) {
         var alertPopup;
 
-        function getMessage(key) {
-            return uiResource.texts[key] || null;
-        }
-
         return {
-            info: function(text, timeout) {
+            info: function(textKey, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Info',
                     cssClass: 'alert-info',
-                    template: getMessage(text)
+                    template: uiResource.getText(textKey)
                 });
                 $timeout(function() {
                         alertPopup.close();
@@ -73,11 +58,11 @@
                     timeout || 5000
                 );
             },
-            error: function(text, timeout) {
+            error: function(textKey, timeout) {
                 alertPopup = $ionicPopup.alert({
                     title: 'Error',
                     cssClass: 'alert-error',
-                    template: getMessage(text) || 'Ha ocurrido un error. Inténtalo nuevamente.'
+                    template: uiResource.getText(textKey) || 'Ha ocurrido un error. Inténtalo nuevamente.'
                 });
                 $timeout(function() {
                         alertPopup.close();
@@ -85,11 +70,11 @@
                     timeout || 5000
                 );
             },
-            confirm: function(text) {
+            confirm: function(textKey) {
                 return $ionicPopup.confirm({
                     title: 'Confirmación',
                     cssClass: 'alert-confirm',
-                    template: getMessage(text),
+                    template: uiResource.getText(textKey),
                     okText: 'Confirmar',
                     cancelText: 'Cancelar'
                 })
