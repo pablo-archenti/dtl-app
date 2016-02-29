@@ -1,5 +1,5 @@
 
-describe('storage', function () {
+describe('storage.module', function () {
 
     describe('localStorage', function() {
         var localStorage,
