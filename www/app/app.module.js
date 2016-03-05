@@ -2,14 +2,14 @@
     'use strict';
 
     angular
-        .module('app', [
-            'ionic',
-            'dtl',
-            'projects',
-            'myaccount',
-            'ngCordova'
-        ])
-        .run(ionicRun);
+    .module('app', [
+        'ionic',
+        'dtl',
+        'projects',
+        'myaccount',
+        'ngCordova'
+    ])
+    .run(ionicRun);
 
     ionicRun.$inject = ['$ionicPlatform'];
 

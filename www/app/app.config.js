@@ -32,14 +32,14 @@
     };
 
     angular
-        .module('app')
-        .constant('appConfig', config.app)
-        .constant('dtlConfig', config.dtl)
-        .constant('appTexts', config.texts)
-        .constant('shareProject', config.shareProject)
-        .config(app)
-        .config(dtl)
-        .config(uiModule);
+    .module('app')
+    .constant('appConfig', config.app)
+    .constant('dtlConfig', config.dtl)
+    .constant('appTexts', config.texts)
+    .constant('shareProject', config.shareProject)
+    .config(app)
+    .config(dtl)
+    .config(uiModule);
 
     app.$inject       = ['$logProvider', 'appConfig'];
     dtl.$inject       = ['dtlResourceProvider', 'dtlConfig'];

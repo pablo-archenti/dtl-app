@@ -2,9 +2,9 @@
     'use strict';
 
     angular
-        .module('session', ['storage'])
-        .factory('userSession', userSession)
-        .service('goBackState', goBackState);
+    .module('session', ['storage'])
+    .factory('userSession', userSession)
+    .service('goBackState', goBackState);
 
     userSession.$inject = ['localStorage'];
 

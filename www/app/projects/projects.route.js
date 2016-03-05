@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('projects')
-        .config(routes);
+    .module('projects')
+    .config(routes);
 
     routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 

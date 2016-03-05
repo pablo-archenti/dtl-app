@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('app')
-        .controller('ApplicationController', ApplicationController);
+    .module('app')
+    .controller('ApplicationController', ApplicationController);
 
     ApplicationController.$inject = ['$scope', '$log', 'dtlVolunteer', '$state'];
 

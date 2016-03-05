@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('myaccount')
-        .controller('MyAccountCtrl', MyAccountCtrl)
-        .controller('EditMyAccountCtrl', EditMyAccountCtrl)
-        .controller('LoginCtrl', LoginCtrl)
-        .controller('SignupCtrl', SignupCtrl);
+    .module('myaccount')
+    .controller('MyAccountCtrl', MyAccountCtrl)
+    .controller('EditMyAccountCtrl', EditMyAccountCtrl)
+    .controller('LoginCtrl', LoginCtrl)
+    .controller('SignupCtrl', SignupCtrl);
 
     MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
     EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
@@ -173,7 +173,7 @@
             .catch(function(err) {
                 var message = null;
                 if (err.code == 'uniqueness')
-                    message = 'account.exists';
+                message = 'account.exists';
                 alert.error(message);
             })
             .finally(function() {

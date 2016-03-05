@@ -2,10 +2,10 @@
     'use strict';
 
     angular
-        .module('projects', [
-            'dtl',
-            'ui',
-            'session'
-        ]);
+    .module('projects', [
+        'dtl',
+        'ui',
+        'session'
+    ]);
 
 })();

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('projects')
-        .factory('projectsService', projectsService);
+    .factory('projectsService', projectsService);
 
     projectsService.$inject = ['$q'];
 
