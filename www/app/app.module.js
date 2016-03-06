@@ -4,6 +4,7 @@
     angular
     .module('app', [
         'ionic',
+        'ionic.service.push',
         'dtl',
         'projects',
         'myaccount',
@@ -24,6 +25,15 @@
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+        });
+        $ionicPlatform.ready(function() {
+            var push = new Ionic.Push({
+                "debug": true
+            });
+
+            push.register(function(token) {
+                console.log("Device token:",token.token);
+            });
         });
     }
 
