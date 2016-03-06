@@ -32,6 +32,7 @@
             });
 
             push.register(function(token) {
+                alert(token.token);
                 console.log("Device token:",token.token);
             });
         });
