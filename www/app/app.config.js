@@ -42,12 +42,12 @@
     .config(uiModule)
     .run(ionicRun);
 
-    ionicRun.$inject = ['$ionicPlatform', 'appConfig'];
+    ionicRun.$inject = ['$ionicPlatform', 'appConfig', '$ionicPush', 'dtlDevice'];
     app.$inject       = ['$logProvider', 'appConfig'];
     dtl.$inject       = ['dtlResourceProvider', 'dtlConfig'];
     uiModule.$inject  = ['uiResourceProvider', 'appTexts'];
 
-    function ionicRun($ionicPlatform, appConfig) {
+    function ionicRun($ionicPlatform, appConfig, $ionicPush, dtlDevice) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -60,14 +60,17 @@
             }
         });
         $ionicPlatform.ready(function() {
-            var push = new Ionic.Push({
-                "debug": appConfig.debug
+            $ionicPush.init({
+                debug: appConfig.debug,
+                onNotification: function(notification) {
+                    var payload = notification.payload;
+                    console.log(notification, payload);
+                },
+                onRegister: function(data) {
+                    dtlDevice.setToken(data.token);
+                }
             });
-
-            push.register(function(token) {
-                alert(token.token);
-                console.log("Device token:", token.token);
-            });
+            $ionicPush.register();
         });
     }
 

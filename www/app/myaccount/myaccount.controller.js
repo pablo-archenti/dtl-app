@@ -48,6 +48,7 @@
                 });
                 $ionicHistory.clearCache();
                 $state.go('app.login');
+                dtlVolunteer.unsetDeviceToken();
             });
         };
     }
@@ -118,6 +119,7 @@
                 });
                 $scope.hideCode();
                 $state.go('app.projectsList');
+                dtlVolunteer.setDeviceToken();
             })
             .catch(function() {
                 alert.error();

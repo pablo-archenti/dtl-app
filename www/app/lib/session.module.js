@@ -4,9 +4,11 @@
     angular
     .module('session', ['storage'])
     .factory('userSession', userSession)
-    .service('goBackState', goBackState);
+    .factory('goBackState', goBackState)
+    .factory('deviceSession', deviceSession);
 
     userSession.$inject = ['localStorage'];
+    deviceSession.$inject = ['localStorage'];
 
     function userSession(localStorage) {
         var session = {};
@@ -58,6 +60,18 @@
                 var p = params || defaultParams || {};
                 params = {};
                 return p;
+            }
+        };
+    }
+
+    function deviceSession(localStorage) {
+
+        return {
+            setToken: function(token) {
+                localStorage.set('device.token', token);
+            },
+            getToken: function() {
+                return localStorage.get('device.token') || null;
             }
         };
     }

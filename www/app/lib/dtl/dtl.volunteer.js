@@ -5,13 +5,17 @@
         .module('dtl')
         .factory('dtlVolunteer', dtlVolunteer);
 
-    dtlVolunteer.$inject = ['userSession', 'Volunteer'];
+    dtlVolunteer.$inject = ['Volunteer', 'userSession', 'dtlQuery', 'dtlDevice'];
 
-    function dtlVolunteer(userSession, Volunteer) {
+    function dtlVolunteer(Volunteer, userSession, dtlQuery, dtlDevice) {
         var service = {};
 
         service.isAuthenticated = function isAuthenticated() {
             return Volunteer.isAuthenticated();
+        };
+
+        service.getId = function getId() {
+            return userSession.getUserId();
         };
 
         service.login = function login(credentials) {
@@ -54,7 +58,7 @@
         service.deleteAccount = function deleteAccount() {
             var self = this;
             return Volunteer.deleteById({
-                        id: userSession.getUserId()
+                        id: this.getId()
                     })
                     .$promise
                     .then(function() {
@@ -68,7 +72,7 @@
 
         service.getAccount = function getAccount() {
             return Volunteer.findById({
-                        id: userSession.getUserId()
+                        id: this.getId()
                     })
                     .$promise
                     .then(function(data) {
@@ -80,7 +84,7 @@
 
         service.updateAccount = function updateAccount(data) {
             return Volunteer.prototype$updateAttributes({
-                            id: userSession.getUserId()
+                            id: this.getId()
                         },
                         preUserData(data)
                     )
@@ -94,31 +98,43 @@
 
         service.isSubscribed = function isSubscribed(projectId) {
             return Volunteer.projects.exists({
-                        id: userSession.getUserId(),
+                        id: this.getId(),
                         fk: projectId
-                    })
-                    .$promise;
+                    }).$promise;
         };
 
         service.subscribe = function subscribe(projectId, data) {
             data = data || {};
             return Volunteer.projects.link({
-                        id: userSession.getUserId()
+                        id: this.getId()
                     },
                     {
                         fk: projectId,
                         help: data.help || null,
-                        volunteerId: userSession.getUserId()
-                    })
-                    .$promise;
+                        volunteerId: this.getId()
+                    }).$promise;
         };
 
         service.unsubscribe = function unsubscribe(projectId) {
             return Volunteer.projects.unlink({
-                id: userSession.getUserId(),
+                id: this.getId(),
                 fk: projectId
             })
             .$promise;
+        };
+
+        service.getProjects = function getProjects(where, options) {
+            var query = dtlQuery.prepare(where, options);
+            query.id = this.getId();
+            return Volunteer.projects(query).$promise;
+        };
+
+        service.setDeviceToken = function setDeviceToken() {
+            dtlDevice.setVolunteer(this.getId());
+        };
+
+        service.unsetDeviceToken = function unsetDeviceToken() {
+            dtlDevice.unsetVolunteer(this.getId());
         };
 
         function preUserData(userData) {

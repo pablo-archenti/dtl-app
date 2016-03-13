@@ -85,9 +85,9 @@
             var where = status && { status: status } || {};
 
             if (suscribed)
-            finder = dtlProject.findSubscribed(where, { page: page });
+                finder = dtlVolunteer.getProjects(where, { page: page });
             else
-            finder = dtlProject.find(where, { page: page });
+                finder = dtlProject.find(where, { page: page });
 
             return finder
             .then(function(projects) {
@@ -108,7 +108,7 @@
 
     }
 
-    function ProjectsShowCtrl($scope, projectsService, dtlVolunteer, $stateParams, $ionicModal, alert,
+    function ProjectsShowCtrl($scope, dtlProject, dtlVolunteer, $stateParams, $ionicModal, alert,
         $state, $ionicHistory, $sce, loader, goBackState, $ionicPlatform, $socialSharing, shareProject) {
             var projectId = $stateParams.id;
             $scope.project = {};
@@ -116,7 +116,7 @@
 
             function init() {
                 loader.show();
-                projectsService.findById(projectId, 'gallery')
+                dtlProject.findById(projectId, 'gallery')
                 .then(function(project) {
                     $scope.project = project;
                     return dtlVolunteer.isSubscribed(projectId)
@@ -135,12 +135,14 @@
                 .finally(function() {
                     loader.hide();
                 });
+
                 $ionicModal.fromTemplateUrl('app/projects/templates/gallery.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
                 }).then(function(modal) {
                     $scope.galleryModal = modal;
                 });
+                
                 $ionicModal.fromTemplateUrl('app/projects/templates/subscription.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
