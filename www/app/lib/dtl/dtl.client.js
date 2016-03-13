@@ -9,7 +9,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
   module.exports = "dtlClient";
 }
 
-(function(window, angular, undefined) {
+(function(window, angular, undefined) {'use strict';
 
 var urlBase = "/api";
 var authHeader = 'authorization';
@@ -142,6 +142,13 @@ module.factory(
         "prototype$__get__projects": {
           isArray: true,
           url: urlBase + "/Volunteers/:id/projects",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens() instead.
+        "prototype$__get__deviceTokens": {
+          isArray: true,
+          url: urlBase + "/Volunteers/:id/deviceTokens",
           method: "GET"
         },
 
@@ -367,9 +374,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -496,7 +503,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `email` – `{string}` -
+         *  - `email` – `{string}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -701,7 +708,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` -
+         *  - `filter` – `{object=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -846,6 +853,42 @@ module.factory(
      * to query all related instances.
      */
 
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Volunteer#deviceTokens
+         * @methodOf dtlClient.Volunteer
+         *
+         * @description
+         *
+         * Queries deviceTokens of Volunteer.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        R.deviceTokens = function() {
+          var TargetResource = $injector.get("DeviceToken");
+          var action = TargetResource["::get::Volunteer::deviceTokens"];
+          return action.apply(R, arguments);
+        };
 
         /**
          * @ngdoc method
@@ -1172,9 +1215,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -1405,6 +1448,13 @@ module.factory(
           },
           url: urlBase + "/Volunteers/:id/deviceTokens/:fk",
           method: "PUT"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens() instead.
+        "::get::Volunteer::deviceTokens": {
+          isArray: true,
+          url: urlBase + "/Volunteers/:id/deviceTokens",
+          method: "GET"
         },
 
         // INTERNAL. Use Volunteer.deviceTokens.create() instead.
