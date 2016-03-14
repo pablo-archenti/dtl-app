@@ -1,53 +1,73 @@
 (function() {
     'use strict';
 
+    var ENV = 'local';
+
     var config = {
+        local: {
+            debug: true,
+            apiUrlBase: 'http://localhost:3030/api'
+        },
+        dev: {
+            debug: true,
+            apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api'
+        },
+        prod: {
+            debug: false,
+            apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api'
+        },
         app: {
-            debug: true
-        },
-        dtl: {
-            //apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api',
-            apiUrlBase: 'http://localhost:3030/api',
-            paginationLimit: 10
-        },
-        texts: {
-            "account.exists": 'Ya existe un usuario con el email ingresado',
-            "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
-            "account.deleted": 'Tu cuenta ha sido eliminada',
-            "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
-            "project.confirmUnsubscription": '¿Estás seguro que querés desuscribirte del proyecto?',
-            "project.suscribed": "Gracias por suscribirte!!!<br/>Te estaremos contactando pronto.",
-            "loggingOut": 'Cerrando sesión...',
-            "deletingAccount": 'Eliminando cuenta...',
-            "updatingData": 'Actualizando datos...',
-            "loggingIn": 'Iniciando sesión...',
-            "sendingCode": 'Enviando email...',
-            "signingUp": 'Finalizando registración...'
-        },
-        shareProject: {
-            message: 'Sumate y ayudá a cumplir este proyecto!!',
-            subject: 'Desde tu lugar',
-            link: 'http://desdetulugar.com.ar/?s=proyectos_actuales_ampliado&p={projectId}'
+            paginationLimit: 10,
+            texts: {
+                "account.exists": 'Ya existe un usuario con el email ingresado',
+                "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
+                "account.deleted": 'Tu cuenta ha sido eliminada',
+                "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
+                "project.confirmUnsubscription": '¿Estás seguro que querés desuscribirte del proyecto?',
+                "project.suscribed": "Gracias por suscribirte!!!<br/>Te estaremos contactando pronto.",
+                "loggingOut": 'Cerrando sesión...',
+                "deletingAccount": 'Eliminando cuenta...',
+                "updatingData": 'Actualizando datos...',
+                "loggingIn": 'Iniciando sesión...',
+                "sendingCode": 'Enviando email...',
+                "signingUp": 'Finalizando registración...'
+            },
+            shareProject: {
+                message: 'Sumate y ayudá a cumplir este proyecto!!',
+                subject: 'Desde tu lugar',
+                link: 'http://desdetulugar.com.ar/?s=proyectos_actuales_ampliado&p={projectId}'
+            }
         }
     };
 
     angular
     .module('app')
+    .constant('envConfig', config[ENV])
     .constant('appConfig', config.app)
-    .constant('dtlConfig', config.dtl)
-    .constant('appTexts', config.texts)
-    .constant('shareProject', config.shareProject)
     .config(app)
     .config(dtl)
     .config(uiModule)
     .run(ionicRun);
 
-    ionicRun.$inject = ['$ionicPlatform', 'appConfig', '$ionicPush', 'dtlDevice'];
-    app.$inject       = ['$logProvider', 'appConfig'];
-    dtl.$inject       = ['dtlResourceProvider', 'dtlConfig'];
-    uiModule.$inject  = ['uiResourceProvider', 'appTexts'];
+    app.$inject       = ['$logProvider', 'envConfig'];
+    dtl.$inject       = ['dtlResourceProvider', 'envConfig', 'appConfig'];
+    uiModule.$inject  = ['uiResourceProvider', 'appConfig'];
+    ionicRun.$inject = ['$ionicPlatform', 'envConfig', '$ionicPush', 'dtlDevice'];
 
-    function ionicRun($ionicPlatform, appConfig, $ionicPush, dtlDevice) {
+    function app($logProvider, envConfig) {
+        $logProvider.debugEnabled(envConfig.debug);
+    }
+
+    function dtl(dtlResourceProvider, envConfig, appConfig) {
+        dtlResourceProvider.setUrlBase(envConfig.apiUrlBase);
+        dtlResourceProvider.setPaginationLimit(appConfig.paginationLimit);
+    }
+
+    function uiModule(uiResourceProvider, appConfig) {
+        uiResourceProvider.setTexts(appConfig.texts);
+    }
+
+    function ionicRun($ionicPlatform, envConfig, $ionicPush, dtlDevice) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -61,7 +81,7 @@
         });
         $ionicPlatform.ready(function() {
             $ionicPush.init({
-                debug: appConfig.debug,
+                debug: envConfig.debug,
                 onNotification: function(notification) {
                     var payload = notification.payload;
                     console.log(notification, payload);
@@ -72,19 +92,6 @@
             });
             $ionicPush.register();
         });
-    }
-
-    function app($logProvider, appConfig) {
-        $logProvider.debugEnabled(appConfig.debug);
-    }
-
-    function dtl(dtlResourceProvider, dtlConfig) {
-        dtlResourceProvider.setUrlBase(dtlConfig.apiUrlBase);
-        dtlResourceProvider.setPaginationLimit(dtlConfig.paginationLimit);
-    }
-
-    function uiModule(uiResourceProvider, appTexts) {
-        uiResourceProvider.setTexts(appTexts);
     }
 
 })();
