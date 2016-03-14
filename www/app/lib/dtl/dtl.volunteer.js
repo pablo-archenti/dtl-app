@@ -5,9 +5,9 @@
         .module('dtl')
         .factory('dtlVolunteer', dtlVolunteer);
 
-    dtlVolunteer.$inject = ['Volunteer', 'userSession', 'dtlQuery', 'dtlDevice'];
+    dtlVolunteer.$inject = ['Volunteer', 'userSession', 'dtlQuery'];
 
-    function dtlVolunteer(Volunteer, userSession, dtlQuery, dtlDevice) {
+    function dtlVolunteer(Volunteer, userSession, dtlQuery) {
         var service = {};
 
         service.isAuthenticated = function isAuthenticated() {
@@ -127,14 +127,6 @@
             var query = dtlQuery.prepare(where, options);
             query.id = this.getId();
             return Volunteer.projects(query).$promise;
-        };
-
-        service.setDeviceToken = function setDeviceToken() {
-            dtlDevice.setVolunteer(this.getId());
-        };
-
-        service.unsetDeviceToken = function unsetDeviceToken() {
-            dtlDevice.unsetVolunteer(this.getId());
         };
 
         function preUserData(userData) {
