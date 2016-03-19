@@ -35,7 +35,7 @@
     function dtlErrorsInterceptor($q, $log) {
         return {
             responseError: function(rejection) {
-                var error = rejection.data.error || {};
+                var error = rejection.data && rejection.data.error || {};
                 var message = error.message || rejection.statusText;
                 var codes = [];
 
