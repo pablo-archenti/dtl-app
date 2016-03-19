@@ -1,7 +1,25 @@
-(function(window, angular, undefined) {
+// CommonJS package manager support
+if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
+  // Export the *name* of this Angular module
+  // Sample usage:
+  //
+  //   import lbServices from './lb-services';
+  //   angular.module('app', [lbServices]);
+  //
+  module.exports = "dtlClient";
+}
+
+(function(window, angular, undefined) {'use strict';
 
 var urlBase = "/api";
 var authHeader = 'authorization';
+
+function getHost(url) {
+  var m = url.match(/^(?:https?:)?\/\/([^\/]+)/);
+  return m ? m[1] : null;
+}
+
+var urlBaseHost = getHost(urlBase) || location.host;
 
 /**
  * @ngdoc overview
@@ -111,11 +129,33 @@ module.factory(
           method: "HEAD"
         },
 
+        // INTERNAL. Use Volunteer.deviceTokens.updateById() instead.
+        "prototype$__updateById__deviceTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Volunteers/:id/deviceTokens/:fk",
+          method: "PUT"
+        },
+
         // INTERNAL. Use Volunteer.projects() instead.
         "prototype$__get__projects": {
           isArray: true,
           url: urlBase + "/Volunteers/:id/projects",
           method: "GET"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens() instead.
+        "prototype$__get__deviceTokens": {
+          isArray: true,
+          url: urlBase + "/Volunteers/:id/deviceTokens",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens.create() instead.
+        "prototype$__create__deviceTokens": {
+          url: urlBase + "/Volunteers/:id/deviceTokens",
+          method: "POST"
         },
 
         /**
@@ -799,6 +839,172 @@ module.factory(
           var action = TargetResource["::unlink::Volunteer::projects"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name dtlClient.Volunteer.deviceTokens
+     * @header dtlClient.Volunteer.deviceTokens
+     * @object
+     * @description
+     *
+     * The object `Volunteer.deviceTokens` groups methods
+     * manipulating `DeviceToken` instances related to `Volunteer`.
+     *
+     * Call {@link dtlClient.Volunteer#deviceTokens Volunteer.deviceTokens()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Volunteer#deviceTokens
+         * @methodOf dtlClient.Volunteer
+         *
+         * @description
+         *
+         * Queries deviceTokens of Volunteer.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        R.deviceTokens = function() {
+          var TargetResource = $injector.get("DeviceToken");
+          var action = TargetResource["::get::Volunteer::deviceTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Volunteer.deviceTokens#create
+         * @methodOf dtlClient.Volunteer.deviceTokens
+         *
+         * @description
+         *
+         * Creates a new instance in deviceTokens of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        R.deviceTokens.create = function() {
+          var TargetResource = $injector.get("DeviceToken");
+          var action = TargetResource["::create::Volunteer::deviceTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Volunteer.deviceTokens#createMany
+         * @methodOf dtlClient.Volunteer.deviceTokens
+         *
+         * @description
+         *
+         * Creates a new instance in deviceTokens of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        R.deviceTokens.createMany = function() {
+          var TargetResource = $injector.get("DeviceToken");
+          var action = TargetResource["::createMany::Volunteer::deviceTokens"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Volunteer.deviceTokens#updateById
+         * @methodOf dtlClient.Volunteer.deviceTokens
+         *
+         * @description
+         *
+         * Update a related item by id for deviceTokens.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for deviceTokens
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        R.deviceTokens.updateById = function() {
+          var TargetResource = $injector.get("DeviceToken");
+          var action = TargetResource["::updateById::Volunteer::deviceTokens"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -1172,10 +1378,156 @@ module.factory(
     return R;
   }]);
 
+/**
+ * @ngdoc object
+ * @name dtlClient.DeviceToken
+ * @header dtlClient.DeviceToken
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `DeviceToken` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "DeviceToken",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/DeviceTokens/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.DeviceToken#upsert
+         * @methodOf dtlClient.DeviceToken
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/DeviceTokens",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens.updateById() instead.
+        "::updateById::Volunteer::deviceTokens": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Volunteers/:id/deviceTokens/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens() instead.
+        "::get::Volunteer::deviceTokens": {
+          isArray: true,
+          url: urlBase + "/Volunteers/:id/deviceTokens",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens.create() instead.
+        "::create::Volunteer::deviceTokens": {
+          url: urlBase + "/Volunteers/:id/deviceTokens",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Volunteer.deviceTokens.createMany() instead.
+        "::createMany::Volunteer::deviceTokens": {
+          isArray: true,
+          url: urlBase + "/Volunteers/:id/deviceTokens",
+          method: "POST"
+        },
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.DeviceToken#updateOrCreate
+         * @methodOf dtlClient.DeviceToken
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DeviceToken` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+
+    /**
+    * @ngdoc property
+    * @name dtlClient.DeviceToken#modelName
+    * @propertyOf dtlClient.DeviceToken
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `DeviceToken`.
+    */
+    R.modelName = "DeviceToken";
+
+
+    return R;
+  }]);
+
 
 module
   .factory('LoopBackAuth', function() {
-    var props = ['accessTokenId', 'currentUserId'];
+    var props = ['accessTokenId', 'currentUserId', 'rememberMe'];
     var propsPrefix = '$LoopBack$';
 
     function LoopBackAuth() {
@@ -1183,7 +1535,6 @@ module
       props.forEach(function(name) {
         self[name] = load(name);
       });
-      this.rememberMe = undefined;
       this.currentUserData = null;
     }
 
@@ -1219,9 +1570,13 @@ module
     // Note: LocalStorage converts the value to string
     // We are using empty string as a marker for null/undefined values.
     function save(storage, name, value) {
-      var key = propsPrefix + name;
-      if (value == null) value = '';
-      storage[key] = value;
+      try {
+        var key = propsPrefix + name;
+        if (value == null) value = '';
+        storage[key] = value;
+      } catch(err) {
+        console.log('Cannot access local/session storage:', err);
+      }
     }
 
     function load(name) {
@@ -1237,8 +1592,9 @@ module
       return {
         'request': function(config) {
 
-          // filter out non urlBase requests
-          if (config.url.substr(0, urlBase.length) !== urlBase) {
+          // filter out external requests
+          var host = getHost(config.url);
+          if (host && host !== urlBaseHost) {
             return config;
           }
 
@@ -1306,6 +1662,7 @@ module
      */
     this.setUrlBase = function(url) {
       urlBase = url;
+      urlBaseHost = getHost(urlBase) || location.host;
     };
 
     /**
