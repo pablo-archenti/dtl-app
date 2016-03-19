@@ -12,7 +12,7 @@
 
         service.setToken = function(token) {
             var savedToken = deviceSession.getToken();
-            if (!savedToken && token || token !== savedToken && token) {
+            if (token && (!savedToken || token !== savedToken)) {
                 var data = {};
                 data.token = token;
                 if (dtlVolunteer.getId()) data.volunteerId =  dtlVolunteer.getId();
