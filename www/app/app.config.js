@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var ENV = 'local';
+    var ENV = 'dev';
 
     var config = {
         local: {
@@ -44,6 +44,7 @@
     .module('app')
     .constant('envConfig', config[ENV])
     .constant('appConfig', config.app)
+    .constant('shareProjectConfig', config.app.shareProject)
     .config(app)
     .config(dtl)
     .config(uiModule)
@@ -52,7 +53,7 @@
     app.$inject       = ['$logProvider', 'envConfig'];
     dtl.$inject       = ['dtlResourceProvider', 'envConfig', 'appConfig'];
     uiModule.$inject  = ['uiResourceProvider', 'appConfig'];
-    ionicRun.$inject = ['$ionicPlatform', 'envConfig', '$ionicPush', 'dtlDevice'];
+    ionicRun.$inject = ['$ionicPlatform', 'envConfig', '$ionicPush', 'dtlDevice', '$log', '$state'];
 
     function app($logProvider, envConfig) {
         $logProvider.debugEnabled(envConfig.debug);
@@ -67,7 +68,7 @@
         uiResourceProvider.setTexts(appConfig.texts);
     }
 
-    function ionicRun($ionicPlatform, envConfig, $ionicPush, dtlDevice) {
+    function ionicRun($ionicPlatform, envConfig, $ionicPush, dtlDevice, $log, $state) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -83,8 +84,13 @@
             $ionicPush.init({
                 debug: envConfig.debug,
                 onNotification: function(notification) {
-                    var payload = notification.payload;
-                    console.log(notification, payload);
+                    alert('hola');
+                    $log.debug("Notification received: ", JSON.stringify(notification));
+                    $state.go('app.login');
+                    setTimeout(function() {
+                        $state.go('app.login');
+                    }, 3000);
+
                 },
                 onRegister: function(data) {
                     dtlDevice.setToken(data.token);

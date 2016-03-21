@@ -10,7 +10,7 @@
     ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'dtlVolunteer'];
     ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal',
         'alert', '$state', '$ionicHistory', '$sce', 'loader', 'goBackState',
-        '$ionicPlatform', '$cordovaSocialSharing', 'shareProject'];
+        '$ionicPlatform', '$cordovaSocialSharing', 'shareProjectConfig'];
 
     function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, dtlVolunteer) {
         var page = 0;
@@ -109,7 +109,7 @@
     }
 
     function ProjectsShowCtrl($scope, dtlProject, dtlVolunteer, $stateParams, $ionicModal, alert,
-        $state, $ionicHistory, $sce, loader, goBackState, $ionicPlatform, $socialSharing, shareProject) {
+        $state, $ionicHistory, $sce, loader, goBackState, $ionicPlatform, $socialSharing, shareProjectConfig) {
             var projectId = $stateParams.id;
             $scope.project = {};
             $scope.subscriptionData = {};
@@ -142,7 +142,7 @@
                 }).then(function(modal) {
                     $scope.galleryModal = modal;
                 });
-                
+
                 $ionicModal.fromTemplateUrl('app/projects/templates/subscription.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
@@ -216,9 +216,9 @@
             };
 
             $scope.share = function() {
-                var message = shareProject.message;
-                var subject = shareProject.subject;
-                var link = shareProject.link.replace("{projectId}", projectId);
+                var message = shareProjectConfig.message;
+                var subject = shareProjectConfig.subject;
+                var link = shareProjectConfig.link.replace("{projectId}", projectId);
 
                 $ionicPlatform.ready(function() {
                     $socialSharing
