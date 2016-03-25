@@ -4,11 +4,11 @@
     var ENV = 'dev';
 
     var config = {
-        local: {
+        dev: {
             debug: true,
             apiUrlBase: 'http://localhost:3030/api'
         },
-        dev: {
+        testing: {
             debug: true,
             apiUrlBase: 'http://api-desdetulugar.rhcloud.com/api'
         },
