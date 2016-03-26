@@ -98,12 +98,13 @@
         $ionicPlatform.ready(function() {
             var push = PushNotification.init({
                 android: {
-                    senderID: appConfig.android.appId
+                    senderID: appConfig.android.appId,
+                    forceShow: true
                 }
             });
 
             push.on('registration', function(data) {
-                dtlDevice.setToken(data.token);
+                dtlDevice.setToken(data.registrationId);
             });
 
             push.on('notification', function(notification) {
@@ -111,7 +112,7 @@
             });
 
             push.on('error', function(e) {
-              $log.debug(e);
+                $log.debug(e);
             });
         });
     }
