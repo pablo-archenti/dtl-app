@@ -108,7 +108,14 @@
             });
 
             push.on('notification', function(notification) {
-                $state.go('app.login');
+                var state = 'app.projectsList';
+                var params = {};
+                var additionalData = notification.additionalData || {};
+                if (additionalData.deepLink) {
+                    state = additionalData.deepLink.state || state;
+                    params = additionalData.deepLink.params || params;
+                }
+                $state.go(state, params);
             });
 
             push.on('error', function(e) {
