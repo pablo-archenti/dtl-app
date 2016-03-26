@@ -3,11 +3,11 @@
 
     angular
         .module('dtl')
-        .factory('dtlDevice', dtlDevice);
+        .factory('dtlDeviceToken', dtlDeviceToken);
 
-    dtlDevice.$inject = ['DeviceToken', 'deviceSession', 'dtlVolunteer'];
+    dtlDeviceToken.$inject = ['DeviceToken', 'deviceSession', 'dtlVolunteer'];
 
-    function dtlDevice(DeviceToken, deviceSession, dtlVolunteer) {
+    function dtlDeviceToken(DeviceToken, deviceSession, dtlVolunteer) {
         var service = {};
 
         service.setToken = function(token) {

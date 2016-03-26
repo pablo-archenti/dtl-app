@@ -71,7 +71,7 @@
     app.$inject       = ['$logProvider', 'appConfig'];
     dtl.$inject       = ['dtlResourceProvider', 'appConfig'];
     uiModule.$inject  = ['uiResourceProvider', 'appConfig'];
-    ionicRun.$inject  = ['$ionicPlatform', 'appConfig', 'dtlDevice', '$log', '$state'];
+    ionicRun.$inject  = ['$ionicPlatform', 'appConfig', 'dtlDeviceToken', '$log', '$state'];
 
     function app($logProvider, appConfig) {
         $logProvider.debugEnabled(appConfig.debug);
@@ -86,7 +86,7 @@
         uiResourceProvider.setTexts(appConfig.texts);
     }
 
-    function ionicRun($ionicPlatform, appConfig, dtlDevice, $log, $state) {
+    function ionicRun($ionicPlatform, appConfig, dtlDeviceToken, $log, $state) {
         $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -104,7 +104,7 @@
             });
 
             push.on('registration', function(data) {
-                dtlDevice.setToken(data.registrationId);
+                dtlDeviceToken.setToken(data.registrationId);
             });
 
             push.on('notification', function(notification) {

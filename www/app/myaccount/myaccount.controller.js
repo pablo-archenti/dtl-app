@@ -8,12 +8,12 @@
     .controller('LoginCtrl', LoginCtrl)
     .controller('SignupCtrl', SignupCtrl);
 
-    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader', 'dtlDevice'];
+    MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader', 'dtlDeviceToken'];
     EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
-    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'loader', 'alert', 'dtlDevice'];
+    LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'loader', 'alert', 'dtlDeviceToken'];
     SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'alert', 'loader', 'goBackState'];
 
-    function MyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader, dtlDevice) {
+    function MyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader, dtlDeviceToken) {
 
         $scope.delete = function() {
             alert.confirm('account.confirmDeletion')
@@ -48,7 +48,7 @@
                 });
                 $ionicHistory.clearCache();
                 $state.go('app.login');
-                dtlDevice.unsetVolunteer();
+                dtlDeviceToken.unsetVolunteer();
             });
         };
     }
@@ -97,7 +97,7 @@
         };
     }
 
-    function LoginCtrl($scope, $state, $ionicHistory, dtlVolunteer, loader, alert, dtlDevice) {
+    function LoginCtrl($scope, $state, $ionicHistory, dtlVolunteer, loader, alert, dtlDeviceToken) {
 
         $scope.showCode = function() {
             $scope.codeShown = 1;
@@ -119,7 +119,7 @@
                 });
                 $scope.hideCode();
                 $state.go('app.projectsList');
-                dtlDevice.setVolunteer();
+                dtlDeviceToken.setVolunteer();
             })
             .catch(function() {
                 alert.error();
