@@ -32,6 +32,7 @@
             controller: 'ShowProjectCtrl'
         });
 
+        $urlRouterProvider.when('/app/projects', '/app/projects/list');
         $urlRouterProvider.otherwise('/app/projects/list');
     }
 
