@@ -118,7 +118,7 @@
                     historyRoot: true
                 });
                 $scope.hideCode();
-                $state.go('app.projectsList');
+                $state.go('app.projects.list');
                 dtlDeviceToken.setVolunteer();
             })
             .catch(function() {
