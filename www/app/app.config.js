@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var ENV = 'testing';
+    var ENV = 'dev';
 
     var envConfig = {
         dev: {
