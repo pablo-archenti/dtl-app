@@ -170,7 +170,7 @@
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });
-                $state.go(goBackState.getState('app.projectsList'), goBackState.getParams());
+                $state.go(goBackState.getState('app.projects.list'), goBackState.getParams());
             })
             .catch(function(err) {
                 var message = null;

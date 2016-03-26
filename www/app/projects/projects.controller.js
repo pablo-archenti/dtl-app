@@ -4,15 +4,15 @@
 
     angular
     .module('projects')
-    .controller('ProjectsListCtrl', ProjectsListCtrl)
-    .controller('ProjectsShowCtrl', ProjectsShowCtrl);
+    .controller('ListProjectsCtrl', ListCtrl)
+    .controller('ShowProjectCtrl', ShowCtrl);
 
-    ProjectsListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'dtlVolunteer'];
-    ProjectsShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal',
+    ListCtrl.$inject = ['$scope', 'dtlProject', '$ionicPopup', 'alert', 'dtlVolunteer'];
+    ShowCtrl.$inject = ['$scope', 'dtlProject', 'dtlVolunteer', '$stateParams', '$ionicModal',
         'alert', '$state', '$ionicHistory', '$sce', 'loader', 'goBackState',
         '$ionicPlatform', '$cordovaSocialSharing', 'shareProjectConfig'];
 
-    function ProjectsListCtrl($scope, dtlProject, $ionicPopup, alert, dtlVolunteer) {
+    function ListCtrl($scope, dtlProject, $ionicPopup, alert, dtlVolunteer) {
         var page = 0;
         var status = null;
         var suscribed = false;
@@ -108,7 +108,7 @@
 
     }
 
-    function ProjectsShowCtrl($scope, dtlProject, dtlVolunteer, $stateParams, $ionicModal, alert,
+    function ShowCtrl($scope, dtlProject, dtlVolunteer, $stateParams, $ionicModal, alert,
         $state, $ionicHistory, $sce, loader, goBackState, $ionicPlatform, $socialSharing, shareProjectConfig) {
             var projectId = $stateParams.id;
             $scope.project = {};
@@ -129,7 +129,7 @@
                     $ionicHistory.nextViewOptions({
                         historyRoot: true
                     });
-                    $state.go('app.projectsList');
+                    $state.go('^.list');
                     alert.error();
                 })
                 .finally(function() {
@@ -189,7 +189,7 @@
                     $scope.subscriptionData = {};
                     $scope.subscriptionModal.show();
                 } else {
-                    goBackState.save('app.projectsShow', { id: projectId });
+                    goBackState.save('app.projects.show', { id: projectId });
                     $state.go('app.signup.step1');
                 }
             };

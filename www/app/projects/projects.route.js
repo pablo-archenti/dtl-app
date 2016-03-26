@@ -10,27 +10,29 @@
     function routes($stateProvider, $urlRouterProvider) {
         $stateProvider
 
-        .state('app.projectsList', {
+        .state('app.projects', {
             url: '/projects',
+            abstract: true,
             views: {
                 menuContent: {
-                    templateUrl: 'app/projects/templates/list.html',
-                    controller: 'ProjectsListCtrl'
+                    templateUrl: 'app/projects/templates/main.html'
                 }
             }
         })
 
-        .state('app.projectsShow', {
-            url: '/projects/{id:int}',
-            views: {
-                menuContent: {
-                    templateUrl: 'app/projects/templates/project.html',
-                    controller: 'ProjectsShowCtrl'
-                }
-            }
+        .state('app.projects.list', {
+            url: '/list',
+            templateUrl: 'app/projects/templates/list.html',
+            controller: 'ListProjectsCtrl'
+        })
+
+        .state('app.projects.show', {
+            url: '/show/{id:int}',
+            templateUrl: 'app/projects/templates/show.html',
+            controller: 'ShowProjectCtrl'
         });
 
-        $urlRouterProvider.otherwise('/app/projects');
+        $urlRouterProvider.otherwise('/app/projects/list');
     }
 
 })();

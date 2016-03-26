@@ -20,16 +20,6 @@
             }
         })
 
-        .state('app.login', {
-            url: '/login',
-            views: {
-                menuContent: {
-                    templateUrl: 'app/myaccount/templates/login.html',
-                    controller: 'LoginCtrl'
-                }
-            }
-        })
-
         .state('app.editMyAccount', {
             cache: false,
             url: '/editMyAccount',
@@ -75,6 +65,16 @@
         .state('app.signup.step3', {
             url: '/step3',
             templateUrl: 'app/myaccount/templates/myDataStep3.html'
+        })
+
+        .state('app.login', {
+            url: '/login',
+            views: {
+                menuContent: {
+                    templateUrl: 'app/myaccount/templates/login.html',
+                    controller: 'LoginCtrl'
+                }
+            }
         });
     }
 })();

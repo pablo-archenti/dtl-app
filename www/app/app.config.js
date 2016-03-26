@@ -108,7 +108,7 @@
             });
 
             push.on('notification', function(notification) {
-                var state = 'app.projectsList';
+                var state = 'app.projects.list';
                 var params = {};
                 var additionalData = notification.additionalData || {};
                 if (additionalData.deepLink) {
