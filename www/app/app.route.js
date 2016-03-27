@@ -15,8 +15,8 @@
             abstract: true,
             templateUrl: 'app/layout/menu.html'
         });
-
-        $urlRouterProvider.otherwise('/app/projects');
+        $urlRouterProvider.when('/app/projects', '/app/projects/list');
+        $urlRouterProvider.otherwise('/app/projects/list');
     }
 
 })();

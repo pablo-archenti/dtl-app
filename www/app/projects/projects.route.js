@@ -7,7 +7,7 @@
 
     routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function routes($stateProvider, $urlRouterProvider) {
+    function routes($stateProvider) {
         $stateProvider
 
         .state('app.projects', {
@@ -31,9 +31,6 @@
             templateUrl: 'app/projects/templates/show.html',
             controller: 'ShowProjectCtrl'
         });
-
-        $urlRouterProvider.when('/app/projects', '/app/projects/list');
-        $urlRouterProvider.otherwise('/app/projects/list');
     }
 
 })();
