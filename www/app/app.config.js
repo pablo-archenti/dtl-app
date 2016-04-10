@@ -96,31 +96,35 @@
             }
         });
         $ionicPlatform.ready(function() {
-            var push = PushNotification.init({
-                android: {
-                    senderID: appConfig.android.appId,
-                    forceShow: true
-                }
-            });
+            try {
+                var push = PushNotification.init({
+                    android: {
+                        senderID: appConfig.android.appId,
+                        forceShow: true
+                    }
+                });
 
-            push.on('registration', function(data) {
-                dtlDeviceToken.setToken(data.registrationId);
-            });
+                push.on('registration', function(data) {
+                    dtlDeviceToken.setToken(data.registrationId);
+                });
 
-            push.on('notification', function(notification) {
-                var state = 'app.projects.list';
-                var params = {};
-                var additionalData = notification.additionalData || {};
-                if (additionalData.deepLink) {
-                    state = additionalData.deepLink.state || state;
-                    params = additionalData.deepLink.params || params;
-                }
-                $state.go(state, params);
-            });
+                push.on('notification', function(notification) {
+                    var state = 'app.projects.list';
+                    var params = {};
+                    var additionalData = notification.additionalData || {};
+                    if (additionalData.deepLink) {
+                        state = additionalData.deepLink.state || state;
+                        params = additionalData.deepLink.params || params;
+                    }
+                    $state.go(state, params);
+                });
 
-            push.on('error', function(e) {
-                $log.debug(e);
-            });
+                push.on('error', function(e) {
+                    $log.debug(e);
+                });
+            } catch(e) {
+                $log.debug('PushNotification is not defined');
+            }
         });
     }
 
