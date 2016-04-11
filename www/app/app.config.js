@@ -7,7 +7,7 @@
         dev: {
             debug: true,
             api: {
-                baseUrl: 'http://localhost:3030/api'
+                baseUrl: 'http://api:3030/api'
             },
             android:  {
                 appId: null
