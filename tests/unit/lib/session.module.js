@@ -76,4 +76,82 @@ describe('session.module', function () {
             });
         });
     });
+
+    describe('goBackState', function() {
+        var goBackState;
+
+        beforeEach(module('session'));
+        beforeEach(inject(function (_goBackState_) {
+            goBackState = _goBackState_;
+        }));
+
+        describe('save', function() {
+            it('should set state and params', function() {
+                goBackState.save('state1', { id: 100 });
+                goBackState.getState().should.equal('state1');
+                goBackState.getParams().should.deep.equal({ id: 100 });
+            });
+        });
+
+        describe('getState', function() {
+            it('should return state', function() {
+                goBackState.save('state1');
+                goBackState.getState().should.equal('state1');
+            });
+            it('should return default state if not previously set', function() {
+                goBackState.save();
+                goBackState.getState('defaultState').should.equal('defaultState');
+            });
+        });
+
+        describe('getParams', function() {
+            it('should return state params', function() {
+                goBackState.save('state1', { id: 200 });
+                goBackState.getParams().should.deep.equal({ id: 200 });
+            });
+            it('should return default params if not previously set', function() {
+                goBackState.save();
+                goBackState.getParams({ id: 200 }).should.deep.equal({ id: 200 });
+            });
+        });
+    });
+
+    describe('deviceSession', function() {
+        var deviceSession,
+            localStorage;
+
+        beforeEach(module('session'));
+        beforeEach(function() {
+            module({
+                'localStorage': {
+                    set: sinon.spy(),
+                    get: sinon.stub()
+                }
+            });
+        });
+        beforeEach(inject(function (_deviceSession_, _localStorage_) {
+            deviceSession = _deviceSession_;
+            localStorage = _localStorage_;
+        }));
+
+        describe('setToken', function() {
+            it('should set device token', function() {
+                deviceSession.setToken('token1');
+                localStorage.set.getCall(0).args[0].should.equal('device.token');
+                localStorage.set.getCall(0).args[1].should.equal('token1');
+            });
+        });
+
+        describe('getToken', function() {
+            it('should return device token if exists', function() {
+                localStorage.get.withArgs('device.token').returns('token1');
+                deviceSession.getToken().should.equal('token1');
+            });
+            it('should return null if doesn\'t exist', function() {
+                localStorage.get.withArgs('device.token').returns(null);
+                expect(deviceSession.getToken()).to.be.equal(null);
+            });
+        });
+
+    });
 });
