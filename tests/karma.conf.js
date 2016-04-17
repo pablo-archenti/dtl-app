@@ -9,10 +9,11 @@ module.exports = function(config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'chai', 'sinon'],
+        frameworks: ['mocha', 'chai-as-promised', 'chai', 'sinon'],
 
         // list of files / patterns to load in the browser
         files: [
+            '../node_modules/babel-polyfill/dist/polyfill.js',
             '../www/lib/ionic/js/ionic.bundle.js',
             '../www/app/**/*.module.js',
             '../www/app/**/*.js',
