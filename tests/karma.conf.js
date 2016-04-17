@@ -15,9 +15,10 @@ module.exports = function(config) {
         files: [
             '../node_modules/babel-polyfill/dist/polyfill.js',
             '../www/lib/ionic/js/ionic.bundle.js',
+            '../www/lib/angular-mocks/angular-mocks.js',
+            '../www/lib/angular-resource/angular-resource.min.js',
             '../www/app/**/*.module.js',
             '../www/app/**/*.js',
-            '../www/lib/angular-mocks/angular-mocks.js',
             'unit/**/*.js'
         ],
 

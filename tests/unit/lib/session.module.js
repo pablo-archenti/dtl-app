@@ -152,6 +152,5 @@ describe('session.module', function () {
                 expect(deviceSession.getToken()).to.be.equal(null);
             });
         });
-
     });
 });

@@ -10,7 +10,9 @@ describe('storage.module', function () {
                 return {
                     localStorage: {
                         setItem: sinon.spy(),
-                        getItem: sinon.stub()
+                        getItem: sinon.stub(),
+                        removeItem: sinon.spy(),
+                        clear: sinon.spy()
                     }
                 };
             });
@@ -54,6 +56,20 @@ describe('storage.module', function () {
                 var key = 'test1';
                 $window.localStorage.getItem.withArgs(key).returns(undefined);
                 expect(localStorage.get(key)).to.equal(null);
+            });
+        });
+
+        describe('remove', function () {
+            it('delete by key', function () {
+                localStorage.remove('key1');
+                $window.localStorage.removeItem.getCall(0).args[0].should.equal('key1');
+            });
+        });
+
+        describe('clear', function () {
+            it('delete all the storage', function () {
+                localStorage.clear();
+                $window.localStorage.clear.calledOnce.should.equal(true);
             });
         });
     });
