@@ -1,4 +1,3 @@
-
 describe('storage.module', function () {
 
     describe('localStorage', function() {

@@ -19,7 +19,7 @@
         };
 
         session.getUserData = function getUserData() {
-            return localStorage.get('user.data') || null;
+            return localStorage.get('user.data');
         };
 
         session.setUserData = function setUserData(data) {
