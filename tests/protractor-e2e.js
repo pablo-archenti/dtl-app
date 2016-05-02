@@ -25,7 +25,7 @@ exports.config = {
 
     // Spec patterns are relative to the current working directly when
     // protractor is called.
-    specs: ['functional/*.js'],
+    specs: ['e2e/**/*.spec.js'],
 
     // Options to be passed to mocha.
     mochaOpts: {
