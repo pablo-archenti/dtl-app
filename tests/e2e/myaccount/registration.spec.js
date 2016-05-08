@@ -2,30 +2,32 @@
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
+var helpers = require('../helpers');
 var RegistrationPage = require('./pages/Registration.page');
+var ProjectsListingPage = require('../projects/pages/ProjectsListing.page');
 
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('User registration', function() {
-    var registrationPage;
+    var registrationPage,
+        projectsListingPage;
 
     before(function () {
         registrationPage = new RegistrationPage();
+        projectsListingPage = new ProjectsListingPage();
         registrationPage.go();
     });
 
     describe('Successful registration', function() {
 
-        it('should take the new user to the projects list page', function () {
+        it('should take the new user to the projects listing page', function () {
             registrationPage.register({
-                name: 'Pablo Perez',
-                email: 'pablo.perez@desdetulugar.com.ar',
+                name: 'Pablo Nuevo Perez',
+                email: 'pablo.nuevo.perez@desdetulugar.com.ar',
                 phone: '11111'
             });
-            browser.getTitle().then(function(title) {
-                console.log('TITLE: ', title);
-            });
+            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
         });
     });
 });

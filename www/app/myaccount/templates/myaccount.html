@@ -2,17 +2,17 @@
     <ion-content>
         <div class="list card">
 
-          <a ui-sref="app.editMyAccount.step1" class="item item-icon-left">
+          <a ui-sref="app.editMyAccount.step1" class="item item-icon-left" id="edit-account-btn">
             <i class="icon ion-person"></i>
             Editar cuenta
           </a>
 
-          <a ng-click="logout()" class="item item-icon-left">
+          <a ng-click="logout()" class="item item-icon-left" id="logout-btn">
             <i class="icon ion-android-close"></i>
             Cerrar sesión
           </a>
 
-          <a ng-click="delete()" class="item item-icon-left">
+          <a ng-click="delete()" class="item item-icon-left" id="delete-account-btn">
             <i class="icon ion-trash-b"></i>
             Eliminar cuenta
           </a>

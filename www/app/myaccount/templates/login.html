@@ -22,13 +22,17 @@
                             </button>
                         </div>
                         <div class="col">
-                            <button class="button button-block button-positive" ng-click="login(credentials)" ng-disabled="loginForm.$invalid">
+                            <button id="login-btn" class="button button-block button-positive" ng-click="login
+                            (credentials)"
+                                     ng-disabled="loginForm.$invalid">
                                 Iniciar sesión
                             </button>
                         </div>
                     </div>
                     <div class="padding" ng-show="codeHidden" ng-hide="codeShown">
-                        <button class="button button-block button-positive" ng-click="sendLoginCode(credentials.email)" ng-disabled="loginForm.$invalid">
+                        <button id="send-code-btn" class="button button-block button-positive" ng-click="sendLoginCode
+                        (credentials
+                        .email)" ng-disabled="loginForm.$invalid">
                             Y recibí el código vía email
                         </button>
                     </div>
