@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var ENV = 'dev';
+    var ENV = getParameterByName('env') || 'testing';
 
     var envConfig = {
         dev: {
@@ -14,6 +14,15 @@
             }
         },
         testing: {
+            debug: true,
+            api: {
+                baseUrl: 'http://api-testing:3030/api'
+            },
+            android:  {
+                appId: null
+            }
+        },
+        openshift: {
             debug: true,
             api: {
                 baseUrl: 'http://api-desdetulugar.rhcloud.com/api'
@@ -126,6 +135,16 @@
                 $log.debug('PushNotification is not defined');
             }
         });
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
 })();
