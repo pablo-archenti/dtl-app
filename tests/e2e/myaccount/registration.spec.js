@@ -23,6 +23,9 @@ describe('User registration', function() {
                 email: 'pablo.perez@desdetulugar.com.ar',
                 phone: '11111'
             });
+            browser.getTitle().then(function(title) {
+                console.log('TITLE: ', title);
+            });
         });
     });
 });
