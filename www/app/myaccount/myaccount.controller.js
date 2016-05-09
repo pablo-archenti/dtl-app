@@ -25,11 +25,10 @@
                         $ionicHistory.nextViewOptions({
                             historyRoot: true
                         });
-                        $state.go('app.login');
+                        $state.go('app.projects.list');
                     })
                     .finally(function() {
                         loader.hide();
-                        alert.info('account.deleted');
                     });
                 }
             })

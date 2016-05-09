@@ -10,12 +10,10 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('User registration', function() {
-    var registrationPage,
-        projectsListingPage;
-
-    before(function () {
-        registrationPage = new RegistrationPage();
+    var registrationPage = new RegistrationPage(),
         projectsListingPage = new ProjectsListingPage();
+
+    beforeEach(function () {
         registrationPage.go();
     });
 

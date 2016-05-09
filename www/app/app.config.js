@@ -50,7 +50,6 @@
         texts: {
             "account.exists": 'Ya existe un usuario con el email ingresado',
             "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
-            "account.deleted": 'Tu cuenta ha sido eliminada',
             "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
             "project.confirmUnsubscription": '¿Estás seguro que querés desuscribirte del proyecto?',
             "project.suscribed": "Gracias por suscribirte!!!<br/>Te estaremos contactando pronto.",

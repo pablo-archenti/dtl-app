@@ -5,8 +5,3 @@ module.exports.getUrlPath = function(p) {
         return url.match(/http:\/\/[0-9a-z:]+(.*)/)[1];
     })
 };
-
-module.exports.registeredUser = {
-    email: 'pablo.perez@desdetulugar.com.ar',
-    code: 1111
-};

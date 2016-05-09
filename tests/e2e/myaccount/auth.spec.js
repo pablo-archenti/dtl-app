@@ -3,6 +3,7 @@
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 var helpers = require('../helpers');
+var fixtures = require('../fixtures');
 var LoginPage = require('./pages/Login.page');
 var LogoutPage = require('./pages/Logout.page');
 var ProjectsListingPage = require('../projects/pages/ProjectsListing.page');
@@ -11,15 +12,9 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('User authentication', function() {
-    var loginPage,
-        logoutPage,
-        projectsListingPage;
-
-    before(function () {
-        loginPage = new LoginPage();
-        logoutPage = new LogoutPage();
+    var loginPage = new LoginPage(),
+        logoutPage = new LogoutPage(),
         projectsListingPage = new ProjectsListingPage();
-    });
 
     describe('User login', function() {
 
@@ -31,8 +26,8 @@ describe('User authentication', function() {
 
             it('should take the login user to the projects listing page', function () {
                 loginPage.login(
-                    helpers.registeredUser.email,
-                    helpers.registeredUser.code
+                    fixtures.registeredUser.email,
+                    fixtures.registeredUser.code
                 );
                 expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
             });
@@ -44,8 +39,8 @@ describe('User authentication', function() {
         beforeEach(function () {
             loginPage.go();
             loginPage.login(
-                helpers.registeredUser.email,
-                helpers.registeredUser.code
+                fixtures.registeredUser.email,
+                fixtures.registeredUser.code
             );
             logoutPage.go();
         });
