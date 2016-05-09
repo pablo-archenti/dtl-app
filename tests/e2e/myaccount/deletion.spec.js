@@ -26,11 +26,8 @@ describe('User deletion', function() {
         deleteAccountPage.go();
     });
 
-    describe('Successful deletion', function() {
-
-        it('should take the user to the projects listing page', function () {
-            deleteAccountPage.delete();
-            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
-        });
+    it('Successful deletion', function () {
+        deleteAccountPage.delete();
+        expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
     });
 });

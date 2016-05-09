@@ -17,15 +17,12 @@ describe('User registration', function() {
         registrationPage.go();
     });
 
-    describe('Successful registration', function() {
-
-        it('should take the new user to the projects listing page', function () {
-            registrationPage.register({
-                name: 'Pablo Nuevo Perez',
-                email: 'pablo.nuevo.perez@desdetulugar.com.ar',
-                phone: '11111'
-            });
-            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
+    it('Successful user registration', function () {
+        registrationPage.register({
+            name: 'Pablo Nuevo Perez',
+            email: 'pablo.nuevo.perez@desdetulugar.com.ar',
+            phone: '11111'
         });
+        expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
     });
 });

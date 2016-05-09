@@ -22,15 +22,12 @@ describe('User authentication', function() {
             loginPage.go();
         })
 
-        describe('Successful login', function() {
-
-            it('should take the login user to the projects listing page', function () {
-                loginPage.login(
-                    fixtures.registeredUser.email,
-                    fixtures.registeredUser.code
-                );
-                expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
-            });
+        it('Successful user login', function () {
+            loginPage.login(
+                fixtures.registeredUser.email,
+                fixtures.registeredUser.code
+            );
+            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
         });
     });
 
@@ -45,12 +42,9 @@ describe('User authentication', function() {
             logoutPage.go();
         });
 
-        describe('Successful logout', function() {
-
-            it('should take the login user to the login page', function () {
-                logoutPage.logout();
-                expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(loginPage.url);
-            });
+        it('Successful user logout', function () {
+            logoutPage.logout();
+            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(loginPage.url);
         });
     });
 
