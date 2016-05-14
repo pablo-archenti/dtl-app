@@ -22,7 +22,6 @@ describe('User deletion', function() {
             fixtures.deletableUser.email,
             fixtures.deletableUser.code
         );
-        browser.waitForAngular();
         deleteAccountPage.go();
     });
 

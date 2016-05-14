@@ -3,22 +3,22 @@
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 var helpers = require('../helpers');
-var RegistrationPage = require('./pages/Registration.page');
+var MyAccountPage = require('./pages/MyAccount.page');
 var ProjectsListingPage = require('../projects/pages/ProjectsListing.page');
 
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('User registration', function() {
-    var registrationPage = new RegistrationPage(),
+    var myAccountPage = new MyAccountPage(),
         projectsListingPage = new ProjectsListingPage();
 
     beforeEach(function () {
-        registrationPage.go();
+        myAccountPage.goSignup();
     });
 
     it('Successful user registration', function () {
-        registrationPage.register({
+        myAccountPage.register({
             name: 'Pablo Nuevo Perez',
             email: 'pablo.nuevo.perez@desdetulugar.com.ar',
             phone: '11111'

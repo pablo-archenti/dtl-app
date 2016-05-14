@@ -19,7 +19,7 @@ exports.config = {
         'browserName': 'chrome'
     },
 
-    baseUrl: 'http://app:8101/?env=testing',
+    baseUrl: 'http://app:8101/?env=testingDocker',
 
     framework: 'mocha',
 

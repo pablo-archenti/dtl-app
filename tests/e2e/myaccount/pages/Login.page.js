@@ -18,5 +18,6 @@ function LoginPage() {
         this.sendCodeButton.click();
         this.code.sendKeys(code);
         this.loginButton.click();
+        browser.waitForAngular();
     };
 }
