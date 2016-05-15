@@ -4,9 +4,9 @@ module.exports = LoginPage;
 
 function LoginPage() {
     this.url =  '/#/app/login?env=testing';
-    this.email = element(by.model('credentials.email'));
+    this.emailInput = element(by.model('credentials.email'));
     this.sendCodeButton = element(by.id('send-code-btn'));
-    this.code = element(by.model('credentials.code'));
+    this.codeInput = element(by.model('credentials.code'));
     this.loginButton = element(by.id('login-btn'));
 
     this.go = function() {
@@ -14,9 +14,9 @@ function LoginPage() {
     };
 
     this.login = function(email, code) {
-        this.email.sendKeys(email);
+        this.emailInput.sendKeys(email);
         this.sendCodeButton.click();
-        this.code.sendKeys(code);
+        this.codeInput.sendKeys(code);
         this.loginButton.click();
         browser.waitForAngular();
     };

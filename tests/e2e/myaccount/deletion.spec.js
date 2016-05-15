@@ -4,17 +4,17 @@ var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 var helpers = require('../helpers');
 var fixtures = require('../fixtures');
-var DeleteAccountPage = require('./pages/DeleteAccount.page');
+var MyAccountPage = require('./pages/MyAccount.page');
 var LoginPage = require('./pages/Login.page');
-var ProjectsListingPage = require('../projects/pages/ProjectsListing.page');
+var ProjectsPage = require('../projects/pages/Projects.page');
 
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('User deletion', function() {
-    var deleteAccountPage = new DeleteAccountPage(),
+    var myAccountPage = new MyAccountPage(),
         loginPage = new LoginPage(),
-        projectsListingPage = new ProjectsListingPage();
+        projectsPage = new ProjectsPage();
 
     beforeEach(function () {
         loginPage.go();
@@ -22,11 +22,12 @@ describe('User deletion', function() {
             fixtures.deletableUser.email,
             fixtures.deletableUser.code
         );
-        deleteAccountPage.go();
+        myAccountPage.go();
     });
 
     it('Successful deletion', function () {
-        deleteAccountPage.delete();
-        expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
+        browser.waitForAngular();
+        myAccountPage.deleteAccount();
+        expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsPage.url);
     });
 });

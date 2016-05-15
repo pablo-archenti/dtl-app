@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = ProjectsListingPage;
+module.exports = ProjectsPage;
 
-function ProjectsListingPage() {
+function ProjectsPage() {
     this.url =  '/#/app/projects/list?env=testing';
 
 }

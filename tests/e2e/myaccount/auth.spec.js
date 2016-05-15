@@ -5,29 +5,29 @@ var chaiAsPromised = require('chai-as-promised');
 var helpers = require('../helpers');
 var fixtures = require('../fixtures');
 var LoginPage = require('./pages/Login.page');
-var LogoutPage = require('./pages/Logout.page');
-var ProjectsListingPage = require('../projects/pages/ProjectsListing.page');
+var MyAccountPage = require('./pages/MyAccount.page');
+var ProjectsPage = require('../projects/pages/Projects.page');
 
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('User authentication', function() {
     var loginPage = new LoginPage(),
-        logoutPage = new LogoutPage(),
-        projectsListingPage = new ProjectsListingPage();
+        myAccountPage = new MyAccountPage(),
+        projectsPage = new ProjectsPage();
 
     describe('User login', function() {
 
         beforeEach(function() {
             loginPage.go();
-        })
+        });
 
         it('Successful user login', function () {
             loginPage.login(
                 fixtures.registeredUser.email,
                 fixtures.registeredUser.code
             );
-            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsListingPage.url);
+            expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsPage.url);
         });
     });
 
@@ -39,11 +39,11 @@ describe('User authentication', function() {
                 fixtures.registeredUser.email,
                 fixtures.registeredUser.code
             );
-            logoutPage.go();
+            myAccountPage.go();
         });
 
         it('Successful user logout', function () {
-            logoutPage.logout();
+            myAccountPage.logout();
             expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(loginPage.url);
         });
     });
