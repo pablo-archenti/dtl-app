@@ -15,7 +15,7 @@ describe('User registration', function() {
         loginPage = new LoginPage(),
         projectsPage = new ProjectsPage();
 
-    before(function () {
+    beforeEach(function () {
         loginPage.go();
     });
 

@@ -24,6 +24,7 @@ describe('User account edition', function() {
     });
 
     describe('Successful edition', function () {
+        
         before(function() {
             myAccountPage.clickEditMyAccountButton();
             myAccountPage.enterName('Pablo Nuevo');
