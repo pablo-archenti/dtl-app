@@ -47,11 +47,11 @@
     <br/><br/>
     </ion-content>
     <div class="tabs tabs-icon-top tabs-stable" ng-if="project.status == 'actual'">
-        <a class="tab-item" ng-hide="project.isSubscribed" ng-click="openSubscriptionModal()">
+        <a class="tab-item" ng-hide="project.isSubscribed" ng-click="openSubscriptionModal()" id="subscribe-btn">
             <i class="icon ion-heart assertive"></i>
             Ayudar
         </a>
-        <a class="tab-item" ng-show="project.isSubscribed" ng-click="unsubscribe()">
+        <a class="tab-item" ng-show="project.isSubscribed" ng-click="unsubscribe()"  id="unsubscribe-btn">
             <i class="icon ion-close-circled"></i>
             Desuscribirse
         </a>

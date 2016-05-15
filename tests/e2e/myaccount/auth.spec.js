@@ -49,7 +49,7 @@ describe('User authentication', function() {
     });
 
 
-})
+});
 
 
 
