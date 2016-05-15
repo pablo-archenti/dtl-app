@@ -3,6 +3,6 @@
 module.exports = ProjectsListingPage;
 
 function ProjectsListingPage() {
-    this.url =  '/#/app/projects/list';
+    this.url =  '/#/app/projects/list?env=testing';
 
 }

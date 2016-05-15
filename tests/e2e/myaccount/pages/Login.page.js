@@ -3,7 +3,7 @@
 module.exports = LoginPage;
 
 function LoginPage() {
-    this.url =  '/#/app/login';
+    this.url =  '/#/app/login?env=testing';
     this.email = element(by.model('credentials.email'));
     this.sendCodeButton = element(by.id('send-code-btn'));
     this.code = element(by.model('credentials.code'));

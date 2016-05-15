@@ -3,7 +3,7 @@
 module.exports = DeleteAccount;
 
 function DeleteAccount() {
-    this.url =  '/#/app/myaccount';
+    this.url =  '/#/app/myaccount?env=testing';
     this.deleteAccountButton = element(by.id('delete-account-btn'));
     this.confirmationButton = element(by.buttonText('Confirmar'));
 

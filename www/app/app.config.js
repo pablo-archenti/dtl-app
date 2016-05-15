@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var ENV = getParameterByName('env') || 'testingDocker';
+    var ENV = getParameterByName('env') || 'dev';
 
     var envConfig = {
         dev: {
@@ -13,19 +13,10 @@
                 appId: null
             }
         },
-        testingDocker: {
-            debug: true,
-            api: {
-                baseUrl: 'http://api-testing:3030/api'
-            },
-            android:  {
-                appId: null
-            }
-        },
         testing: {
             debug: true,
             api: {
-                baseUrl: 'http://api:3031/api'
+                baseUrl: 'http://api-testing:3031/api'
             },
             android:  {
                 appId: null

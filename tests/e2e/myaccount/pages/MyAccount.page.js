@@ -3,8 +3,8 @@
 module.exports = MyAccountPage;
 
 function MyAccountPage() {
-    this.signupUrl = '/#/app/signup/step1';
-    this.myAccountUrl = '/#/app/editMyAccount/step1';
+    this.signupUrl = '/#/app/signup/step1?env=testing';
+    this.myAccountUrl = '/#/app/editMyAccount/step1?env=testing';
     this.nameInput = element(by.model('data.name'));
     this.emailInput = element(by.model('data.email'));
     this.phoneInput = element(by.model('data.phone'));
