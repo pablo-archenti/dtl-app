@@ -25,7 +25,7 @@ describe('User deletion', function() {
         myAccountPage.go();
     });
 
-    it('Successful deletion', function () {
+    it('Successful', function () {
         browser.waitForAngular();
         myAccountPage.deleteAccount();
         expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(projectsPage.url);

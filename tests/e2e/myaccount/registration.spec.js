@@ -19,7 +19,7 @@ describe('User registration', function() {
         loginPage.go();
     });
 
-    it('Successful user registration', function () {
+    it('Successful', function () {
         myAccountPage.clickSignupButton();
         myAccountPage.register({
             name: 'Pablo Nuevo Perez',

@@ -23,8 +23,8 @@ describe('User account edition', function() {
         myAccountPage.go();
     });
 
-    describe('Successful edition', function () {
-        
+    describe('Successful', function () {
+
         before(function() {
             myAccountPage.clickEditMyAccountButton();
             myAccountPage.enterName('Pablo Nuevo');

@@ -22,7 +22,7 @@ describe('User authentication', function() {
             loginPage.go();
         });
 
-        it('Successful user login', function () {
+        it('Successful', function () {
             loginPage.login(
                 fixtures.registeredUser.email,
                 fixtures.registeredUser.code
@@ -42,7 +42,7 @@ describe('User authentication', function() {
             myAccountPage.go();
         });
 
-        it('Successful user logout', function () {
+        it('Successful', function () {
             myAccountPage.logout();
             expect(helpers.getUrlPath(browser.getCurrentUrl())).to.eventually.equal(loginPage.url);
         });
