@@ -62,7 +62,7 @@
                 alertPopup = $ionicPopup.alert({
                     title: 'Error',
                     cssClass: 'alert-error',
-                    template: uiResource.getText(textKey) || 'Ha ocurrido un error. Inténtalo nuevamente.'
+                    template: uiResource.getText(textKey) || uiResource.getText('default.error')
                 });
                 $timeout(function() {
                         alertPopup.close();

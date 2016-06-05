@@ -48,6 +48,7 @@
         android: envConfig[ENV].android,
         paginationLimit: 10,
         texts: {
+            "default.error": 'Ha ocurrido un error. Verificá tu conexión a Internet e intentalo nuevamente.',
             "account.exists": 'Ya existe un usuario con el email ingresado',
             "account.notExists": 'La cuenta no existe. Registrate y comenzá a ayudar!',
             "account.confirmDeletion": 'Tu cuenta se eliminará por completo!!',
