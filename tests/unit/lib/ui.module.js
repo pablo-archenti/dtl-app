@@ -116,12 +116,15 @@ describe('ui.module', function () {
         describe('error', function() {
 
             it('should pop up an error alert with default text and seconds', function() {
+                uiResource.getText.withArgs('key1').returns(null);
+                uiResource.getText.withArgs('default.error').returns('text1');
+
                 alert.error();
 
                 $ionicPopup.alert.getCall(0).args[0].should.deep.equal({
                     title: 'Error',
                     cssClass: 'alert-error',
-                    template: 'Ha ocurrido un error. Inténtalo nuevamente.'
+                    template: 'text1'
                 });
                 $timeout.getCall(0).args[0]();
                 $timeout.getCall(0).args[1].should.equal(5000);
