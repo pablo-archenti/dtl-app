@@ -32,6 +32,5 @@
         function clear() {
             return $window.localStorage.clear();
         }
-
     }
 })();

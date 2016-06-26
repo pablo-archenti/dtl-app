@@ -23,7 +23,7 @@ describe('storage.module', function () {
         }));
 
         describe('set', function () {
-            it('assigns a value to a key', function () {
+            it('saves data under a key', function () {
                 var key = 'test1';
                 var value = { key: 'value'};
 
@@ -34,13 +34,13 @@ describe('storage.module', function () {
         });
 
         describe('get', function () {
-            it('returns a value from an existing key', function () {
+            it('returns data from an existing key', function () {
                 var key = 'test1';
                 $window.localStorage.getItem.withArgs(key).returns('{"key": 10}');
                 localStorage.get(key).should.deep.equal({key: 10});
             });
 
-            it('returns null when value is null', function () {
+            it('returns null when no data', function () {
                 var key = 'test1';
                 $window.localStorage.getItem.withArgs(key).returns(null);
                 expect(localStorage.get(key)).to.equal(null);
@@ -60,14 +60,14 @@ describe('storage.module', function () {
         });
 
         describe('remove', function () {
-            it('delete by key', function () {
+            it('deletes data by key', function () {
                 localStorage.remove('key1');
                 $window.localStorage.removeItem.getCall(0).args[0].should.equal('key1');
             });
         });
 
         describe('clear', function () {
-            it('delete all the storage', function () {
+            it('deletes all data', function () {
                 localStorage.clear();
                 $window.localStorage.clear.calledOnce.should.equal(true);
             });
