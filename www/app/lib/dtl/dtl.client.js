@@ -334,9 +334,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -463,7 +463,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `email` – `{string}` -
+         *  - `email` – `{string}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -668,7 +668,7 @@ module.factory(
          *
          *  - `id` – `{*}` - User id
          *
-         *  - `filter` – `{object=}` -
+         *  - `filter` – `{object=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -977,6 +977,40 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name dtlClient.Admin#find
+         * @methodOf dtlClient.Admin
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Admin` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/Admins",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
          * @name dtlClient.Admin#login
          * @methodOf dtlClient.Admin
          *
@@ -1009,9 +1043,9 @@ module.factory(
          *
          * The response body contains properties of the AccessToken created on login.
          * Depending on the value of `include` parameter, the body may contain additional properties:
-         *
+         * 
          *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         *
+         * 
          *
          */
         "login": {
@@ -1284,6 +1318,154 @@ module.factory(
     * i.e. `DeviceToken`.
     */
     R.modelName = "DeviceToken";
+
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name dtlClient.Notification
+ * @header dtlClient.Notification
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Notification` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Notification",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Notifications/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Notification#findById
+         * @methodOf dtlClient.Notification
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         *  - `filter` – `{object=}` - Filter defining fields and include
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Notification` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/Notifications/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Notification#find
+         * @methodOf dtlClient.Notification
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Notification` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/Notifications",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name dtlClient.Notification#send
+         * @methodOf dtlClient.Notification
+         *
+         * @description
+         *
+         * Send a push Notification
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "send": {
+          url: urlBase + "/Notifications/send",
+          method: "POST"
+        },
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name dtlClient.Notification#modelName
+    * @propertyOf dtlClient.Notification
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Notification`.
+    */
+    R.modelName = "Notification";
 
 
     return R;
