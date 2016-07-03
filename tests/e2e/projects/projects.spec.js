@@ -18,7 +18,7 @@ describe('Projects', function() {
 
     describe('Listing', function() {
 
-        it('should list all projects available', function () {
+        it('should list all available projects', function () {
             expect(projectsPage.getNumberOfProjects()).to.eventually.equal(7);
         });
     });
