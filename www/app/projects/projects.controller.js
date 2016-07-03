@@ -190,7 +190,7 @@
                     $scope.subscriptionModal.show();
                 } else {
                     goBackState.save('app.projects.show', { id: projectId });
-                    $state.go('app.signup.step1');
+                    $state.go('app.myaccount');
                 }
             };
 
