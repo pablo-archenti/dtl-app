@@ -53,6 +53,8 @@
     }
 
     function EditMyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader) {
+        $scope.viewTitle = 'Editar';
+
         initView();
         function initView() {
             loader.show();
