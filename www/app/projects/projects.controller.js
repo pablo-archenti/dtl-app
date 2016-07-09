@@ -157,7 +157,7 @@
                 .then(function() {
                     $scope.project.isSubscribed = true;
                     $scope.closeSubscriptionModal();
-                    alert.info('project.suscribed', 3000);
+                    alert.info('project.suscribed', 10000);
                 })
                 .catch(function() {
                     alert.error();
