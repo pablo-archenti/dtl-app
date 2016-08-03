@@ -11,7 +11,7 @@
     MyAccountCtrl.$inject      = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader', 'dtlDeviceToken'];
     EditMyAccountCtrl.$inject  = ['$scope', '$state', '$ionicHistory', 'alert', 'dtlVolunteer', 'loader'];
     LoginCtrl.$inject          = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'loader', 'alert', 'dtlDeviceToken', 'goBackState'];
-    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'alert', 'loader', 'goBackState'];
+    SignupCtrl.$inject         = ['$scope', '$state', '$ionicHistory', 'dtlVolunteer', 'alert', 'loader', 'goBackState', 'dtlDeviceToken'];
 
     function MyAccountCtrl($scope, $state, $ionicHistory, alert, dtlVolunteer, loader, dtlDeviceToken) {
 
@@ -153,7 +153,7 @@
         $scope.hideCode();
     }
 
-    function SignupCtrl($scope, $state, $ionicHistory, dtlVolunteer, alert, loader, goBackState) {
+    function SignupCtrl($scope, $state, $ionicHistory, dtlVolunteer, alert, loader, goBackState, dtlDeviceToken) {
 
         $scope.data = {};
 
@@ -172,6 +172,7 @@
                     historyRoot: true
                 });
                 $state.go(goBackState.getState('app.projects.list'), goBackState.getParams());
+                dtlDeviceToken.setVolunteer();
             })
             .catch(function(err) {
                 var message = null;
