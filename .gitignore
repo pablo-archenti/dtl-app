@@ -7,3 +7,4 @@ plugins/
 .brackets.json
 tests/coverage
 .idea
+www/lib
