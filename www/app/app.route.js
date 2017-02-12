@@ -9,7 +9,6 @@
 
     function routes($stateProvider, $urlRouterProvider) {
         $stateProvider
-
         .state('app', {
             url: '/app',
             abstract: true,
