@@ -13,7 +13,7 @@ function ProjectsPage() {
 
     this.getProject = function(position) {
         return new Project(element(by.repeater('project in projects').row(position)));
-    }
+    };
 
     this.getNumberOfProjects = function() {
         return element.all(by.repeater('project in projects'))
