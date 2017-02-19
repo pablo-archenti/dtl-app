@@ -60,10 +60,7 @@
             return Volunteer.deleteById({
                         id: this.getId()
                     })
-                    .$promise
-                    .then(function() {
-                        return self.logout();
-                    });
+                    .$promise;
         };
 
         service.createAccount = function createAccount(data) {
