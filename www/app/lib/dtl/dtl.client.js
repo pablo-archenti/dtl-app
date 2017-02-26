@@ -1,7 +1,27 @@
-(function(window, angular, undefined) {
+// CommonJS package manager support
+if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
+  module.exports === exports) {
+  // Export the *name* of this Angular module
+  // Sample usage:
+  //
+  //   import lbServices from './lb-services';
+  //   angular.module('app', [lbServices]);
+  //
+  module.exports = "dtlClient";
+}
 
-var urlBase = "/api";
-var authHeader = 'authorization';
+(function(window, angular, undefined) {
+  'use strict';
+
+  var urlBase = "/api";
+  var authHeader = 'authorization';
+
+  function getHost(url) {
+    var m = url.match(/^(?:https?:)?\/\/([^\/]+)/);
+    return m ? m[1] : null;
+  }
+
+  var urlBaseHost = getHost(urlBase) || location.host;
 
 /**
  * @ngdoc overview
@@ -13,7 +33,7 @@ var authHeader = 'authorization';
  * the models exposed by the LoopBack server via the REST API.
  *
  */
-var module = angular.module("dtlClient", ['ngResource']);
+  var module = angular.module("dtlClient", ['ngResource']);
 
 /**
  * @ngdoc object
@@ -32,32 +52,35 @@ var module = angular.module("dtlClient", ['ngResource']);
  * for an example of using this object.
  *
  */
-module.factory(
-  "Email",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/Emails/:id",
-      { 'id': '@id' },
-      {
-      }
-    );
+  module.factory(
+    "Email",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/Emails/:id",
+          { 'id': '@id' },
+          {
+          }
+        );
 
 
 
 
-    /**
-    * @ngdoc property
-    * @name dtlClient.Email#modelName
-    * @propertyOf dtlClient.Email
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `Email`.
-    */
-    R.modelName = "Email";
+        /**
+        * @ngdoc property
+        * @name dtlClient.Email#modelName
+        * @propertyOf dtlClient.Email
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `Email`.
+        */
+        R.modelName = "Email";
 
 
-    return R;
-  }]);
+
+        return R;
+      }]);
 
 /**
  * @ngdoc object
@@ -76,517 +99,565 @@ module.factory(
  * for an example of using this object.
  *
  */
-module.factory(
-  "Volunteer",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/Volunteers/:id",
-      { 'id': '@id' },
-      {
+  module.factory(
+    "Volunteer",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/Volunteers/:id",
+          { 'id': '@id' },
+          {
 
-        // INTERNAL. Use Volunteer.projects.link() instead.
-        "prototype$__link__projects": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Volunteers/:id/projects/rel/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Volunteer.projects.unlink() instead.
-        "prototype$__unlink__projects": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Volunteers/:id/projects/rel/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Volunteer.projects.exists() instead.
-        "prototype$__exists__projects": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Volunteers/:id/projects/rel/:fk",
-          method: "HEAD"
-        },
-
-        // INTERNAL. Use Volunteer.projects() instead.
-        "prototype$__get__projects": {
-          isArray: true,
-          url: urlBase + "/Volunteers/:id/projects",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#create
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "create": {
-          url: urlBase + "/Volunteers",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#createMany
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "createMany": {
-          isArray: true,
-          url: urlBase + "/Volunteers",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#findById
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/Volunteers/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#deleteById
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "deleteById": {
-          url: urlBase + "/Volunteers/:id",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#prototype$updateAttributes
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Update attributes for a model instance and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "prototype$updateAttributes": {
-          url: urlBase + "/Volunteers/:id",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#login
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Login a user with username/email and password.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
-         *   Default value: `user`.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The response body contains properties of the AccessToken created on login.
-         * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
-         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
-         *
-         */
-        "login": {
-          params: {
-            include: "user"
-          },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Volunteers/login",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#logout
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Logout a user with access token.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "logout": {
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.clearUser();
-              LoopBackAuth.clearStorage();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Volunteers/logout",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#login
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Login a volunteer with email and login code
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "login": {
-          params: {
-            include: "user"
-          },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Volunteers/login",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#sendLoginCode
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Send login Code to volunteer
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `email` – `{string}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
-        "sendLoginCode": {
-          url: urlBase + "/Volunteers/sendLoginCode",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#getCurrent
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Get data of the currently logged user. Fail with HTTP result 401
-         * when there is no user logged in.
-         *
-         * @param {function(Object,Object)=} successCb
-         *    Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *    `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         */
-        "getCurrent": {
-           url: urlBase + "/Volunteers" + "/:id",
-           method: "GET",
-           params: {
-             id: function() {
-              var id = LoopBackAuth.currentUserId;
-              if (id == null) id = '__anonymous__';
-              return id;
+            // INTERNAL. Use Volunteer.projects.link() instead.
+            "prototype$__link__projects": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Volunteers/:id/projects/rel/:fk",
+              method: "PUT",
             },
-          },
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.currentUserData = response.data;
-              return response.resource;
-            }
-          },
-          __isGetCurrentUser__ : true
-        }
-      }
-    );
+
+            // INTERNAL. Use Volunteer.projects.unlink() instead.
+            "prototype$__unlink__projects": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Volunteers/:id/projects/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Volunteer.projects.exists() instead.
+            "prototype$__exists__projects": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Volunteers/:id/projects/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Volunteer.projects() instead.
+            "prototype$__get__projects": {
+              isArray: true,
+              url: urlBase + "/Volunteers/:id/projects",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#create
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/Volunteers",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#createMany
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/Volunteers",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#findById
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/Volunteers/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#deleteById
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/Volunteers/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#prototype$updateAttributes
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Volunteer id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/Volunteers/:id",
+              method: "PUT",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#login
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Login a user with username/email and password.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
+             *   Default value: `user`.
+             *
+             *  - `rememberMe` - `boolean` - Whether the authentication credentials
+             *     should be remembered in localStorage across app/browser restarts.
+             *     Default: `true`.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The response body contains properties of the AccessToken created on login.
+             * Depending on the value of `include` parameter, the body may contain additional properties:
+             *   - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
+             *
+             */
+            "login": {
+              params: {
+                include: 'user',
+              },
+              interceptor: {
+                response: function(response) {
+                  var accessToken = response.data;
+                  LoopBackAuth.setUser(
+                    accessToken.id, accessToken.userId, accessToken.user);
+                  LoopBackAuth.rememberMe =
+                    response.config.params.rememberMe !== false;
+                  LoopBackAuth.save();
+                  return response.resource;
+                },
+              },
+              url: urlBase + "/Volunteers/login",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#logout
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Logout a user with access token.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+            "logout": {
+              interceptor: {
+                response: function(response) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return response.resource;
+                },
+                responseError: function(responseError) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return responseError.resource;
+                },
+              },
+              url: urlBase + "/Volunteers/logout",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#login
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Login a volunteer with email and login code
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             *  - `rememberMe` - `boolean` - Whether the authentication credentials
+             *     should be remembered in localStorage across app/browser restarts.
+             *     Default: `true`.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "login": {
+              params: {
+                include: 'user',
+              },
+              interceptor: {
+                response: function(response) {
+                  var accessToken = response.data;
+                  LoopBackAuth.setUser(
+                    accessToken.id, accessToken.userId, accessToken.user);
+                  LoopBackAuth.rememberMe =
+                    response.config.params.rememberMe !== false;
+                  LoopBackAuth.save();
+                  return response.resource;
+                },
+              },
+              url: urlBase + "/Volunteers/login",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#sendLoginCode
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Send login Code to volunteer
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `email` – `{string}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+            "sendLoginCode": {
+              url: urlBase + "/Volunteers/sendLoginCode",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#getCurrent
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Get data of the currently logged user. Fail with HTTP result 401
+             * when there is no user logged in.
+             *
+             * @param {function(Object,Object)=} successCb
+             *    Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *    `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             */
+            'getCurrent': {
+              url: urlBase + "/Volunteers" + '/:id',
+              method: 'GET',
+              params: {
+                id: function() {
+                  var id = LoopBackAuth.currentUserId;
+                  if (id == null) id = '__anonymous__';
+                  return id;
+                },
+              },
+              interceptor: {
+                response: function(response) {
+                  LoopBackAuth.currentUserData = response.data;
+                  return response.resource;
+                },
+                responseError: function(responseError) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return $q.reject(responseError);
+                },
+              },
+              __isGetCurrentUser__: true,
+            },
+          }
+        );
 
 
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#destroyById
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#destroyById
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
         R["destroyById"] = R["deleteById"];
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#removeById
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Volunteer` object.)
-         * </em>
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#removeById
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
         R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#patchAttributes
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Volunteer id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Volunteer` object.)
+             * </em>
+             */
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method
@@ -630,15 +701,15 @@ module.factory(
           return LoopBackAuth.currentUserId;
         };
 
-    /**
-    * @ngdoc property
-    * @name dtlClient.Volunteer#modelName
-    * @propertyOf dtlClient.Volunteer
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `Volunteer`.
-    */
-    R.modelName = "Volunteer";
+        /**
+        * @ngdoc property
+        * @name dtlClient.Volunteer#modelName
+        * @propertyOf dtlClient.Volunteer
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `Volunteer`.
+        */
+        R.modelName = "Volunteer";
 
     /**
      * @ngdoc object
@@ -655,153 +726,154 @@ module.factory(
      */
 
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer#projects
-         * @methodOf dtlClient.Volunteer
-         *
-         * @description
-         *
-         * Queries projects of Volunteer.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Project` object.)
-         * </em>
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer#projects
+             * @methodOf dtlClient.Volunteer
+             *
+             * @description
+             *
+             * Queries projects of Volunteer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Volunteer id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Project` object.)
+             * </em>
+             */
         R.projects = function() {
           var TargetResource = $injector.get("Project");
           var action = TargetResource["::get::Volunteer::projects"];
           return action.apply(R, arguments);
         };
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer.projects#exists
-         * @methodOf dtlClient.Volunteer.projects
-         *
-         * @description
-         *
-         * Check the existence of projects relation to an item by id.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for projects
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Project` object.)
-         * </em>
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer.projects#exists
+             * @methodOf dtlClient.Volunteer.projects
+             *
+             * @description
+             *
+             * Check the existence of projects relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Volunteer id
+             *
+             *  - `fk` – `{*}` - Foreign key for projects
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Project` object.)
+             * </em>
+             */
         R.projects.exists = function() {
           var TargetResource = $injector.get("Project");
           var action = TargetResource["::exists::Volunteer::projects"];
           return action.apply(R, arguments);
         };
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer.projects#link
-         * @methodOf dtlClient.Volunteer.projects
-         *
-         * @description
-         *
-         * Add a related item by id for projects.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for projects
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Project` object.)
-         * </em>
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer.projects#link
+             * @methodOf dtlClient.Volunteer.projects
+             *
+             * @description
+             *
+             * Add a related item by id for projects.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Volunteer id
+             *
+             *  - `fk` – `{*}` - Foreign key for projects
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Project` object.)
+             * </em>
+             */
         R.projects.link = function() {
           var TargetResource = $injector.get("Project");
           var action = TargetResource["::link::Volunteer::projects"];
           return action.apply(R, arguments);
         };
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Volunteer.projects#unlink
-         * @methodOf dtlClient.Volunteer.projects
-         *
-         * @description
-         *
-         * Remove the projects relation to an item by id.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for projects
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.Volunteer.projects#unlink
+             * @methodOf dtlClient.Volunteer.projects
+             *
+             * @description
+             *
+             * Remove the projects relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Volunteer id
+             *
+             *  - `fk` – `{*}` - Foreign key for projects
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
         R.projects.unlink = function() {
           var TargetResource = $injector.get("Project");
           var action = TargetResource["::unlink::Volunteer::projects"];
           return action.apply(R, arguments);
         };
 
-    return R;
-  }]);
+
+        return R;
+      }]);
 
 /**
  * @ngdoc object
@@ -820,135 +892,138 @@ module.factory(
  * for an example of using this object.
  *
  */
-module.factory(
-  "Project",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/Projects/:id",
-      { 'id': '@id' },
-      {
+  module.factory(
+    "Project",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/Projects/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Project#findById
+             * @methodOf dtlClient.Project
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Project` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/Projects/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Project#find
+             * @methodOf dtlClient.Project
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Project` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/Projects",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Volunteer.projects.link() instead.
+            "::link::Volunteer::projects": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Volunteers/:id/projects/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Volunteer.projects.unlink() instead.
+            "::unlink::Volunteer::projects": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Volunteers/:id/projects/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Volunteer.projects.exists() instead.
+            "::exists::Volunteer::projects": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Volunteers/:id/projects/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Volunteer.projects() instead.
+            "::get::Volunteer::projects": {
+              isArray: true,
+              url: urlBase + "/Volunteers/:id/projects",
+              method: "GET",
+            },
+          }
+        );
+
+
+
 
         /**
-         * @ngdoc method
-         * @name dtlClient.Project#findById
-         * @methodOf dtlClient.Project
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Project` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/Projects/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Project#find
-         * @methodOf dtlClient.Project
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Project` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/Projects",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Volunteer.projects.link() instead.
-        "::link::Volunteer::projects": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Volunteers/:id/projects/rel/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Volunteer.projects.unlink() instead.
-        "::unlink::Volunteer::projects": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Volunteers/:id/projects/rel/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Volunteer.projects.exists() instead.
-        "::exists::Volunteer::projects": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Volunteers/:id/projects/rel/:fk",
-          method: "HEAD"
-        },
-
-        // INTERNAL. Use Volunteer.projects() instead.
-        "::get::Volunteer::projects": {
-          isArray: true,
-          url: urlBase + "/Volunteers/:id/projects",
-          method: "GET"
-        },
-      }
-    );
+        * @ngdoc property
+        * @name dtlClient.Project#modelName
+        * @propertyOf dtlClient.Project
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `Project`.
+        */
+        R.modelName = "Project";
 
 
 
-
-    /**
-    * @ngdoc property
-    * @name dtlClient.Project#modelName
-    * @propertyOf dtlClient.Project
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `Project`.
-    */
-    R.modelName = "Project";
-
-
-    return R;
-  }]);
+        return R;
+      }]);
 
 /**
  * @ngdoc object
@@ -967,186 +1042,198 @@ module.factory(
  * for an example of using this object.
  *
  */
-module.factory(
-  "Admin",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/Admins/:id",
-      { 'id': '@id' },
-      {
+  module.factory(
+    "Admin",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/Admins/:id",
+          { 'id': '@id' },
+          {
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.Admin#find
-         * @methodOf dtlClient.Admin
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Admin` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/Admins",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Admin#login
-         * @methodOf dtlClient.Admin
-         *
-         * @description
-         *
-         * Login a user with username/email and password.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
-         *   Default value: `user`.
-         *
-         *  - `rememberMe` - `boolean` - Whether the authentication credentials
-         *     should be remembered in localStorage across app/browser restarts.
-         *     Default: `true`.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * The response body contains properties of the AccessToken created on login.
-         * Depending on the value of `include` parameter, the body may contain additional properties:
-         * 
-         *   - `user` - `{User}` - Data of the currently logged in user. (`include=user`)
-         * 
-         *
-         */
-        "login": {
-          params: {
-            include: "user"
-          },
-          interceptor: {
-            response: function(response) {
-              var accessToken = response.data;
-              LoopBackAuth.setUser(accessToken.id, accessToken.userId, accessToken.user);
-              LoopBackAuth.rememberMe = response.config.params.rememberMe !== false;
-              LoopBackAuth.save();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Admins/login",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Admin#logout
-         * @methodOf dtlClient.Admin
-         *
-         * @description
-         *
-         * Logout a user with access token.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "logout": {
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.clearUser();
-              LoopBackAuth.clearStorage();
-              return response.resource;
-            }
-          },
-          url: urlBase + "/Admins/logout",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Admin#getCurrent
-         * @methodOf dtlClient.Admin
-         *
-         * @description
-         *
-         * Get data of the currently logged user. Fail with HTTP result 401
-         * when there is no user logged in.
-         *
-         * @param {function(Object,Object)=} successCb
-         *    Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *    `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         */
-        "getCurrent": {
-           url: urlBase + "/Admins" + "/:id",
-           method: "GET",
-           params: {
-             id: function() {
-              var id = LoopBackAuth.currentUserId;
-              if (id == null) id = '__anonymous__';
-              return id;
+            /**
+             * @ngdoc method
+             * @name dtlClient.Admin#find
+             * @methodOf dtlClient.Admin
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Admin` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/Admins",
+              method: "GET",
             },
-          },
-          interceptor: {
-            response: function(response) {
-              LoopBackAuth.currentUserData = response.data;
-              return response.resource;
-            }
-          },
-          __isGetCurrentUser__ : true
-        }
-      }
-    );
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Admin#login
+             * @methodOf dtlClient.Admin
+             *
+             * @description
+             *
+             * Login a user with username/email and password.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `include` – `{string=}` - Related objects to include in the response. See the description of return value for more details.
+             *   Default value: `user`.
+             *
+             *  - `rememberMe` - `boolean` - Whether the authentication credentials
+             *     should be remembered in localStorage across app/browser restarts.
+             *     Default: `true`.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The response body contains properties of the AccessToken created on login.
+             * Depending on the value of `include` parameter, the body may contain additional properties:
+             *   - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
+             *
+             */
+            "login": {
+              params: {
+                include: 'user',
+              },
+              interceptor: {
+                response: function(response) {
+                  var accessToken = response.data;
+                  LoopBackAuth.setUser(
+                    accessToken.id, accessToken.userId, accessToken.user);
+                  LoopBackAuth.rememberMe =
+                    response.config.params.rememberMe !== false;
+                  LoopBackAuth.save();
+                  return response.resource;
+                },
+              },
+              url: urlBase + "/Admins/login",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Admin#logout
+             * @methodOf dtlClient.Admin
+             *
+             * @description
+             *
+             * Logout a user with access token.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `access_token` – `{string}` - Do not supply this argument, it is automatically extracted from request headers.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+            "logout": {
+              interceptor: {
+                response: function(response) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return response.resource;
+                },
+                responseError: function(responseError) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return responseError.resource;
+                },
+              },
+              url: urlBase + "/Admins/logout",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Admin#getCurrent
+             * @methodOf dtlClient.Admin
+             *
+             * @description
+             *
+             * Get data of the currently logged user. Fail with HTTP result 401
+             * when there is no user logged in.
+             *
+             * @param {function(Object,Object)=} successCb
+             *    Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *    `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             */
+            'getCurrent': {
+              url: urlBase + "/Admins" + '/:id',
+              method: 'GET',
+              params: {
+                id: function() {
+                  var id = LoopBackAuth.currentUserId;
+                  if (id == null) id = '__anonymous__';
+                  return id;
+                },
+              },
+              interceptor: {
+                response: function(response) {
+                  LoopBackAuth.currentUserData = response.data;
+                  return response.resource;
+                },
+                responseError: function(responseError) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return $q.reject(responseError);
+                },
+              },
+              __isGetCurrentUser__: true,
+            },
+          }
+        );
 
 
 
@@ -1192,19 +1279,20 @@ module.factory(
           return LoopBackAuth.currentUserId;
         };
 
-    /**
-    * @ngdoc property
-    * @name dtlClient.Admin#modelName
-    * @propertyOf dtlClient.Admin
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `Admin`.
-    */
-    R.modelName = "Admin";
+        /**
+        * @ngdoc property
+        * @name dtlClient.Admin#modelName
+        * @propertyOf dtlClient.Admin
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `Admin`.
+        */
+        R.modelName = "Admin";
 
 
-    return R;
-  }]);
+
+        return R;
+      }]);
 
 /**
  * @ngdoc object
@@ -1223,105 +1311,143 @@ module.factory(
  * for an example of using this object.
  *
  */
-module.factory(
-  "DeviceToken",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/DeviceTokens/:id",
-      { 'id': '@id' },
-      {
+  module.factory(
+    "DeviceToken",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/DeviceTokens/:id",
+          { 'id': '@id' },
+          {
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.DeviceToken#upsert
-         * @methodOf dtlClient.DeviceToken
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `DeviceToken` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/DeviceTokens",
-          method: "PUT"
-        },
-      }
-    );
+            /**
+             * @ngdoc method
+             * @name dtlClient.DeviceToken#upsert
+             * @methodOf dtlClient.DeviceToken
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DeviceToken` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/DeviceTokens",
+              method: "PUT",
+            },
+          }
+        );
 
 
 
-        /**
-         * @ngdoc method
-         * @name dtlClient.DeviceToken#updateOrCreate
-         * @methodOf dtlClient.DeviceToken
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `DeviceToken` object.)
-         * </em>
-         */
+            /**
+             * @ngdoc method
+             * @name dtlClient.DeviceToken#patchOrCreate
+             * @methodOf dtlClient.DeviceToken
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DeviceToken` object.)
+             * </em>
+             */
+        R["patchOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.DeviceToken#updateOrCreate
+             * @methodOf dtlClient.DeviceToken
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DeviceToken` object.)
+             * </em>
+             */
         R["updateOrCreate"] = R["upsert"];
 
 
-    /**
-    * @ngdoc property
-    * @name dtlClient.DeviceToken#modelName
-    * @propertyOf dtlClient.DeviceToken
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `DeviceToken`.
-    */
-    R.modelName = "DeviceToken";
+        /**
+        * @ngdoc property
+        * @name dtlClient.DeviceToken#modelName
+        * @propertyOf dtlClient.DeviceToken
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `DeviceToken`.
+        */
+        R.modelName = "DeviceToken";
 
 
-    return R;
-  }]);
+
+        return R;
+      }]);
 
 /**
  * @ngdoc object
@@ -1340,141 +1466,144 @@ module.factory(
  * for an example of using this object.
  *
  */
-module.factory(
-  "Notification",
-  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
-    var R = Resource(
-      urlBase + "/Notifications/:id",
-      { 'id': '@id' },
-      {
+  module.factory(
+    "Notification",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/Notifications/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Notification#findById
+             * @methodOf dtlClient.Notification
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Notification` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/Notifications/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Notification#find
+             * @methodOf dtlClient.Notification
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Notification` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/Notifications",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name dtlClient.Notification#send
+             * @methodOf dtlClient.Notification
+             *
+             * @description
+             *
+             * Send a push Notification
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+            "send": {
+              url: urlBase + "/Notifications/send",
+              method: "POST",
+            },
+          }
+        );
+
+
+
 
         /**
-         * @ngdoc method
-         * @name dtlClient.Notification#findById
-         * @methodOf dtlClient.Notification
-         *
-         * @description
-         *
-         * Find a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         *  - `filter` – `{object=}` - Filter defining fields and include
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Notification` object.)
-         * </em>
-         */
-        "findById": {
-          url: urlBase + "/Notifications/:id",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Notification#find
-         * @methodOf dtlClient.Notification
-         *
-         * @description
-         *
-         * Find all instances of the model matched by filter from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Notification` object.)
-         * </em>
-         */
-        "find": {
-          isArray: true,
-          url: urlBase + "/Notifications",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name dtlClient.Notification#send
-         * @methodOf dtlClient.Notification
-         *
-         * @description
-         *
-         * Send a push Notification
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "send": {
-          url: urlBase + "/Notifications/send",
-          method: "POST"
-        },
-      }
-    );
+        * @ngdoc property
+        * @name dtlClient.Notification#modelName
+        * @propertyOf dtlClient.Notification
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `Notification`.
+        */
+        R.modelName = "Notification";
 
 
 
-
-    /**
-    * @ngdoc property
-    * @name dtlClient.Notification#modelName
-    * @propertyOf dtlClient.Notification
-    * @description
-    * The name of the model represented by this $resource,
-    * i.e. `Notification`.
-    */
-    R.modelName = "Notification";
+        return R;
+      }]);
 
 
-    return R;
-  }]);
-
-
-module
+  module
   .factory('LoopBackAuth', function() {
-    var props = ['accessTokenId', 'currentUserId'];
+    var props = ['accessTokenId', 'currentUserId', 'rememberMe'];
     var propsPrefix = '$LoopBack$';
 
     function LoopBackAuth() {
@@ -1482,7 +1611,6 @@ module
       props.forEach(function(name) {
         self[name] = load(name);
       });
-      this.rememberMe = undefined;
       this.currentUserData = null;
     }
 
@@ -1498,13 +1626,13 @@ module
       this.accessTokenId = accessTokenId;
       this.currentUserId = userId;
       this.currentUserData = userData;
-    }
+    };
 
     LoopBackAuth.prototype.clearUser = function() {
       this.accessTokenId = null;
       this.currentUserId = null;
       this.currentUserData = null;
-    }
+    };
 
     LoopBackAuth.prototype.clearStorage = function() {
       props.forEach(function(name) {
@@ -1518,9 +1646,13 @@ module
     // Note: LocalStorage converts the value to string
     // We are using empty string as a marker for null/undefined values.
     function save(storage, name, value) {
-      var key = propsPrefix + name;
-      if (value == null) value = '';
-      storage[key] = value;
+      try {
+        var key = propsPrefix + name;
+        if (value == null) value = '';
+        storage[key] = value;
+      } catch (err) {
+        console.log('Cannot access local/session storage:', err);
+      }
     }
 
     function load(name) {
@@ -1531,13 +1663,13 @@ module
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('LoopBackAuthRequestInterceptor');
   }])
-  .factory('LoopBackAuthRequestInterceptor', [ '$q', 'LoopBackAuth',
+  .factory('LoopBackAuthRequestInterceptor', ['$q', 'LoopBackAuth',
     function($q, LoopBackAuth) {
       return {
         'request': function(config) {
-
-          // filter out non urlBase requests
-          if (config.url.substr(0, urlBase.length) !== urlBase) {
+          // filter out external requests
+          var host = getHost(config.url);
+          if (host && host !== urlBaseHost) {
             return config;
           }
 
@@ -1547,16 +1679,16 @@ module
             // Return a stub 401 error for User.getCurrent() when
             // there is no user logged in
             var res = {
-              body: { error: { status: 401 } },
+              body: { error: { status: 401 }},
               status: 401,
               config: config,
-              headers: function() { return undefined; }
+              headers: function() { return undefined; },
             };
             return $q.reject(res);
           }
           return config || $q.when(config);
-        }
-      }
+        },
+      };
     }])
 
   /**
@@ -1596,6 +1728,17 @@ module
 
     /**
      * @ngdoc method
+     * @name dtlClient.LoopBackResourceProvider#getAuthHeader
+     * @methodOf dtlClient.LoopBackResourceProvider
+     * @description
+     * Get the header name that is used for sending the authentication token.
+     */
+    this.getAuthHeader = function() {
+      return authHeader;
+    };
+
+    /**
+     * @ngdoc method
      * @name dtlClient.LoopBackResourceProvider#setUrlBase
      * @methodOf dtlClient.LoopBackResourceProvider
      * @param {string} url The URL to use, e.g. `/api` or `//example.com/api`.
@@ -1605,6 +1748,7 @@ module
      */
     this.setUrlBase = function(url) {
       urlBase = url;
+      urlBaseHost = getHost(urlBase) || location.host;
     };
 
     /**
@@ -1620,7 +1764,7 @@ module
     };
 
     this.$get = ['$resource', function($resource) {
-      return function(url, params, actions) {
+      var LoopBackResource = function(url, params, actions) {
         var resource = $resource(url, params, actions);
 
         // Angular always calls POST on $save()
@@ -1634,7 +1778,16 @@ module
         };
         return resource;
       };
+
+      LoopBackResource.getUrlBase = function() {
+        return urlBase;
+      };
+
+      LoopBackResource.getAuthHeader = function() {
+        return authHeader;
+      };
+
+      return LoopBackResource;
     }];
   });
-
 })(window, window.angular);
