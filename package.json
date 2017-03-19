@@ -35,11 +35,17 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "phonegap-plugin-push",
-    "com.ionic.keyboard",
+    "ionic-plugin-keyboard",
     {
       "locator": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
       "id": "cordova-plugin-x-socialsharing"
+    },
+    {
+      "variables": {
+        "SENDER_ID": "63635089070"
+      },
+      "locator": "phonegap-plugin-push@1.6.0",
+      "id": "phonegap-plugin-push"
     }
   ],
   "cordovaPlatforms": [
