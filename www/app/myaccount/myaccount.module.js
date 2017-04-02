@@ -4,8 +4,7 @@
     angular
     .module('myaccount', [
         'dtl',
-        'ui',
-        'session'
+        'ui'
     ]);
 
 })();
