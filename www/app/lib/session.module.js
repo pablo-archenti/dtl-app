@@ -10,7 +10,7 @@
     userSession.$inject = ['localStorage'];
     deviceSession.$inject = ['localStorage'];
 
-    function userSession(localStorage) {
+    function userSession(storage) {
         var session = {};
 
         session.getUserId = function getUserId() {
@@ -19,24 +19,24 @@
         };
 
         session.getUserData = function getUserData() {
-            return localStorage.get('user.data');
+            return storage.get('user.data');
         };
 
         session.setUserData = function setUserData(data) {
-            localStorage.set('user.data', data);
+            storage.set('user.data', data);
         };
 
         session.getToken = function getToken() {
-            return localStorage.get('user.token');
+            return storage.get('user.token');
         };
 
         session.setToken = function setToken(token) {
-            localStorage.set('user.token', token);
+            storage.set('user.token', token);
         };
 
         session.clearSession = function clearSession() {
-            localStorage.remove('user.data');
-            localStorage.remove('user.token');
+            storage.remove('user.data');
+            storage.remove('user.token');
         };
 
         return session;
@@ -64,14 +64,14 @@
         };
     }
 
-    function deviceSession(localStorage) {
+    function deviceSession(storage) {
 
         return {
             setToken: function(token) {
-                localStorage.set('device.token', token);
+                storage.set('device.token', token);
             },
             getToken: function() {
-                return localStorage.get('device.token') || null;
+                return storage.get('device.token') || null;
             }
         };
     }
