@@ -11,7 +11,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 }
 
 (function(window, angular, undefined) {
-  'use strict';
 
   var urlBase = "/api";
   var authHeader = 'authorization';
