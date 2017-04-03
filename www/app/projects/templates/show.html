@@ -7,7 +7,7 @@
                 <p ng-if="project.status === 'finalizado'">Finalizado</p>
             </div>
             <div class="item item-body">
-                <img class="full-image" src="{{ project.gallery[0].url }}" ng-click="openGalleryModal()">
+                <img ng-if="project.status==='finalizado'" class="full-image" src="{{ project.gallery[0].url }}" ng-click="openGalleryModal()">
                 <p ng-bind-html="displaySafeHtml(project.description)"></p>
                 <p>
                     <span class="open" ng-if="project.openingDate">Inicio: {{ project.openingDate }}<br></span>
@@ -22,7 +22,7 @@
                   <i class="icon"><img ng-src="img/icons/{{ project.iconNeed1 || 'OTROS' }}.png"></i>
                   <span>{{ project.need1 }}</span>
                 </a>
-                <a class="item item-icon-left item-text-wrap" href="#" ng-if="false">
+                <a class="item item-icon-left item-text-wrap" href="#" ng-if="project.need2">
                   <i class="icon"><img ng-src="img/icons/{{ project.iconNeed2 || 'OTROS' }}.png"></i>
                   <span>{{ project.need2 }}</span>
                 </a>
