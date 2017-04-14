@@ -22,6 +22,7 @@
                     loader.show('deletingAccount');
                     dtlVolunteer.deleteAccount()
                     .then(function() {
+                        dtlVolunteer.logout();
                         $ionicHistory.nextViewOptions({
                             historyRoot: true
                         });
