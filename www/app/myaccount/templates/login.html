@@ -8,11 +8,13 @@
                                 <span ng-class="{'asterisk-error': loginForm.credentials.email.$invalid}">*</span>
                                 Email
                             </span>
-                            <input type="email" name="email" ng-model="credentials.email" placeholder="Para iniciar sesión ingresá tu email" required>
+                            <input type="email" name="email" ng-model="credentials.email"
+                                   placeholder="Para iniciar sesión ingresá tu email" required>
                         </label>
                         <label class="item item-input" ng-show="codeShown" ng-hide="codeHidden">
                             <span class="input-label">Código:</span>
-                            <input type="number" name="code" ng-model="credentials.code" style="width:10%" minlength="4" maxlength="4" ng-required="codeShown" placeholder="Ingresá el código">
+                            <input type="number" name="code" ng-model="credentials.code" style="width:10%"
+                                   minlength="4" maxlength="4" ng-required="codeShown" placeholder="Ingresá el código">
                         </label>
                     </div>
                     <div class="padding row" ng-show="codeShown" ng-hide="codeHidden">
@@ -22,9 +24,8 @@
                             </button>
                         </div>
                         <div class="col">
-                            <button id="login-btn" class="button button-block button-positive" ng-click="login
-                            (credentials)"
-                                     ng-disabled="loginForm.$invalid">
+                            <button id="login-btn" class="button button-block button-positive"
+                                    ng-click="login(credentials)" ng-disabled="loginForm.$invalid">
                                 Iniciar sesión
                             </button>
                         </div>
