@@ -23,7 +23,7 @@ exports.config = {
         }
     },
 
-    baseUrl: 'http://app:8101/?env=testing',
+    baseUrl: 'http://app:8101',
 
     framework: 'mocha',
 
